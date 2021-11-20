@@ -35,7 +35,7 @@ function LogIn(){
 
     return(
         <MainContainer>
-            <h1>Welcome</h1>
+            <h1>Welcome {user && user.displayName}</h1>
 
             <label>Add a Task</label>
             <input
