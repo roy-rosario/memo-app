@@ -36,7 +36,6 @@ export const MainContainer = styled.div`
     }
 
     button{
-        border: 1px solid white;
         padding: 0.5em 1em;
         background-color: forestgreen;
         font-size: 1.2rem;
