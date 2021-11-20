@@ -45,6 +45,7 @@ export const MainContainer = styled.div`
         border-radius: 3px;
         margin-right: 0.5em;
         cursor: pointer;
+        border: none;
     }
 
     a{
