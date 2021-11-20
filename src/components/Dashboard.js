@@ -37,7 +37,6 @@ function LogIn(){
         <MainContainer>
             <h1>Welcome</h1>
 
-        
             <label>Add a Task</label>
             <input
                 value={task}
