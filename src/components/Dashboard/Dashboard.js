@@ -19,10 +19,11 @@ import {ThemeContext} from '../../utils/themeContext'
 function LogIn(){
     const [task, setTask] = useState('')
     const [tasks, setTasks] = useState('')
+    const [themeLock, setThemeLock] = useState(false)
     const auth = getAuth()
     const user = auth.currentUser
     const history = useHistory()
-    const {theme} = useContext(ThemeContext)
+    const {theme, toggleTheme} = useContext(ThemeContext)
 
     useEffect(()=>{
         if(!localStorage.getItem("token")){
@@ -70,6 +71,10 @@ function LogIn(){
        history.push('/')
     }
 
+    const toggleThemeSelector = () =>{
+        setThemeLock(prev => !prev)
+    }
+
     return(
         <>
         <NavBar theme={theme}>
@@ -78,14 +83,19 @@ function LogIn(){
             <div>
                 <NavTitle>{user && user.displayName}</NavTitle>
                 <AccountDrop>
-                    <ThemeSelect>
+                    <ThemeSelect onClick = {toggleThemeSelector}>
                         Theme
-                        <ThemeHolder>
-                            <ThemeOption><p>light theme</p></ThemeOption>
-                            <ThemeOption><p>dark theme</p></ThemeOption>
-                        </ThemeHolder>
                     </ThemeSelect>
                     <p style={{cursor: "pointer"}} onClick={onLogOut}>Log Out</p>
+                    <ThemeHolder activate={themeLock}>
+                            <ThemeOption 
+                                onClick={
+                                    toggleTheme
+                                }
+                            >
+                                <p>light theme</p></ThemeOption>
+                            <ThemeOption onClick={toggleTheme}><p>dark theme</p></ThemeOption>
+                    </ThemeHolder>
                 </AccountDrop>
                 
             </div>
