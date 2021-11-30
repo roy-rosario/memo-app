@@ -59,10 +59,9 @@ export const ThemeHolder = styled.div`
     width: 7em;
     background-color: rgba(0, 0, 0, 0.3);
     border: 1px solid grey;
-    padding: 0.5em;
     position: absolute;
     top: -0.07em;
-    right: 4.5em;
+    right: 4.6em;
     color: white;
     z-index: 2;
 
@@ -76,9 +75,19 @@ export const ThemeSelect = styled.p`
     cursor: pointer;
 `
 
-export const ThemeOption = styled.div` 
+export const ThemeOptionLight = styled.div` 
     text-align: center;
     cursor: pointer;
+    color: ${props => (props.theme === "light"? 'white' : 'lightgrey')};
+    background-color: ${props => (props.theme === "light"? 'grey' : 'initial')};
+
+`
+
+export const ThemeOptionDark = styled.div` 
+    text-align: center;
+    cursor: pointer;
+    color: ${props => (props.theme === "dark"? 'white' : 'lightgrey')};
+    background-color: ${props => (props.theme === "dark"? 'grey' : 'initial')};
 `
 
 export const MainContainer = styled.div`

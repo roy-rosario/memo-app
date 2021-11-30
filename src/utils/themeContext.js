@@ -5,13 +5,12 @@ const ThemeContext = createContext()
 function ThemeContextProvider({children}){
     const [theme, setTheme] = useState('light')
 
-    const toggleTheme = () =>{
-        const current = localStorage.getItem("theme")
-        current === 'light'? localStorage.setItem("theme", "dark") : localStorage.setItem("theme", "light")
-        
-        setTheme(prev => prev === 'light'? 'dark' : 'light')
-        
-        
+    const toggleLightTheme = () =>{
+        setTheme('light')
+    }
+
+    const toggleDarkTheme = () =>{
+        setTheme('dark')
     }
 
     const set_Theme = (theme) =>{
@@ -19,7 +18,7 @@ function ThemeContextProvider({children}){
     }
     
     return(
-        <ThemeContext.Provider value={{theme, toggleTheme, set_Theme}}>
+        <ThemeContext.Provider value={{theme, toggleLightTheme, toggleDarkTheme, set_Theme}}>
             {children}
         </ThemeContext.Provider>
     )
