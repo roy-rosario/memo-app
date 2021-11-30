@@ -24,11 +24,12 @@ export const NavBar = styled.nav`
 export const AccountDrop = styled.div` 
     background-color: rgba(0, 0, 0, 0.3);
     padding: 0.5em;
-    border: 1px solid grey;
+    border: 1px solid gray;
     position: absolute;
     top: 2.5em;
     right: 0.75em;
     display: none;
+    z-index: 0;
 
     &:hover{
         display: initial;
@@ -54,43 +55,30 @@ export const NavTitle = styled.h4`
 `
 
 export const ThemeHolder = styled.div` 
-    width: 10em;
+    display: ${props => (props.activate? 'initial' : 'none')};
+    width: 7em;
     background-color: rgba(0, 0, 0, 0.3);
-    border: none;
+    border: 1px solid grey;
+    padding: 0.5em;
     position: absolute;
     top: -0.07em;
     right: 4.5em;
     color: white;
+    z-index: 2;
 
-    *{
-        display: none;
-    }
 
     &:hover{
-        *{
-            display: block;
-        }
+        display: initial;
     }
 `
 
 export const ThemeSelect = styled.p` 
-
-    cursor: default;
-
-    &:hover{
-        ${ThemeHolder}{
-            
-            *{
-              display: initial;
-            }
-        }
-    }
-    
-   
+    cursor: pointer;
 `
 
 export const ThemeOption = styled.div` 
     text-align: center;
+    cursor: pointer;
 `
 
 export const MainContainer = styled.div`
