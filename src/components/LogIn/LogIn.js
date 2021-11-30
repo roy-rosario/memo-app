@@ -1,13 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import {MainContainer} from '../styles/allStyles' 
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import React, {useState, useEffect, useContext} from 'react'
+import {MainContainer, StanButton} from './styles/loginStyles' 
 import {useHistory, Link} from 'react-router-dom'
+import {LogInService} from '../../services/authServices'
+import {ThemeContext} from '../../utils/themeContext'
 
 function LogIn(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const auth = getAuth()
     const history = useHistory()
+    const {theme} = useContext(ThemeContext)
 
     useEffect(()=>{
         if(localStorage.getItem("token")){
@@ -16,17 +17,21 @@ function LogIn(){
     },[])
     
 
-    const onLogIn = () =>{
-       signInWithEmailAndPassword(auth, email, password)
-       .then(userCredential => {localStorage.setItem('token', userCredential._tokenResponse.idToken)
-        history.push("/dashboard")})
-        .catch(err => alert(err.message))
+    const onLogIn = async(e) =>{
+        e.preventDefault()
+       let check = await LogInService(email, password)
+
+       if(check){
+           history.push('/dashboard')
+       }
+       
     }
 
     return(
-        <MainContainer>
+        <MainContainer theme={theme} onSubmit={onLogIn}>
             <h1>Log In</h1>
 
+            {/* {error & <p>Oops! Try again</p>} */}
         
             <label>Email</label>
             <input
@@ -42,7 +47,7 @@ function LogIn(){
                 onChange = {(e => setPassword(e.target.value))}
             />
 
-            <button onClick={onLogIn}>Log In</button>
+            <StanButton type="submit" theme={theme}>Log In</StanButton>
 
             <Link to="/signup">Don't have an account?</Link>
         </MainContainer>

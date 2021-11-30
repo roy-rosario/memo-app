@@ -1,14 +1,17 @@
-import React, {useState, useEffect} from 'react'
-import {MainContainer} from '../styles/allStyles' 
-import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import React, {useState, useEffect, useContext} from 'react'
+import {MainContainer, StanButton} from './styles/signUpStyles' 
 import {useHistory, Link} from 'react-router-dom'
+import {signUpService} from '../../services/authServices'
+import { ThemeContext } from '../../utils/themeContext'
+
+
 
 function SignUp(){
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const auth = getAuth()
     const history = useHistory()
+    const {theme} = useContext(ThemeContext)
 
     useEffect(()=>{
         if(localStorage.getItem("token")){
@@ -17,17 +20,21 @@ function SignUp(){
     },[])
     
 
-    const onSignUp = () =>{
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            updateProfile(auth.currentUser, {displayName: name})
-            .then(history.push('/'))
-        })
-        .catch(err => alert(err.message))
+    const onSignUp = async(e) =>{
+        e.preventDefault()
+        let check 
+
+        check = await signUpService(name, email, password)
+        console.log(check)
+  
+
+        if(check === true){
+            history.push('/')
+        }
     }
 
     return(
-        <MainContainer>
+        <MainContainer theme={theme} onSubmit={onSignUp}>
             <h1>Sign Up</h1>
 
             <label>Name</label>
@@ -51,7 +58,7 @@ function SignUp(){
                 onChange = {(e => setPassword(e.target.value))}
             />
 
-            <button onClick={onSignUp}>Sign Up</button>
+            <StanButton theme={theme} type="submit">Sign Up</StanButton>
 
             <Link to="/">Already have an account?</Link>
         </MainContainer>

@@ -1,14 +1,35 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {GlobalStyle} from './styles/allStyles'
+import {ThemeContext, ThemeContextProvider} from './utils/themeContext'
+import {GlobalStyled} from './styles/allStyles'
+
+const GlobalStyle = () =>{
+  const {theme, set_Theme} = useContext(ThemeContext)
+
+  useEffect(()=>{
+    let currentTheme = localStorage.getItem('theme')
+    if(currentTheme){
+        set_Theme(currentTheme)
+    }
+    else{
+      set_Theme('light')
+    }
+  }, [])
+
+  return(
+      <GlobalStyled theme={theme} />
+  )
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle/>
-    <App />
+    <ThemeContextProvider>
+      <GlobalStyle />
+      <App />
+    </ThemeContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
