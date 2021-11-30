@@ -7,7 +7,8 @@ import {MainContainer,
         NavTitle,
         ThemeSelect,
         ThemeHolder,
-        ThemeOption
+        ThemeOptionLight,
+        ThemeOptionDark
     } from './styles/dashboardStyles' 
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
@@ -23,7 +24,7 @@ function LogIn(){
     const auth = getAuth()
     const user = auth.currentUser
     const history = useHistory()
-    const {theme, toggleTheme} = useContext(ThemeContext)
+    const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
 
     useEffect(()=>{
         if(!localStorage.getItem("token")){
@@ -88,13 +89,17 @@ function LogIn(){
                     </ThemeSelect>
                     <p style={{cursor: "pointer"}} onClick={onLogOut}>Log Out</p>
                     <ThemeHolder activate={themeLock}>
-                            <ThemeOption 
-                                onClick={
-                                    toggleTheme
-                                }
+                            <ThemeOptionLight 
+                                theme={theme}
+                                onClick={toggleLightTheme}
                             >
-                                <p>light theme</p></ThemeOption>
-                            <ThemeOption onClick={toggleTheme}><p>dark theme</p></ThemeOption>
+                                light theme
+                            </ThemeOptionLight>
+                            <ThemeOptionDark 
+                                theme={theme}
+                                onClick={toggleDarkTheme}
+                            >dark theme
+                            </ThemeOptionDark>
                     </ThemeHolder>
                 </AccountDrop>
                 
