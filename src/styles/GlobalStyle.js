@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../utils/themeContext";
-import { GlobalStyled } from "./allStyles";
+import { GlobalStyled } from "./defaultStyles";
 
 export const GlobalStyle = () =>{
     const {theme} = useContext(ThemeContext)

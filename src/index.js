@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ThemeContext, ThemeContextProvider} from './utils/themeContext'
-import {GlobalStyled} from './styles/allStyles'
+import {GlobalStyled} from './styles/defaultStyles'
 
 const GlobalStyle = () =>{
   const {theme, set_Theme} = useContext(ThemeContext)

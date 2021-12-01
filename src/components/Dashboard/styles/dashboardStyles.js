@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 
 export const NavBar = styled.nav`
-    background-color: ${props => props.theme === 'light'? 'azure' : 'steelblue'};
+    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
     padding: 1em;
     margin-bottom: 2em;
@@ -14,10 +14,12 @@ export const NavBar = styled.nav`
     }
 
     h3{
-        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'darkslateblue'};
+        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'};
     }
 
-   
+   @media (min-width: 600px){
+       font-size: 1.25rem;
+   }
 
 `
 
@@ -69,6 +71,10 @@ export const ThemeHolder = styled.div`
     &:hover{
         display: initial;
     }
+
+    @media (min-width: 600px){
+        top: -0.06em;
+    }
 `
 
 export const ThemeSelect = styled.p` 
@@ -90,14 +96,51 @@ export const ThemeOptionDark = styled.div`
     background-color: ${props => (props.theme === "dark"? 'grey' : 'initial')};
 `
 
-export const MainContainer = styled.div`
+export const MainContainer = styled.div` 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 4em auto;
+
+    @media (min-width: 600px){
+        width: 60%;
+        flex-direction: row;
+        align-items: initial;
+        margin: 5em auto;
+    }
+`
+
+export const LeftContainer = styled.div`
+    width: 100%;
+
+    @media (min-width: 600px){
+       
+        display: flex;
+        flex-direction: column-reverse;
+        margin-right: 1em;
+        width: 30%;
+    }
+`
+
+const containerStyle = css` 
     padding: 1em;
-    background-color: ${props => props.theme === 'light'? 'azure' : 'steelblue'};
+    margin-bottom: 2em;
+    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
-  
+    border-radius: 5px;
+
+    
+`
+
+
+export const QueryContainer = styled.div`
+    ${containerStyle};
+
+    
     h1{
         font-size: 3em;
-        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'darkslateblue'}
+        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'}
     }
 
     input{
@@ -115,11 +158,44 @@ export const MainContainer = styled.div`
         text-decoration: none;
         color: white;
     }
+
+    @media (min-width: 600px){
+        margin-bottom: 1em;
+    }
 `
+
+export const StatusContainer = styled.div` 
+    ${containerStyle};
+
+    h3{
+        margin-top: 0;
+    }
+
+    @media (min-width: 600px){
+        min-height: 500px;
+    }
+`
+
+export const TaskContainer = styled.div` 
+    height:400px;
+  
+    ${containerStyle};
+    
+    width: 100%;
+    overflow-y: scroll;
+    
+
+    @media (min-width: 600px){
+        height: 640px;
+        overflow-y: scroll;
+        margin:0;
+    }
+
+`
+
 
 export const TaskEntry = styled.div` 
     margin-bottom: 0.5em;
-
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -130,7 +206,7 @@ export const TaskEntry = styled.div`
 export const StanButton = styled.button` 
 
         padding: 0.5em 1em;
-        background-color: ${props => props.theme === 'light'? 'cadetblue' : 'rebeccapurple'};
+        background-color: ${props => props.theme === 'light'? 'grey' : 'darkslategrey'};
         color: white;
         border-radius: 3px;
         margin-right: 0.5em;
@@ -140,7 +216,7 @@ export const StanButton = styled.button`
 
         &:disabled{
             cursor: initial;
-            background-color: ${props => props.theme === 'light'? '#447475' : 'r#502978'};
+            background-color: ${props => props.theme === 'light'? '#447475' : '#502978'};
             color: grey;
         }
 

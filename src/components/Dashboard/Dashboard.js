@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react'
-import {MainContainer, 
+import {QueryContainer, 
         StanButton, 
         TaskEntry,
         NavBar,
@@ -8,7 +8,11 @@ import {MainContainer,
         ThemeSelect,
         ThemeHolder,
         ThemeOptionLight,
-        ThemeOptionDark
+        ThemeOptionDark,
+        TaskContainer,
+        MainContainer,
+        LeftContainer,
+        StatusContainer
     } from './styles/dashboardStyles' 
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
@@ -106,16 +110,39 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <MainContainer theme={theme}>
+        <MainContainer>
+
+        <LeftContainer>
+
+            <StatusContainer theme={theme}>
+                <h3 style={{textAlign: "ce"}}>Status</h3>
+            </StatusContainer>
+
+            <QueryContainer theme={theme}>
+
+                <label>Add a Task</label>
+                <input
+                    value={task}
+
+                    onChange = {(e => setTask(e.target.value))}
+                />
+
+                
+
+                <StanButton 
+                    theme={theme}
+                    onClick={addTask} 
+                    disabled = {task === ""}
+                >
+                    Submit a Task
+                </StanButton>
+
+            </QueryContainer>
 
 
-            <label>Add a Task</label>
-            <input
-                value={task}
+        </LeftContainer>
 
-                onChange = {(e => setTask(e.target.value))}
-            />
-
+        <TaskContainer theme={theme}>
             {tasks.length > 0? tasks.map(entry => {
                 return(
                     <TaskEntry key={entry.docId}>
@@ -134,16 +161,7 @@ function LogIn(){
                     </TaskEntry>
                 )
             }) : <p>There are no tasks to display</p>}
-
-            <StanButton 
-                theme={theme}
-                onClick={addTask} 
-                disabled = {task === ""}
-            >
-                Submit a Task
-            </StanButton>
-
-
+        </TaskContainer>
 
         </MainContainer>
     </>
