@@ -206,7 +206,7 @@ export const TaskEntry = styled.div`
 export const StanButton = styled.button` 
 
         padding: 0.5em 1em;
-        background-color: ${props => props.theme === 'light'? 'grey' : 'darkslategrey'};
+        background-color: ${props => props.theme === 'light'? '#0e869c' : '#7f5d87'};
         color: white;
         border-radius: 3px;
         margin-right: 0.5em;
@@ -216,7 +216,7 @@ export const StanButton = styled.button`
 
         &:disabled{
             cursor: initial;
-            background-color: ${props => props.theme === 'light'? '#447475' : '#502978'};
+            background-color: ${props => props.theme === 'light'? '#0a6170' : '#59425e'};
             color: grey;
         }
 
