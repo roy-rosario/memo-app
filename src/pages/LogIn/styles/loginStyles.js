@@ -1,11 +1,13 @@
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
+
+
 
 
 export const MainContainer = styled.form` 
     width: 80%;
     margin: 15em auto 0 auto;
     padding: 1em;
-    background-color: ${props => props.theme === 'light'? 'azure' : 'steelblue'};
+    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
     border-radius: 5px;
 
@@ -15,7 +17,7 @@ export const MainContainer = styled.form`
   
     h1{
         font-size: 3em;
-        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'darkslateblue'}
+        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'};
     }
 
     input{
@@ -50,13 +52,19 @@ export const TaskEntry = styled.div`
 export const StanButton = styled.button` 
 
         padding: 0.5em 1em;
-        background-color: ${props => props.theme === 'light'? 'cadetblue' : 'rebeccapurple'};
+        background-color: ${props => props.theme === 'light'? '#0e869c' : '#7f5d87'};
         color: white;
         border-radius: 3px;
         margin-right: 0.5em;
         cursor: pointer;
         border: none;
         text-transform: uppercase;
+
+        &:disabled{
+            cursor: initial;
+            background-color: ${props => props.theme === 'light'? '#0a6170' : '#59425e'};
+            color: grey;
+        }
 
 ` 
 

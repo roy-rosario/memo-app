@@ -5,7 +5,7 @@ export const MainContainer = styled.form`
     width: 80%;
     margin: 15em auto 0 auto;
     padding: 1em;
-    background-color: ${props => props.theme === 'light'? 'azure' : 'steelblue'};
+    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
     border-radius: 5px;
 
@@ -15,7 +15,7 @@ export const MainContainer = styled.form`
   
     h1{
         font-size: 3em;
-        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'darkslateblue'}
+        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'};
     }
 
     input{
@@ -55,6 +55,12 @@ export const StanButton = styled.button`
         cursor: pointer;
         border: none;
         text-transform: uppercase;
+
+        &:disabled{
+            cursor: initial;
+            background-color: ${props => props.theme === 'light'? '#0a6170' : '#59425e'};
+            color: grey;
+        }
 
 ` 
 

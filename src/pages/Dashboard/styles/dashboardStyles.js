@@ -1,5 +1,15 @@
 import styled, {css} from 'styled-components'
 
+const containerStyle = css` 
+    padding: 1em;
+    margin-bottom: 2em;
+    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
+    color: ${props => props.theme === 'light'? 'black' : 'white'};
+    border-radius: 5px;
+
+    
+`
+
 export const NavBar = styled.nav`
     background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
@@ -130,15 +140,7 @@ export const LeftContainer = styled.div`
     }
 `
 
-const containerStyle = css` 
-    padding: 1em;
-    margin-bottom: 2em;
-    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
-    color: ${props => props.theme === 'light'? 'black' : 'white'};
-    border-radius: 5px;
 
-    
-`
 
 
 export const QueryContainer = styled.div`
