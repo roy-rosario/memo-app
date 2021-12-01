@@ -7,10 +7,12 @@ function ThemeContextProvider({children}){
 
     const toggleLightTheme = () =>{
         setTheme('light')
+        localStorage.setItem('theme', 'light')
     }
 
     const toggleDarkTheme = () =>{
         setTheme('dark')
+        localStorage.setItem('theme', 'dark')
     }
 
     const set_Theme = (theme) =>{
