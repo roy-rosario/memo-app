@@ -16,6 +16,7 @@ import {QueryContainer,
         TaskWindow,
         taskHeader
     } from './styles/dashboardStyles' 
+import StatusBar from './components/StatusBar'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
 import {addDoc, retrieveDocs, removeDoc} from '../../services/dataServices'
@@ -116,9 +117,7 @@ function LogIn(){
 
         <LeftContainer>
 
-            <StatusContainer theme={theme}>
-                <h3 style={{textAlign: "ce"}}>Status</h3>
-            </StatusContainer>
+            <StatusBar theme={theme} tasks={tasks}/>
 
             <QueryContainer theme={theme}>
 

@@ -2,9 +2,9 @@
 import './App.css';
 import {initializeFirebase} from './utils/firebase-config'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import LogIn from './components/LogIn/LogIn'
-import SignUp from './components/SignUp/SignUp'
-import Dashboard from './components/Dashboard/Dashboard'
+import LogIn from './pages/LogIn/LogIn'
+import SignUp from './pages/SignUp/SignUp'
+import Dashboard from './pages/Dashboard/Dashboard'
 import React, {useState, useEffect} from 'react'
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 
