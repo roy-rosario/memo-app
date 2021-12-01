@@ -103,7 +103,7 @@ export const MainContainer = styled.div`
     width: 80%;
     margin: 4em auto;
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         width: 60%;
         flex-direction: row;
         align-items: initial;
@@ -114,7 +114,7 @@ export const MainContainer = styled.div`
 export const LeftContainer = styled.div`
     width: 100%;
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
        
         display: flex;
         flex-direction: column-reverse;
@@ -171,7 +171,7 @@ export const StatusContainer = styled.div`
         margin-top: 0;
     }
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         min-height: 500px;
     }
 `
@@ -185,7 +185,7 @@ export const TaskContainer = styled.div`
     overflow-y: scroll;
     
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         height: 640px;
         overflow-y: scroll;
         margin:0;
@@ -202,6 +202,7 @@ export const TaskEntry = styled.div`
 
     
 `
+
 
 export const StanButton = styled.button` 
 
