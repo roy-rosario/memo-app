@@ -4,7 +4,7 @@ export const NavBar = styled.nav`
     background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
     color: ${props => props.theme === 'light'? 'black' : 'white'};
     padding: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 
     display: flex;  
     justify-content: space-between;
@@ -19,6 +19,8 @@ export const NavBar = styled.nav`
 
    @media (min-width: 600px){
        font-size: 1.25rem;
+       margin-bottom: 5em;
+       padding: 1em 3em;
    }
 
 `
@@ -42,6 +44,10 @@ export const AccountDrop = styled.div`
         &:hover{
             color: white;
         }
+    }
+
+    @media (min-width: 1200px){
+        right: 3em;
     }
  
 `
@@ -101,12 +107,12 @@ export const MainContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 80%;
-    margin: 4em auto;
+    margin: 0em auto 0em auto;
 
     @media (min-width: 1200px){
         width: 60%;
         flex-direction: row;
-        align-items: initial;
+        align-items: flex-end;
         margin: 5em auto;
     }
 `
@@ -118,8 +124,9 @@ export const LeftContainer = styled.div`
        
         display: flex;
         flex-direction: column-reverse;
-        margin-right: 1em;
-        width: 30%;
+        justify-content: space-between;
+        margin-right: 2.5em;
+        width: 40%;
     }
 `
 
@@ -160,7 +167,8 @@ export const QueryContainer = styled.div`
     }
 
     @media (min-width: 600px){
-        margin-bottom: 1em;
+        margin-bottom: 2.5em;
+        padding: 1.65em 1em;
     }
 `
 
@@ -172,25 +180,36 @@ export const StatusContainer = styled.div`
     }
 
     @media (min-width: 1200px){
-        min-height: 500px;
+        min-height: 450px;
     }
 `
 
 export const TaskContainer = styled.div` 
-    height:400px;
+ 
   
     ${containerStyle};
     
     width: 100%;
+  
+    @media (min-width: 1200px){
+        padding-right: 2em;
+        padding-left: 2em;
+    }
+`
+export const taskHeader = styled.div` 
+
+`
+
+export const TaskWindow = styled.div` 
+    ${containerStyle};
     overflow-y: scroll;
-    
+    height: 270px;
+    border: ${props => (props.theme === 'light'? '2px solid lightgray' : '3px solid #333333')};
+    background-color: ${props => (props.theme === 'light'? 'white ' : '#616060')};
 
     @media (min-width: 1200px){
-        height: 640px;
-        overflow-y: scroll;
-        margin:0;
+        height: 500px;
     }
-
 `
 
 

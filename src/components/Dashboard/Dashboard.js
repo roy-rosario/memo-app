@@ -12,7 +12,9 @@ import {QueryContainer,
         TaskContainer,
         MainContainer,
         LeftContainer,
-        StatusContainer
+        StatusContainer,
+        TaskWindow,
+        taskHeader
     } from './styles/dashboardStyles' 
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
@@ -143,24 +145,28 @@ function LogIn(){
         </LeftContainer>
 
         <TaskContainer theme={theme}>
-            {tasks.length > 0? tasks.map(entry => {
-                return(
-                    <TaskEntry key={entry.docId}>
-                        <div>
-                        
-                            <p style={{marginBottom: "0"}}>{entry.task} </p>
-                            <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
-                        </div>
-                        <StanButton 
-      
-                            theme={theme}
-                            onClick={()=>{deleteTask(entry.docId)}}
-                        >
-                            delete
-                        </StanButton>
-                    </TaskEntry>
-                )
-            }) : <p>There are no tasks to display</p>}
+            <taskHeader>
+                <h2>Tasks</h2>
+            </taskHeader>
+            <TaskWindow theme={theme}>
+                {tasks.length > 0? tasks.map(entry => {
+                    return(
+                        <TaskEntry key={entry.docId}>
+                            <div>
+                
+                                <p style={{marginBottom: "0"}}>{entry.task} </p>
+                                <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
+                            </div>
+                            <StanButton
+                                theme={theme}
+                                onClick={()=>{deleteTask(entry.docId)}}
+                            >
+                                delete
+                            </StanButton>
+                        </TaskEntry>
+                    )
+                }) : <p>There are no tasks to display</p>}
+            </TaskWindow>
         </TaskContainer>
 
         </MainContainer>
