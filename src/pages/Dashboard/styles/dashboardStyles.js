@@ -120,6 +120,11 @@ export const ThemeOptionDark = styled.div`
     background-color: ${props => (props.theme === "dark"? 'grey' : 'initial')};
 `
 
+
+// ----------- Main Components ------------
+
+
+
 export const MainContainer = styled.div` 
     display: flex;
     flex-direction: column;
@@ -129,7 +134,7 @@ export const MainContainer = styled.div`
     margin: 0em auto 0em auto;
 
     @media (min-width: 1200px){
-        width: 60%;
+        width: 75%;
         flex-direction: row;
         align-items: flex-end;
         margin: 5em auto;
@@ -145,7 +150,7 @@ export const LeftContainer = styled.div`
         flex-direction: column-reverse;
         justify-content: space-between;
         margin-right: 2.5em;
-        width: 40%;
+        width: 30%;
     }
 `
 
@@ -201,10 +206,13 @@ export const TaskContainer = styled.div`
     ${containerStyle};
     
     width: 100%;
+    
   
     @media (min-width: 1200px){
+        width: 60%;
         padding-right: 2em;
         padding-left: 2em;
+        margin-right: 3em;
     }
 `
 export const taskHeader = styled.div` 
@@ -234,6 +242,27 @@ export const TaskEntry = styled.div`
     border-bottom: ${props => (props.theme === "light"? '1px solid black' : '1px solid lightgrey')};
 `
 
+
+export const RightContainer = styled.div` 
+    ${containerStyle};
+    width: 100%;
+    
+    
+    @media (min-width: 1200px){
+        width: 28%;
+        height: 640px;
+        
+        background-color: initial;
+        box-shadow:  none;
+        border-right: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+    }
+`
+
+
+
+
+// ----------- buttons / icons ----------------
 
 export const StanButton = styled.button` 
 
@@ -291,4 +320,14 @@ export const DeleteIcon = styled.div`
 export const ArchiveIcon = styled.div` 
     cursor: pointer;
     color: ${props => (props.theme === "light"? 'black' : 'white')};
+`
+
+export const TimeTitle = styled.h2` 
+    font-size: 4em;
+    font-weight: 300;
+    margin:0;
+
+    @media (min-width:1200px){
+        font-size: 6em;
+    }
 `

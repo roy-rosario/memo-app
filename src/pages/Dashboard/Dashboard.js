@@ -18,7 +18,9 @@ import {QueryContainer,
         IconHolder,
         DeleteIcon,
         CompleteIcon,
-        ArchiveIcon
+        ArchiveIcon,
+        RightContainer,
+        TimeTitle
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import {getAuth} from 'firebase/auth'
@@ -180,6 +182,10 @@ function LogIn(){
                 }) : <p>There are no tasks to display</p>}
             </TaskWindow>
         </TaskContainer>
+
+        <RightContainer theme={theme}>
+            <TimeTitle>10:38</TimeTitle>
+        </RightContainer>
 
         </MainContainer>
     </>
