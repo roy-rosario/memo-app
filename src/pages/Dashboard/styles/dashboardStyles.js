@@ -220,7 +220,7 @@ export const TaskEntry = styled.div`
     margin-bottom: 0.5em;
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
     border-bottom: ${props => (props.theme === "light"? '1px solid black' : '1px solid lightgrey')};
 `
 
@@ -259,3 +259,26 @@ export const ThemeButton = styled.button`
     transition: margin 7s ease;
 `
 
+export const IconHolder = styled.div` 
+    display: flex;
+    justify-content: space-between;
+`
+export const CompleteIcon = styled.div` 
+    cursor: pointer;
+    border-right: 1px solid black;
+    margin-right: 0.5em;    
+    padding-right: 0.5em;
+`
+
+export const DeleteIcon = styled.div` 
+    cursor: pointer;
+    border-right: 1px solid black;
+    margin-right: 0.5em;    
+    padding-right: 0.5em;
+`
+
+
+export const ArchiveIcon = styled.div` 
+    cursor: pointer;
+    color: ${props => (props.theme === "light"? 'black' : 'white')};
+`

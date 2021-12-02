@@ -14,7 +14,11 @@ import {QueryContainer,
         LeftContainer,
         StatusContainer,
         TaskWindow,
-        taskHeader
+        taskHeader,
+        IconHolder,
+        DeleteIcon,
+        CompleteIcon,
+        ArchiveIcon
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import {getAuth} from 'firebase/auth'
@@ -146,7 +150,7 @@ function LogIn(){
 
         <TaskContainer theme={theme}>
             <taskHeader>
-                <h2>Tasks</h2>
+                <h2>Tasks </h2>
             </taskHeader>
             <TaskWindow theme={theme}>
                 {tasks.length > 0? tasks.map(entry => {
@@ -157,12 +161,20 @@ function LogIn(){
                                 <p style={{marginBottom: "0"}}>{entry.task} </p>
                                 <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
                             </div>
-                            <StanButton
-                                theme={theme}
-                                onClick={()=>{deleteTask(entry.docId)}}
-                            >
-                                delete
-                            </StanButton>
+                            <IconHolder>
+                                <CompleteIcon>
+                                    <i class="fas fa-check"></i>
+                                </CompleteIcon>
+                                <DeleteIcon
+                                    theme={theme}
+                                    onClick={()=>{deleteTask(entry.docId)}}
+                                >
+                                    <i class="far fa-trash-alt"></i>
+                                </DeleteIcon>
+                                <ArchiveIcon theme={theme}>
+                                    <i class="fas fa-book"></i>
+                                </ArchiveIcon>
+                            </IconHolder>
                         </TaskEntry>
                     )
                 }) : <p>There are no tasks to display</p>}
