@@ -7,7 +7,7 @@ export const GlobalStyled = createGlobalStyle`
     }
 
     body{
-        background-color: ${props => props.theme === 'light'? 'lightblue' : '#1c1c1c'};
+        background-color: ${props => props.theme === 'light'? '#D19C03' : '#1c1c1c'};
         transition: background-color 1s ease;
     }
 `

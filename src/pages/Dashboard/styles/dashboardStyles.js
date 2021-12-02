@@ -3,16 +3,16 @@ import styled, {css} from 'styled-components'
 const containerStyle = css` 
     padding: 1em;
     margin-bottom: 2em;
-    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
-    color: ${props => props.theme === 'light'? 'black' : 'white'};
+    background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
+    color: ${props => props.theme === 'light'? 'white' : 'white'};
     border-radius: 5px;
 
     
 `
 
 export const NavBar = styled.nav`
-    background-color: ${props => props.theme === 'light'? 'azure' : '#474747'};
-    color: ${props => props.theme === 'light'? 'black' : 'white'};
+    background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
+    color: ${props => props.theme === 'light'? 'white' : 'white'};
     padding: 1em;
     margin-bottom: 4em;
 
@@ -207,7 +207,8 @@ export const TaskWindow = styled.div`
     overflow-y: scroll;
     height: 270px;
     border: ${props => (props.theme === 'light'? '2px solid lightgray' : '3px solid #333333')};
-    background-color: ${props => (props.theme === 'light'? 'white ' : '#616060')};
+    background-color: ${props => (props.theme === 'light'? 'white' : '#616060')};
+    color: ${props => (props.theme === 'light'? 'black' : 'white')};
 
     @media (min-width: 1200px){
         height: 500px;
@@ -220,8 +221,7 @@ export const TaskEntry = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-
-    
+    border-bottom: ${props => (props.theme === "light"? '1px solid black' : '1px solid lightgrey')};
 `
 
 

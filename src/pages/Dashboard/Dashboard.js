@@ -124,7 +124,8 @@ function LogIn(){
                 <label>Add a Task</label>
                 <input
                     value={task}
-
+                    type="text"
+                    maxLength="50"
                     onChange = {(e => setTask(e.target.value))}
                 />
 
