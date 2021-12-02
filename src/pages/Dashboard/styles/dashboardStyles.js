@@ -2,12 +2,18 @@ import styled, {css} from 'styled-components'
 
 const containerStyle = css` 
     padding: 1em;
-    margin-bottom: 2em;
+    margin-bottom: 3em;
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
-    border-radius: 5px;
-
+    border-top-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    box-shadow:  ${props => props.theme === 'light'? '-15px -15px 1px lightblue' : '-15px -15px 1px blueviolet'};
+    /* border-top: 1px solid white;
+    border-left: 1px solid white; */
     
+    @media (min-width:1200px){
+        margin-bottom: 2em;
+    }
 `
 
 export const NavBar = styled.nav`
@@ -15,6 +21,8 @@ export const NavBar = styled.nav`
     color: ${props => props.theme === 'light'? 'white' : 'white'};
     padding: 1em;
     margin-bottom: 4em;
+    /* border-bottom: ${props => (props.theme === 'light'? '5px solid #CF8600' : '5px solid #7F5D87')}; */
+    box-shadow: ${props => (props.theme === 'light'? '0px 5px 1px #CF8600' : '0px 5px 1px #7F5D87')};
 
     display: flex;  
     justify-content: space-between;
@@ -23,8 +31,8 @@ export const NavBar = styled.nav`
         margin: 0;
     }
 
-    h3{
-        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'};
+    h2{
+        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
     }
 
    @media (min-width: 600px){
@@ -116,6 +124,7 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-left: 2em;
     width: 90%;
     margin: 0em auto 0em auto;
 
@@ -204,6 +213,7 @@ export const taskHeader = styled.div`
 
 export const TaskWindow = styled.div` 
     ${containerStyle};
+    box-shadow: none;
     overflow-y: scroll;
     height: 270px;
     border: ${props => (props.theme === 'light'? '2px solid lightgray' : '3px solid #333333')};

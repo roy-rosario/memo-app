@@ -90,7 +90,7 @@ function LogIn(){
     return(
         <>
         <NavBar theme={theme}>
-            <h3>memo-app</h3>
+            <h2>memo-app</h2>
 
             <div>
                 <NavTitle>{user && user.displayName}</NavTitle>
