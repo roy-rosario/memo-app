@@ -116,7 +116,7 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 90%;
     margin: 0em auto 0em auto;
 
     @media (min-width: 1200px){
@@ -228,7 +228,7 @@ export const TaskEntry = styled.div`
 export const StanButton = styled.button` 
 
         padding: 0.5em 1em;
-        background-color: ${props => props.theme === 'light'? '#0e869c' : '#7f5d87'};
+        background-color: ${props => props.theme === 'light'? '#cf8600' : '#7f5d87'};
         color: white;
         border-radius: 3px;
         margin-right: 0.5em;
@@ -238,8 +238,8 @@ export const StanButton = styled.button`
 
         &:disabled{
             cursor: initial;
-            background-color: ${props => props.theme === 'light'? '#0a6170' : '#59425e'};
-            color: grey;
+            background-color: ${props => props.theme === 'light'? '#915e00' : '#59425e'};
+            color: lightgrey;
         }
 
 ` 
