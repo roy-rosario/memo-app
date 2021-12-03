@@ -136,7 +136,7 @@ export const MainContainer = styled.div`
     margin: 0em auto 0em auto;
     
     h1,h2,h3,h4{
-        text-shadow: -3px -3px 1.5px ${props => props.theme === 'light'? 'grey' : 'lavender'};
+        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? '#CF8600' : '#7F5D87'};
       
     }
 
@@ -282,7 +282,6 @@ export const RightContainer = styled.div`
         box-shadow:  none;
         border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
         /* border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
-
         display: flex;
         justify-content: center;
         
