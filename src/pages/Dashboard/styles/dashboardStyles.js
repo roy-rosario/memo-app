@@ -137,7 +137,8 @@ export const MainContainer = styled.div`
     
     h1,h2,h3,h4{
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? '#CF8600' : '#7F5D87'};
-      
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
+        transition: color 1s ease;
     }
 
     @media (min-width: 1200px){
