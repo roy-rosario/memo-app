@@ -119,7 +119,7 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <MainContainer>
+        <MainContainer theme={theme}>
 
         <LeftContainer>
 
@@ -127,7 +127,7 @@ function LogIn(){
 
             <QueryContainer theme={theme}>
 
-                <label>Add a Task</label>
+                <label><h4>Add a Task</h4></label>
                 <input
                     value={task}
                     type="text"
@@ -152,7 +152,7 @@ function LogIn(){
 
         <TaskContainer theme={theme}>
             <taskHeader>
-                <h2>Tasks </h2>
+                <h2>Tasks</h2>
             </taskHeader>
             <TaskWindow theme={theme}>
                 {tasks.length > 0? tasks.map(entry => {
@@ -184,7 +184,7 @@ function LogIn(){
         </TaskContainer>
 
         <RightContainer theme={theme}>
-            <TimeTitle>10:38</TimeTitle>
+            <TimeTitle>1038</TimeTitle>
         </RightContainer>
 
         </MainContainer>

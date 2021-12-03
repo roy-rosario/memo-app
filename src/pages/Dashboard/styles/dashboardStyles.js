@@ -32,6 +32,8 @@ export const NavBar = styled.nav`
     }
 
     h2{
+        font-size: 1.25em;
+        font-family: 'Alfa Slab One', 'cursive';
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
     }
 
@@ -132,11 +134,16 @@ export const MainContainer = styled.div`
     padding-left: 2em;
     width: 90%;
     margin: 0em auto 0em auto;
+    
+    h1,h2,h3,h4{
+        text-shadow: -3px -3px 1.5px ${props => props.theme === 'light'? 'grey' : 'lavender'};
+      
+    }
 
     @media (min-width: 1200px){
         width: 75%;
         flex-direction: row;
-        align-items: flex-end;
+        align-items: center;
         margin: 5em auto;
     }
 `
@@ -160,10 +167,10 @@ export const LeftContainer = styled.div`
 export const QueryContainer = styled.div`
     ${containerStyle};
 
-    
-    h1{
-        font-size: 3em;
-        text-shadow: -5px -5px 1px ${props => props.theme === 'light'? 'lightblue' : 'black'}
+    h4{
+        margin: 0;
+        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-size: 2.2em;
     }
 
     input{
@@ -193,15 +200,30 @@ export const StatusContainer = styled.div`
 
     h3{
         margin-top: 0;
+        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-size: 2em;
+    }
+    
+    h4{
+        font-size: 1.25em;
+        display: inline;
+        font-family: 'Baloo Bhaijaan 2', 'cursive';
+        text-shadow: none;
     }
 
     @media (min-width: 1200px){
+       font-size: 1.25rem;
         min-height: 450px;
     }
 `
 
 export const TaskContainer = styled.div` 
- 
+    
+    h2{
+        font-size: 3em;
+        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        margin: 0;
+    }
   
     ${containerStyle};
     
@@ -209,10 +231,14 @@ export const TaskContainer = styled.div`
     
   
     @media (min-width: 1200px){
+        font-size: 1.1rem;
         width: 60%;
         padding-right: 2em;
         padding-left: 2em;
-        margin-right: 3em;
+        margin-right: 1.5em;
+        h2{
+            font-size: 3.5em;
+        }
     }
 `
 export const taskHeader = styled.div` 
@@ -246,16 +272,20 @@ export const TaskEntry = styled.div`
 export const RightContainer = styled.div` 
     ${containerStyle};
     width: 100%;
-    
+  
+
     
     @media (min-width: 1200px){
         width: 28%;
         height: 640px;
-        
         background-color: initial;
         box-shadow:  none;
-        border-right: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
-        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        /* border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
+
+        display: flex;
+        justify-content: center;
+        
     }
 `
 
@@ -325,9 +355,17 @@ export const ArchiveIcon = styled.div`
 export const TimeTitle = styled.h2` 
     font-size: 4em;
     font-weight: 300;
+    padding: 0;
     margin:0;
+    font-family: 'Cousine', monospace;
+    word-wrap: break-word;
+    line-height: 0.8em;
+    
 
     @media (min-width:1200px){
+        width: 120px;
         font-size: 6em;
     }
+
+   
 `
