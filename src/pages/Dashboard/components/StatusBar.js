@@ -5,7 +5,7 @@ export default function StatusBar({theme, tasks}){
     return(
             <StatusContainer theme={theme}>
                 <h3>Status</h3>
-                <h4 style={{display: "inline"}}>Total Tasks: </h4>
+                <h4>Total Tasks: </h4>
                 <span>
                     {tasks.length}
                 </span>
