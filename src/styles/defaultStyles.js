@@ -7,7 +7,7 @@ export const GlobalStyled = createGlobalStyle`
     }
 
     body{
-        background-color: ${props => props.theme === 'light'? '#9FA299' : '#1c1c1c'};
+        background: ${props => props.theme === 'light'? 'linear-gradient(to top, #C48400, #9FA499 45% )' : 'linear-gradient(to top right, #2a14f5, #171717 45% )'};
         transition: background-color 1s ease;
     }
 `
