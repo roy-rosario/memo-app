@@ -283,7 +283,7 @@ export const RightContainer = styled.div`
     width: 100%;
     padding:0.5em;
 
-    background: url("./images/noon-image2.jpg");
+    background: url("./images/night-image.jpg");
     background-size: cover;
     background-position: center;
 
