@@ -4,7 +4,7 @@ import {QueryContainer,
         TaskEntry,
         NavBar,
         AccountDrop,
-        NavTitle,
+        NavAccountName,
         ThemeSelect,
         ThemeHolder,
         ThemeOptionLight,
@@ -95,7 +95,7 @@ function LogIn(){
             <h2>memo-app</h2>
 
             <div>
-                <NavTitle>{user && user.displayName}</NavTitle>
+                <NavAccountName>{user && user.displayName}</NavAccountName>
                 <AccountDrop>
                     <ThemeSelect onClick = {toggleThemeSelector}>
                         Theme

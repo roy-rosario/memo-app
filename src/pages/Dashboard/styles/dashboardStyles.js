@@ -71,10 +71,10 @@ export const AccountDrop = styled.div`
     }
  
 `
-export const NavTitle = styled.h4`
+export const NavAccountName = styled.h4`
     font-weight: 500;
     cursor: default;
-
+    
     padding-bottom: 1em;
 
     &:hover + ${AccountDrop}{
