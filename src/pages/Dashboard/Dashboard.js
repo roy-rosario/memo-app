@@ -27,12 +27,14 @@ import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
 import {addDoc, retrieveDocs, removeDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
-
+import axios from 'axios'
 
 
 function LogIn(){
     const [task, setTask] = useState('')
     const [tasks, setTasks] = useState('')
+    const [time, setTime] = useState('time')
+    const [timeSwitch, setTimeSwitch] = useState('false')
     const [themeLock, setThemeLock] = useState(false)
     const auth = getAuth()
     const user = auth.currentUser
@@ -49,6 +51,23 @@ function LogIn(){
         fetchTasks()
     }, [user])
 
+    useEffect(()=>{
+        getTime()
+        reTrigger()
+    }, [timeSwitch])
+
+    async function getTime(){
+        await axios.get('http://worldtimeapi.org/api/timezone/America/New_York')
+        .then(res => setTime(res.data.datetime.slice(11, 19)))
+        .catch(err => alert(err))
+    }
+
+    const reTrigger = ()=>{
+        setTimeout(()=> {
+            setTimeSwitch(prev => !prev)
+        }, 1000)
+    }
+
     const addTask = useCallback(async() =>{
         const check = await addDoc(task, user.uid)
 
@@ -58,6 +77,7 @@ function LogIn(){
         }
     },[task, user])
     
+   
     
 
     const fetchTasks = useCallback(async() =>{
@@ -184,7 +204,7 @@ function LogIn(){
         </TaskContainer>
 
         <RightContainer theme={theme}>
-            <TimeTitle>1038</TimeTitle>
+            <TimeTitle>{time}</TimeTitle>
         </RightContainer>
 
         </MainContainer>
