@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {MainContainer, StanButton} from './styles/signUpStyles' 
+import {MainContainer, StanButton, Logo, PageTitle, TotalContainer} from '../../styles/defaultStyles' 
 import {useHistory, Link} from 'react-router-dom'
 import {signUpService} from '../../services/authServices'
 import { ThemeContext } from '../../utils/themeContext'
@@ -9,6 +9,7 @@ import { ThemeContext } from '../../utils/themeContext'
 function SignUp(){
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
+    const [loaded, setLoaded] = useState(false)
     const [password, setPassword] = useState('')
     const history = useHistory()
     const {theme} = useContext(ThemeContext)
@@ -17,6 +18,9 @@ function SignUp(){
         if(localStorage.getItem("token")){
             history.push('/dashboard')
         }
+
+        setLoaded(true)
+
     },[])
     
 
@@ -34,35 +38,46 @@ function SignUp(){
     }
 
     return(
-        <MainContainer theme={theme} onSubmit={onSignUp}>
-            <h1>Sign Up</h1>
+        <TotalContainer>
+            <Logo 
+                theme={theme} 
+                loaded={loaded}
+                margin= "3em"
+            >
+                memo-app
+            </Logo>
+            <MainContainer theme={theme}  onSubmit={onSignUp}>
 
-            <label>Name</label>
-            <input
-                value={name}
-                type = 'text'
-                onChange = {(e => setName(e.target.value))}
-            />
 
-            <label>Email</label>
-            <input
-                value={email}
-                type = 'email'
-                onChange = {(e => setEmail(e.target.value))}
-            />
+                <PageTitle theme={theme}>Sign Up</PageTitle>
 
-            <label>Password</label>
-            <input
-                value={password}
-                type = 'password'
-                onChange = {(e => setPassword(e.target.value))}
-            />
+                <label>Name</label>
+                <input
+                    value={name}
+                    type = 'text'
+                    onChange = {(e => setName(e.target.value))}
+                    />
 
-            <StanButton theme={theme} type="submit">Sign Up</StanButton>
+                <label>Email</label>
+                <input
+                    value={email}
+                    type = 'email'
+                    onChange = {(e => setEmail(e.target.value))}
+                    />
 
-            <Link to="/">Already have an account?</Link>
-        </MainContainer>
-    
+                <label>Password</label>
+                <input
+                    value={password}
+                    type = 'password'
+                    onChange = {(e => setPassword(e.target.value))}
+                    />
+
+                <StanButton theme={theme} type="submit">Sign Up</StanButton>
+
+                <Link to="/">Already have an account?</Link>
+            </MainContainer>
+        </TotalContainer>
+        
     )
 }
 
