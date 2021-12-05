@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {MainContainer, StanButton} from './styles/loginStyles' 
+import {MainContainer, PageTitle, StanButton} from '../../styles/defaultStyles' 
 import {useHistory, Link} from 'react-router-dom'
 import {LogInService} from '../../services/authServices'
 import {ThemeContext} from '../../utils/themeContext'
@@ -29,7 +29,7 @@ function LogIn(){
 
     return(
         <MainContainer theme={theme} onSubmit={onLogIn}>
-            <h1>Log In</h1>
+            <PageTitle theme={theme}>Log In</PageTitle >
 
             {/* {error & <p>Oops! Try again</p>} */}
         

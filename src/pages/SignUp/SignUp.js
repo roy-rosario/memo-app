@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {MainContainer, StanButton} from './styles/signUpStyles' 
+import {MainContainer, StanButton, PageTitle} from '../../styles/defaultStyles' 
 import {useHistory, Link} from 'react-router-dom'
 import {signUpService} from '../../services/authServices'
 import { ThemeContext } from '../../utils/themeContext'
@@ -35,7 +35,7 @@ function SignUp(){
 
     return(
         <MainContainer theme={theme} onSubmit={onSignUp}>
-            <h1>Sign Up</h1>
+            <PageTitle theme={theme}>Sign Up</PageTitle>
 
             <label>Name</label>
             <input
