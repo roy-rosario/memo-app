@@ -366,12 +366,11 @@ export const TimeTitle = styled.h2`
     padding: 0;
     margin:0;
     font-family: 'Cousine', monospace;
-    word-wrap: break-word;
-    line-height: 0.8em;
+    /* word-wrap: break-word;
+    line-height: 0.8em; */
     
 
     @media (min-width:1200px){
-        width: 120px;
         font-size: 6em;
     }
 

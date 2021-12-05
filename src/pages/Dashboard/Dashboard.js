@@ -58,7 +58,7 @@ function LogIn(){
 
     async function getTime(){
         await axios.get('http://worldtimeapi.org/api/timezone/America/New_York')
-        .then(res => setTime(res.data.datetime.slice(11, 19)))
+        .then(res => setTime(res.data.datetime.slice(11, 16)))
         .catch(err => alert(err))
     }
 
