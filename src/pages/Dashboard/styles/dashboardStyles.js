@@ -35,6 +35,7 @@ export const NavBar = styled.nav`
         font-size: 1.25em;
         font-family: 'Alfa Slab One', 'cursive';
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
     }
 
    @media (min-width: 600px){
@@ -46,7 +47,7 @@ export const NavBar = styled.nav`
 `
 
 export const AccountDrop = styled.div` 
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: ${props => props.theme === 'light'? '#DCBE26' : '#7F5D87'};
     padding: 0.5em;
     border: 1px solid gray;
     position: absolute;
@@ -54,13 +55,14 @@ export const AccountDrop = styled.div`
     right: 0.75em;
     display: none;
     z-index: 0;
+    border-bottom-right-radius: 30px 30px;
 
     &:hover{
         display: initial;
     }
 
     p{
-        color: grey;
+        color: ${props => props.theme === 'light'? 'grey' : 'lightgrey'};
         &:hover{
             color: white;
         }
@@ -74,7 +76,7 @@ export const AccountDrop = styled.div`
 export const NavAccountName = styled.h4`
     font-weight: 500;
     cursor: default;
-    
+    color: ${props => props.theme === 'light'? 'white' : 'lightskyblue'};
     padding-bottom: 1em;
 
     &:hover + ${AccountDrop}{
@@ -85,14 +87,14 @@ export const NavAccountName = styled.h4`
 export const ThemeHolder = styled.div` 
     display: ${props => (props.activate? 'initial' : 'none')};
     width: 7em;
-    background-color: rgba(0, 0, 0, 0.3);
     border: 1px solid grey;
     position: absolute;
     top: -0.07em;
     right: 4.6em;
-    color: white;
     z-index: 2;
-
+    border-top-left-radius: 30px 30px;
+    background-color: none;
+    border-right: none;
 
     &:hover{
         display: initial;
@@ -111,15 +113,19 @@ export const ThemeOptionLight = styled.div`
     text-align: center;
     cursor: pointer;
     color: ${props => (props.theme === "light"? 'white' : 'lightgrey')};
-    background-color: ${props => (props.theme === "light"? 'grey' : 'initial')};
-
+    background-color: ${props => (props.theme === "light"? '#DCBE26' : 'rgba(0,0,0,0.25)')};
+    border-top-left-radius: 30px 30px;
+    padding: 0.25em;
+    
 `
 
 export const ThemeOptionDark = styled.div` 
     text-align: center;
     cursor: pointer;
     color: ${props => (props.theme === "dark"? 'white' : 'lightgrey')};
-    background-color: ${props => (props.theme === "dark"? 'grey' : 'initial')};
+    background-color: ${props => (props.theme === "dark"? '#7F5D87' : 'rgba(0,0,0,0.25)')};
+    padding: 0.25em;
+
 `
 
 
@@ -137,8 +143,10 @@ export const MainContainer = styled.div`
     
     h1,h2,h3,h4{
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? '#CF8600' : '#7F5D87'};
-      
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
+        transition: color 1s ease;
     }
+
 
     @media (min-width: 1200px){
         width: 75%;
@@ -223,6 +231,7 @@ export const TaskContainer = styled.div`
         font-size: 3em;
         font-family: 'Baloo Bhaijaan 2', 'cursive'; 
         margin: 0;
+
     }
   
     ${containerStyle};

@@ -95,8 +95,8 @@ function LogIn(){
             <h2>memo-app</h2>
 
             <div>
-                <NavAccountName>{user && user.displayName}</NavAccountName>
-                <AccountDrop>
+                <NavAccountName theme={theme}>{user && user.displayName}</NavAccountName>
+                <AccountDrop theme={theme}>
                     <ThemeSelect onClick = {toggleThemeSelector}>
                         Theme
                     </ThemeSelect>
