@@ -20,7 +20,9 @@ import {QueryContainer,
         CompleteIcon,
         ArchiveIcon,
         RightContainer,
-        TimeTitle
+        TimeTitle,
+        TimePic,
+        WeatherHolder
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import {getAuth} from 'firebase/auth'
@@ -205,6 +207,11 @@ function LogIn(){
 
         <RightContainer theme={theme}>
             <TimeTitle>{time}</TimeTitle>
+              <WeatherHolder theme={theme}>
+                <i  class="far fa-sun"></i>
+                <h2>72°</h2>
+              </WeatherHolder>
+          
         </RightContainer>
 
         </MainContainer>
