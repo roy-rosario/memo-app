@@ -36,7 +36,7 @@ import axios from 'axios'
 function LogIn(){
     const [task, setTask] = useState('')
     const [tasks, setTasks] = useState('')
-    const [time, setTime] = useState('time')
+    const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
     const [weather, setWeather] = useState('')
     const [timeSwitch, setTimeSwitch] = useState('false')
@@ -133,6 +133,7 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
+    
     return(
         <>
         <NavBar theme={theme}>
@@ -228,13 +229,13 @@ function LogIn(){
         </TaskContainer>
 
         <RightContainer theme={theme}>
-            <TimeTitle>{time}</TimeTitle>
+            {time && <TimeTitle>{time}</TimeTitle>}
               
               <WeatherHolder theme={theme}>
                 {/* <i  class="far fa-sun"></i> */}
                 <WeatherIcon condition={weather}/>
                 <h2>{weather}</h2>
-                <h2>{temp}°</h2>
+                {temp && <h2>{temp}°</h2>}
               </WeatherHolder>
           
         </RightContainer>

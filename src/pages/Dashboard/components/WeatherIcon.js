@@ -16,7 +16,7 @@ function WeatherIcon({condition}){
         return <i class="fas fa-stream"></i>
     }
     else{
-        return(<p>unknown conditions</p>)
+        return(<p></p>)
     }
  }
 
