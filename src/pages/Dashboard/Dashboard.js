@@ -60,7 +60,7 @@ function LogIn(){
 
     useEffect(()=>{
         getTime()
-        getWeather()
+        // getWeather() disabled because the weather API only allows few request, so only fetch data on initial render
         reTrigger()
     }, [timeSwitch])
 
@@ -71,7 +71,7 @@ function LogIn(){
                 setTime(res.data.datetime.slice(11, 16))}
             }
         )
-        .catch(err => alert(err))
+        .catch(err => console.log(err))
     }
 
 
@@ -83,7 +83,7 @@ function LogIn(){
                 setWeather(res.data.weather[0].main.toLowerCase())
             }
         })
-        .catch(err => alert(err) )
+        .catch(err => console.log(err) )
     }
 
     const reTrigger = ()=>{
