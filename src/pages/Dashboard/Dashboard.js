@@ -11,7 +11,7 @@ import {QueryContainer,
         ThemeOptionDark,
         TaskContainer,
         MainContainer,
-        LeftContainer,
+        MiddleContainer,
         StatusContainer,
         TaskWindow,
         taskHeader,
@@ -20,9 +20,9 @@ import {QueryContainer,
         CompleteIcon,
         ArchiveIcon,
         TimeTitle,
-        TimePic,
         WeatherHolder,
-        InfoContainer
+        InfoContainer,
+        GreaterContainer
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
@@ -164,83 +164,90 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <MainContainer theme={theme}>
+        <GreaterContainer>
 
-        <InfoContainer theme={theme}>
-            {time && <TimeTitle>{time}</TimeTitle>}
-              
-              <WeatherHolder theme={theme}>
-                {/* <i  class="far fa-sun"></i> */}
-                <WeatherIcon condition={weather}/>
-                <h2>{weather}</h2>
-                {temp && <h2>{temp}°</h2>}
-              </WeatherHolder>
-          
-        </InfoContainer>
-
-        <LeftContainer>
-
-            <StatusBar theme={theme} tasks={tasks}/>
-
-            <QueryContainer theme={theme}>
-
-                <label><h4>Add a Task</h4></label>
-                <input
-                    value={task}
-                    type="text"
-                    maxLength="50"
-                    onChange = {(e => setTask(e.target.value))}
-                />
-
+            <InfoContainer theme={theme}>
+                {time && <TimeTitle>{time}</TimeTitle>}
                 
+                <WeatherHolder theme={theme}>
+                    {/* <i  class="far fa-sun"></i> */}
+                    <WeatherIcon condition={weather}/>
+                    <h2>{weather}</h2>
+                    {temp && <h2>{temp}°</h2>}
+                </WeatherHolder>
+            
+            </InfoContainer>
 
-                <StanButton 
-                    theme={theme}
-                    onClick={addTask} 
-                    disabled = {task === ""}
-                >
-                    Submit a Task
-                </StanButton>
+            <MainContainer theme={theme}>
 
-            </QueryContainer>
+            
+
+            <MiddleContainer>
+
+                <StatusBar theme={theme} tasks={tasks}/>
+
+                <QueryContainer theme={theme}>
+
+                    <label><h4>Add a Task</h4></label>
+                    <input
+                        value={task}
+                        type="text"
+                        maxLength="50"
+                        onChange = {(e => setTask(e.target.value))}
+                    />
+
+                    
+
+                    <StanButton 
+                        theme={theme}
+                        onClick={addTask} 
+                        disabled = {task === ""}
+                    >
+                        Submit a Task
+                    </StanButton>
+
+                </QueryContainer>
 
 
-        </LeftContainer>
+            </MiddleContainer>
 
-        <TaskContainer theme={theme}>
-            <taskHeader>
-                <h2>Tasks</h2>
-            </taskHeader>
-            <TaskWindow theme={theme}>
-                {tasks.length > 0? tasks.map(entry => {
-                    return(
-                        <TaskEntry key={entry.docId}>
-                            <div>
+            <TaskContainer theme={theme}>
+                <taskHeader>
+                    <h2>Tasks</h2>
+                </taskHeader>
                 
-                                <p style={{marginBottom: "0"}}>{entry.task} </p>
-                                <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
-                            </div>
-                            <IconHolder>
-                                <CompleteIcon>
-                                    <i class="fas fa-check"></i>
-                                </CompleteIcon>
-                                <DeleteIcon
-                                    theme={theme}
-                                    onClick={()=>{deleteTask(entry.docId)}}
-                                >
-                                    <i class="far fa-trash-alt"></i>
-                                </DeleteIcon>
-                                <ArchiveIcon theme={theme}>
-                                    <i class="fas fa-book"></i>
-                                </ArchiveIcon>
-                            </IconHolder>
-                        </TaskEntry>
-                    )
-                }) : <p>There are no tasks to display</p>}
-            </TaskWindow>
-        </TaskContainer>
+                        <TaskWindow theme={theme}>
+                            {tasks.length > 0? tasks.map(entry => {
+                                return(
+                                    <TaskEntry key={entry.docId}>
+                                        <div>
+                            
+                                            <p style={{marginBottom: "0"}}>{entry.task} </p>
+                                            <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
+                                        </div>
+                                        <IconHolder>
+                                            <CompleteIcon>
+                                                <i class="fas fa-check"></i>
+                                            </CompleteIcon>
+                                            <DeleteIcon
+                                                theme={theme}
+                                                onClick={()=>{deleteTask(entry.docId)}}
+                                            >
+                                                <i class="far fa-trash-alt"></i>
+                                            </DeleteIcon>
+                                            <ArchiveIcon theme={theme}>
+                                                <i class="fas fa-book"></i>
+                                            </ArchiveIcon>
+                                        </IconHolder>
+                                    </TaskEntry>
+                                )
+                            }) : <p>There are no tasks to display</p>}
+                        </TaskWindow>
+               
+            </TaskContainer>
 
-        </MainContainer>
+            </MainContainer>
+        </GreaterContainer>
     </>
     )
 }

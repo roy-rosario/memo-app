@@ -3,17 +3,19 @@ import styled, {css} from 'styled-components'
 const containerStyle = css` 
     padding: 1em;
     margin-bottom: 3em;
-    width: 90%;
+    width: 95%;
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
-    border-top-left-radius: 30px 30px;
-    border-bottom-right-radius: 30px 30px;
+
     box-shadow:  ${props => props.theme === 'light'? '-15px -15px 1px lightblue' : '-15px -15px 1px blueviolet'};
     /* border-top: 1px solid white;
     border-left: 1px solid white; */
     
     @media (min-width:1200px){
-        margin-bottom: 2em;
+        margin-bottom: 0em;
+        box-shadow:  ${props => props.theme === 'light'? '0px -15px 1px lightblue' : '-0px -15px 1px blueviolet'};
+        border-top-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
 `
 
@@ -41,7 +43,6 @@ export const NavBar = styled.nav`
 
    @media (min-width: 600px){
        font-size: 1.25rem;
-       margin-bottom: 5em;
        padding: 1em 3em;
    }
 
@@ -132,13 +133,22 @@ export const ThemeOptionDark = styled.div`
 
 // ----------- Main Components ------------
 
+export const GreaterContainer = styled.div` 
+
+@media (min-width: 1200px){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+}
+`
 
 
 export const MainContainer = styled.div` 
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    
 
     margin: 0em auto 0em auto;
     
@@ -158,16 +168,18 @@ export const MainContainer = styled.div`
     }
 `
 
-export const LeftContainer = styled.div`
+export const MiddleContainer = styled.div`
     width: 100%;
-
+    
     @media (min-width: 1200px){
-       
+        height: 700px;
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
         margin-right: 2.5em;
-        width: 30%;
+        width: 40%;
+        padding: 0;
+        margin-top: 0; 
     }
 `
 
@@ -200,8 +212,9 @@ export const QueryContainer = styled.div`
     }
 
     @media (min-width: 600px){
-        margin-bottom: 2.5em;
+        margin-bottom: 0em;
         padding: 1.65em 1em;
+        width: 100%;
     }
 `
 
@@ -211,7 +224,7 @@ export const StatusContainer = styled.div`
     h3{
         margin-top: 0;
         font-family: 'Alfa Slab One', 'cursive';
-
+        
         font-size: 2em;
     }
     
@@ -224,8 +237,10 @@ export const StatusContainer = styled.div`
     }
 
     @media (min-width: 1200px){
-       font-size: 1.25rem;
+        width: 100%;
+        font-size: 1.25rem;
         min-height: 450px;
+        
     }
 `
 
@@ -245,11 +260,11 @@ export const TaskContainer = styled.div`
     
   
     @media (min-width: 1200px){
+        height: 700px;
         font-size: 1.1rem;
-        width: 60%;
-        padding-right: 2em;
-        padding-left: 2em;
-        margin-right: 1.5em;
+        width: 100%;
+        padding-left: 3.5em;
+        border-bottom-right-radius: 30px 30px;
         h2{
             font-size: 3.5em;
         }
@@ -268,6 +283,7 @@ export const TaskWindow = styled.div`
 
     @media (min-width: 1200px){
         height: 500px;
+        box-shadow: none;
     }
 `
 
@@ -309,11 +325,11 @@ export const InfoContainer = styled.div`
 
     @media (min-width: 1200px){
         width: 28%;
-        height: 640px;
+        height: 700px;
         background-color: initial;
         box-shadow:  none;
-        border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
-        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        /* border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -333,7 +349,7 @@ export const InfoContainer = styled.div`
         background-size: cover;
         background-position: bottom;
         opacity: 0.5;
-        border-top-left-radius: 30px 30px;
+        border-top-left-radius: 0px;
         border-bottom-right-radius: 20px 20px;
     }
     }
