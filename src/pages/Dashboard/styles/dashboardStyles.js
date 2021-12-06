@@ -297,6 +297,7 @@ export const RightContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin-right: 2em;
     }
 `
 

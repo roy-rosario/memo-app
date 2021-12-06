@@ -25,6 +25,7 @@ import {QueryContainer,
         WeatherHolder
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
+import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
 import {addDoc, retrieveDocs, removeDoc} from '../../services/dataServices'
@@ -36,6 +37,8 @@ function LogIn(){
     const [task, setTask] = useState('')
     const [tasks, setTasks] = useState('')
     const [time, setTime] = useState('time')
+    const [temp, setTemp] = useState('')
+    const [weather, setWeather] = useState('')
     const [timeSwitch, setTimeSwitch] = useState('false')
     const [themeLock, setThemeLock] = useState(false)
     const auth = getAuth()
@@ -47,21 +50,40 @@ function LogIn(){
         if(!localStorage.getItem("token")){
             history.push('/')
         }
+        getWeather()
     },[])
 
     useEffect(()=>{
         fetchTasks()
+        
     }, [user])
 
     useEffect(()=>{
         getTime()
+        getWeather()
         reTrigger()
     }, [timeSwitch])
 
     async function getTime(){
         await axios.get('http://worldtimeapi.org/api/timezone/America/New_York')
-        .then(res => setTime(res.data.datetime.slice(11, 16)))
+        .then(res => {
+                if(res.data){
+                setTime(res.data.datetime.slice(11, 16))}
+            }
+        )
         .catch(err => alert(err))
+    }
+
+
+    async function getWeather(){
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=53140&appid=e7d9245955d672e33a8a8b8a439db265&units=imperial`)
+        .then(res => {
+            if(res.data){
+                setTemp(res.data.main.temp.toString().slice(0,2))
+                setWeather(res.data.weather[0].main.toLowerCase())
+            }
+        })
+        .catch(err => alert(err) )
     }
 
     const reTrigger = ()=>{
@@ -207,9 +229,12 @@ function LogIn(){
 
         <RightContainer theme={theme}>
             <TimeTitle>{time}</TimeTitle>
+              
               <WeatherHolder theme={theme}>
-                <i  class="far fa-sun"></i>
-                <h2>72°</h2>
+                {/* <i  class="far fa-sun"></i> */}
+                <WeatherIcon condition={weather}/>
+                <h2>{weather}</h2>
+                <h2>{temp}°</h2>
               </WeatherHolder>
           
         </RightContainer>
