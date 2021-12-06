@@ -19,10 +19,10 @@ import {QueryContainer,
         DeleteIcon,
         CompleteIcon,
         ArchiveIcon,
-        RightContainer,
         TimeTitle,
         TimePic,
-        WeatherHolder
+        WeatherHolder,
+        InfoContainer
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
@@ -166,6 +166,18 @@ function LogIn(){
 
         <MainContainer theme={theme}>
 
+        <InfoContainer theme={theme}>
+            {time && <TimeTitle>{time}</TimeTitle>}
+              
+              <WeatherHolder theme={theme}>
+                {/* <i  class="far fa-sun"></i> */}
+                <WeatherIcon condition={weather}/>
+                <h2>{weather}</h2>
+                {temp && <h2>{temp}°</h2>}
+              </WeatherHolder>
+          
+        </InfoContainer>
+
         <LeftContainer>
 
             <StatusBar theme={theme} tasks={tasks}/>
@@ -227,18 +239,6 @@ function LogIn(){
                 }) : <p>There are no tasks to display</p>}
             </TaskWindow>
         </TaskContainer>
-
-        <RightContainer theme={theme}>
-            {time && <TimeTitle>{time}</TimeTitle>}
-              
-              <WeatherHolder theme={theme}>
-                {/* <i  class="far fa-sun"></i> */}
-                <WeatherIcon condition={weather}/>
-                <h2>{weather}</h2>
-                {temp && <h2>{temp}°</h2>}
-              </WeatherHolder>
-          
-        </RightContainer>
 
         </MainContainer>
     </>

@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components'
 const containerStyle = css` 
     padding: 1em;
     margin-bottom: 3em;
+    width: 90%;
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
     border-top-left-radius: 30px 30px;
@@ -20,7 +21,7 @@ export const NavBar = styled.nav`
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
     padding: 1em;
-    margin-bottom: 4em;
+    margin-bottom: 0em;
     /* border-bottom: ${props => (props.theme === 'light'? '5px solid #CF8600' : '5px solid #7F5D87')}; */
     box-shadow: ${props => (props.theme === 'light'? '0px 5px 1px #CF8600' : '0px 5px 1px #7F5D87')};
 
@@ -137,8 +138,8 @@ export const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 2em;
-    width: 90%;
+
+
     margin: 0em auto 0em auto;
     
     h1,h2,h3,h4{
@@ -153,6 +154,7 @@ export const MainContainer = styled.div`
         flex-direction: row;
         align-items: center;
         margin: 5em auto;
+        padding-left: 2em;
     }
 `
 
@@ -177,7 +179,7 @@ export const QueryContainer = styled.div`
 
     h4{
         margin: 0;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-family: 'Alfa Slab One', 'cursive';
         font-size: 2.2em;
     }
 
@@ -208,14 +210,16 @@ export const StatusContainer = styled.div`
 
     h3{
         margin-top: 0;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-family: 'Alfa Slab One', 'cursive';
+
         font-size: 2em;
     }
     
     h4{
         font-size: 1.25em;
         display: inline;
-        font-family: 'Baloo Bhaijaan 2', 'cursive';
+        font-family: 'Alfa Slab One', 'cursive';
+
         text-shadow: none;
     }
 
@@ -229,7 +233,8 @@ export const TaskContainer = styled.div`
     
     h2{
         font-size: 3em;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-family: 'Alfa Slab One', 'cursive';
+
         margin: 0;
 
     }
@@ -250,9 +255,7 @@ export const TaskContainer = styled.div`
         }
     }
 `
-export const taskHeader = styled.div` 
 
-`
 
 export const TaskWindow = styled.div` 
     ${containerStyle};
@@ -278,14 +281,31 @@ export const TaskEntry = styled.div`
 `
 
 
-export const RightContainer = styled.div` 
+export const InfoContainer = styled.div` 
     ${containerStyle};
     width: 100%;
-    padding:0.5em;
+    padding: 0.5em 1em;
+    box-shadow: none;
+    position: relative;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 
-    background: url("./images/night-image.jpg");
-    background-size: cover;
-    background-position: center;
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-image: url("./images/night-image.jpg");
+        background-size: cover;
+        background-position: bottom;
+        opacity: 0.5;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
+    
 
     @media (min-width: 1200px){
         width: 28%;
@@ -293,17 +313,35 @@ export const RightContainer = styled.div`
         background-color: initial;
         box-shadow:  none;
         border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
-        /* border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
+        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         margin-right: 2em;
+        padding:0.5em;
+        border-top-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
+
+        &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-image: url("./images/night-image.jpg");
+        background-size: cover;
+        background-position: bottom;
+        opacity: 0.5;
+        border-top-left-radius: 30px 30px;
+        border-bottom-right-radius: 20px 20px;
+    }
     }
 `
 
 export const WeatherHolder = styled.div` 
     text-align: right;
-    padding-right: em;
+    position: relative;
     h2{
         font-size: 3.5em;
         margin-left: 0.25em;
@@ -390,7 +428,7 @@ export const TimeTitle = styled.h2`
     font-family: 'Cousine', monospace;
     /* word-wrap: break-word;
     line-height: 0.8em; */
-    
+    position: relative; 
 
     @media (min-width:1200px){
         font-size: 6em;
