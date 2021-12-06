@@ -281,9 +281,12 @@ export const TaskEntry = styled.div`
 export const RightContainer = styled.div` 
     ${containerStyle};
     width: 100%;
-  
+    padding:0.5em;
 
-    
+    background: url("./images/night-image.jpg");
+    background-size: cover;
+    background-position: center;
+
     @media (min-width: 1200px){
         width: 28%;
         height: 640px;
@@ -292,9 +295,28 @@ export const RightContainer = styled.div`
         border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
         /* border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
         display: flex;
-        justify-content: center;
-        
+        flex-direction: column;
+        justify-content: space-between;
+        margin-right: 2em;
     }
+`
+
+export const WeatherHolder = styled.div` 
+    text-align: right;
+    padding-right: em;
+    h2{
+        font-size: 3.5em;
+        margin-left: 0.25em;
+        font-size: 3em;
+        display: inline;
+    }
+
+    i{
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
+        font-size: 3em;
+    }
+
+    padding-bottom: 2em;
 `
 
 
@@ -366,14 +388,25 @@ export const TimeTitle = styled.h2`
     padding: 0;
     margin:0;
     font-family: 'Cousine', monospace;
-    word-wrap: break-word;
-    line-height: 0.8em;
+    /* word-wrap: break-word;
+    line-height: 0.8em; */
     
 
     @media (min-width:1200px){
-        width: 120px;
         font-size: 6em;
     }
 
    
+`
+
+export const TimePic = styled.div` 
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    img{
+        max-width: 100%;
+        margin:0;
+    }
 `
