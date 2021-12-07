@@ -22,7 +22,9 @@ import {QueryContainer,
         TimeTitle,
         WeatherHolder,
         InfoContainer,
-        GreaterContainer
+        GreaterContainer,
+        WeatherCombo,
+        TempTitle
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
@@ -171,9 +173,11 @@ function LogIn(){
                 
                 <WeatherHolder theme={theme}>
                     {/* <i  class="far fa-sun"></i> */}
-                    <WeatherIcon condition={weather}/>
-                    <h2>{weather}</h2>
-                    {temp && <h2>{temp}°</h2>}
+                    <WeatherCombo>
+                        <WeatherIcon condition={weather}/>
+                        <h2>{weather}</h2>
+                    </WeatherCombo>
+                    {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
                 </WeatherHolder>
             
             </InfoContainer>

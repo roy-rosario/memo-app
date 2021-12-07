@@ -36,7 +36,7 @@ export const NavBar = styled.nav`
 
     h2{
         font-size: 1.25em;
-        font-family: 'Alfa Slab One', 'cursive';
+        font-family: 'Alfa Slab One', cursive;
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
     }
@@ -57,7 +57,7 @@ export const AccountDrop = styled.div`
     top: 2.5em;
     right: 0.75em;
     display: none;
-    z-index: 0;
+
     border-bottom-right-radius: 30px 30px;
 
     &:hover{
@@ -94,7 +94,7 @@ export const ThemeHolder = styled.div`
     position: absolute;
     top: -0.07em;
     right: 4.6em;
-    z-index: 2;
+
     border-top-left-radius: 30px 30px;
     background-color: none;
     border-right: none;
@@ -128,6 +128,7 @@ export const ThemeOptionDark = styled.div`
     color: ${props => (props.theme === "dark"? 'white' : 'lightgrey')};
     background-color: ${props => (props.theme === "dark"? '#7F5D87' : 'rgba(0,0,0,0.25)')};
     padding: 0.25em;
+  
 
 `
 
@@ -194,8 +195,11 @@ export const QueryContainer = styled.div`
 
     h4{
         margin: 0;
-        font-family: 'Alfa Slab One', 'cursive';
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
         font-size: 2.2em;
+        font-weight: 400;
     }
 
     input{
@@ -226,7 +230,8 @@ export const StatusContainer = styled.div`
 
     h3{
         margin-top: 0;
-        font-family: 'Alfa Slab One', 'cursive';
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
         
         font-size: 2em;
     }
@@ -234,8 +239,9 @@ export const StatusContainer = styled.div`
     h4{
         font-size: 1.25em;
         display: inline;
-        font-family: 'Alfa Slab One', 'cursive';
-
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        
         text-shadow: none;
     }
 
@@ -253,7 +259,9 @@ export const TaskContainer = styled.div`
 
     h2{
         font-size: 3em;
-        font-family: 'Alfa Slab One', 'cursive';
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
         margin: 0;
     }
   
@@ -301,12 +309,17 @@ export const TaskEntry = styled.div`
 
 export const InfoContainer = styled.div` 
     ${containerStyle};
+    z-index: -1;
     width: 100%;
     padding: 0.5em 1em;
     box-shadow: none;
     position: relative;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
+    padding: 0.5em 0.5em 4em 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 
     &:before{
         content: '';
@@ -318,9 +331,10 @@ export const InfoContainer = styled.div`
         background-image: url("./images/night-image.jpg");
         background-size: cover;
         background-position: center;
-        opacity: 0.5;
+        opacity: 0.8;
         border-top-left-radius: 0px;
         border-bottom-right-radius: 0px;
+        z-index: -1;
     }
 
     
@@ -334,9 +348,9 @@ export const InfoContainer = styled.div`
         border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        align-items: initial;
         margin-right: 2em;
-        padding:0.5em;
+        padding:1em;
         border-top-left-radius: 30px 30px;
         border-bottom-right-radius: 30px 30px;
 
@@ -358,24 +372,58 @@ export const InfoContainer = styled.div`
 `
 
 export const WeatherHolder = styled.div` 
+   
     text-align: right;
     position: relative;
+    display: flex;
+    align-items: center;
     h2{
-        font-size: 3.5em;
+     
         margin-left: 0.25em;
-        font-size: 3em;
+        font-size: 1.25em;
         display: inline;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        margin-top: 0;
     }
 
     i{
-        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
-        font-size: 3em;
+        
+        font-size: 1.25em;
     }
 
     padding-bottom: 2em;
+
+    @media (min-width: 1200px){
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        h2{
+            font-size: 1.5em;
+            margin-top: 0em;
+            margin-bottom: 0.25em;
+        }
+
+        i{
+            font-size: 1.5em;
+            
+        }
+    }   
 `
 
+export const WeatherCombo = styled.div` 
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+`
 
+export const TempTitle = styled.div` 
+    font-size: 2.5em;    
+
+    @media (min-width: 1200px){
+        h2{font-size: 1.5em;}
+    }
+`
 
 
 // ----------- buttons / icons ----------------
@@ -439,17 +487,17 @@ export const ArchiveIcon = styled.div`
 `
 
 export const TimeTitle = styled.h2` 
-    font-size: 4em;
+    font-size: 3.5em;
     font-weight: 300;
     padding: 0;
     margin:0;
-    font-family: 'Cousine', monospace;
-    /* word-wrap: break-word;
-    line-height: 0.8em; */
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
     position: relative; 
-
+   
     @media (min-width:1200px){
-        font-size: 6em;
+        font-size: 8em;
+        
     }
 
    
