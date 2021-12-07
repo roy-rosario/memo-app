@@ -3,11 +3,11 @@ import styled, {css} from 'styled-components'
 const containerStyle = css` 
     padding: 1em;
     margin-bottom: 3em;
-    width: 95%;
+    
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
 
-    box-shadow:  ${props => props.theme === 'light'? '-15px -15px 1px lightblue' : '-15px -15px 1px blueviolet'};
+    box-shadow:  ${props => props.theme === 'light'? '0px -15px 1px lightblue' : '0px -15px 1px blueviolet'};
     /* border-top: 1px solid white;
     border-left: 1px solid white; */
     
@@ -41,9 +41,10 @@ export const NavBar = styled.nav`
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
     }
 
-   @media (min-width: 600px){
+   @media (min-width: 1200px){
        font-size: 1.25rem;
        padding: 1em 3em;
+       margin-bottom: 3em;
    }
 
 `
@@ -135,6 +136,7 @@ export const ThemeOptionDark = styled.div`
 
 export const GreaterContainer = styled.div` 
 
+
 @media (min-width: 1200px){
         display: flex;
         align-items: center;
@@ -144,11 +146,12 @@ export const GreaterContainer = styled.div`
 `
 
 
-export const MainContainer = styled.div` 
+export const SubContainer = styled.div` 
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
+
 
     margin: 0em auto 0em auto;
     
@@ -211,7 +214,7 @@ export const QueryContainer = styled.div`
         color: white;
     }
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         margin-bottom: 0em;
         padding: 1.65em 1em;
         width: 100%;
@@ -239,24 +242,23 @@ export const StatusContainer = styled.div`
     @media (min-width: 1200px){
         width: 100%;
         font-size: 1.25rem;
-        min-height: 450px;
+        min-height: 475px;
         
     }
 `
 
 export const TaskContainer = styled.div` 
-    
+    ${containerStyle};
+    width: 100%;
+
     h2{
         font-size: 3em;
         font-family: 'Alfa Slab One', 'cursive';
-
         margin: 0;
-
     }
   
-    ${containerStyle};
     
-    width: 100%;
+ 
     
   
     @media (min-width: 1200px){
@@ -315,7 +317,7 @@ export const InfoContainer = styled.div`
         right: 0px;
         background-image: url("./images/night-image.jpg");
         background-size: cover;
-        background-position: bottom;
+        background-position: center;
         opacity: 0.5;
         border-top-left-radius: 0px;
         border-bottom-right-radius: 0px;
@@ -351,7 +353,7 @@ export const InfoContainer = styled.div`
         opacity: 0.5;
         border-top-left-radius: 0px;
         border-bottom-right-radius: 20px 20px;
-    }
+        }
     }
 `
 
