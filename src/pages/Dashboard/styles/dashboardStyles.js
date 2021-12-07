@@ -50,7 +50,7 @@ export const NavBar = styled.nav`
 `
 
 export const AccountDrop = styled.div` 
-    background-color: ${props => props.theme === 'light'? '#DCBE26' : '#7F5D87'};
+    background-color: ${props => props.theme === 'light'? '#ADD8E6' : '#7F5D87'};
     padding: 0.5em;
     border: 1px solid gray;
     position: absolute;
@@ -116,7 +116,7 @@ export const ThemeOptionLight = styled.div`
     text-align: center;
     cursor: pointer;
     color: ${props => (props.theme === "light"? 'white' : 'lightgrey')};
-    background-color: ${props => (props.theme === "light"? '#DCBE26' : 'rgba(0,0,0,0.25)')};
+    background-color: ${props => (props.theme === "light"? '#ADD8E6' : 'rgba(0,0,0,0.25)')};
     border-top-left-radius: 30px 30px;
     padding: 0.25em;
     
@@ -488,7 +488,7 @@ export const ArchiveIcon = styled.div`
 
 export const TimeTitle = styled.h2` 
     font-size: 3.5em;
-    font-weight: 300;
+   
     padding: 0;
     margin:0;
     font-family: 'Roboto', sans-serif;
@@ -497,7 +497,7 @@ export const TimeTitle = styled.h2`
    
     @media (min-width:1200px){
         font-size: 8em;
-        
+        font-weight: 100;
     }
 
    

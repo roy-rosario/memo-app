@@ -78,7 +78,7 @@ function LogIn(){
 
 
     async function getWeather(){
-        await axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=53140&appid=e7d9245955d672e33a8a8b8a439db265&units=imperial`)
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=10457&appid=e7d9245955d672e33a8a8b8a439db265&units=imperial`)
         .then(res => {
             if(res.data){
                 setTemp(res.data.main.temp.toString().slice(0,2))
