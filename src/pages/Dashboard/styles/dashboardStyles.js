@@ -103,7 +103,7 @@ export const ThemeHolder = styled.div`
         display: initial;
     }
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         top: -0.06em;
     }
 `
@@ -151,7 +151,7 @@ export const SubContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 90%;
 
 
     margin: 0em auto 0em auto;
