@@ -41,6 +41,9 @@ function LogIn(){
     const [tasks, setTasks] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
+    const [currentCard, setCurrentCard] = useState(0)
+    const [cardFlip, setCardFlip] = useState(false)
+    const [contentVisible , setCardVisible] = useState(true)
     const [weather, setWeather] = useState('')
     const [timeSwitch, setTimeSwitch] = useState('false')
     const [themeLock, setThemeLock] = useState(false)
@@ -136,6 +139,18 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
+    const flipNext = () =>{
+            setCardFlip(true)
+            setCardVisible(false)
+            setTimeout(()=>{
+                setCurrentCard(prev => prev+1)
+                setCardFlip(false)
+                setCardVisible(true)
+            }, 500)
+
+        }
+
+    
     
     return(
         <>
@@ -221,34 +236,35 @@ function LogIn(){
                     
                             <TaskWindow theme={theme}>
                                 {tasks.length > 0? tasks.map(entry => {
-                                    return(
-                                        <TaskEntry>
-                                            <TaskEntrySub theme={theme} key={entry.docId}>
-                                                <div>
-                                                    <p>TASK</p>
-                                                    <h2 style={{marginBottom: "0"}}>{entry.task} </h2>
-                                                    <h3 style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</h3>
-                                                </div>   
-                                            </TaskEntrySub>
-                                            <IconHolder>
-                                                <CompleteIcon>
-                                                    <i class="fas fa-check"></i>
-                                                </CompleteIcon>
-                                                <DeleteIcon
-                                                    theme={theme}
-                                                    onClick={()=>{deleteTask(entry.docId)}}
-                                                >
-                                                    <i class="far fa-trash-alt"></i>
-                                                </DeleteIcon>
-                                                <ArchiveIcon theme={theme}>
-                                                    <i class="fas fa-book"></i>
-                                                </ArchiveIcon>
-                                            </IconHolder>
-                                        </TaskEntry>
-                                    )
+                                    if(entry === tasks[currentCard]){
+                                        return(
+                                            <TaskEntry flip={cardFlip}>
+                                                <TaskEntrySub theme={theme} key={entry.docId}>                                               
+                                                        <p>{contentVisible  && 'task'}</p>
+                                                        <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                        <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                                </TaskEntrySub>
+                                                <IconHolder>
+                                                    <CompleteIcon>
+                                                        {contentVisible && <i class="fas fa-check"></i>}
+                                                    </CompleteIcon>
+                                                    <DeleteIcon
+                                                        theme={theme}
+                                                        onClick={()=>{deleteTask(entry.docId)}}
+                                                    >
+                                                        {contentVisible && <i class="far fa-trash-alt"></i>}
+                                                    </DeleteIcon>
+                                                    <ArchiveIcon theme={theme}>
+                                                        {contentVisible && <i class="fas fa-book"></i>}
+                                                    </ArchiveIcon>
+                                                </IconHolder>
+                                            </TaskEntry>
+                                        )
+                                    }
                                 }) : <p>There are no tasks to display</p>}
                             </TaskWindow>
-                
+                                
+                        <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next</button>
                 </TaskContainer>
 
 

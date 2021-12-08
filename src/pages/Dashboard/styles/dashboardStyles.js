@@ -295,8 +295,6 @@ export const TaskWindow = styled.div`
 `
 const taskEntryStandard = css` 
         margin-bottom: 0.5em;
-        display: flex;
-        justify-content: space-between;
         align-items: center;
         margin-bottom: 1em;
         padding: 1em;
@@ -310,14 +308,18 @@ export const TaskEntry = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 325px;
+    min-height: 310px;
     width: 75%;
+    transition: ${props => (props.flip? 'transform 0.7s ease' : '')};
+    transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
+
 ` 
 export const TaskEntrySub = styled.div` 
     ${taskEntryStandard};
     background: white;
     margin: 0em auto 0em auto;
     width: 100%;
+    height: 210px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
     padding-right: 3em;
@@ -513,7 +515,7 @@ export const IconHolder = styled.div`
     color: white;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    
+    min-height: 64px;
     i{
         font-size: 2em;
         
