@@ -157,7 +157,7 @@ export const SubContainer = styled.div`
     margin: 0em auto 0em auto;
     
     h1,h2,h3,h4{
-        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? '#CF8600' : '#7F5D87'};
+        
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
         transition: color 1s ease;
     }
@@ -256,7 +256,7 @@ export const StatusContainer = styled.div`
 export const TaskContainer = styled.div` 
     ${containerStyle};
     width: 100%;
-
+    padding: 1em 2em;
     h2{
         font-size: 3em;
         font-family: 'Roboto', sans-serif;
@@ -285,30 +285,70 @@ export const TaskContainer = styled.div`
 export const TaskWindow = styled.div` 
     ${containerStyle};
     box-shadow: none;
-    overflow-y: scroll;
-    height: 270px;
-    border: ${props => (props.theme === 'light'? '2px solid lightgray' : '3px solid #333333')};
-    background-color: ${props => (props.theme === 'light'? 'white' : '#616060')};
+    background: ${props => (props.theme === 'light'? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.1)')};
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
-
+   
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
     }
 `
-
-
+const taskEntryStandard = css` 
+        margin-bottom: 0.5em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1em;
+        padding: 1em;
+        background-color: ${props => (props.theme === 'light'? 'lightblue': '#7F5D87')};
+        border-radius: 10px;
+`
 export const TaskEntry = styled.div` 
-    margin-bottom: 0.5em;
+    background: lightblue;
+    border-radius: 10px;
+    margin: 0 auto 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: ${props => (props.theme === "light"? '1px solid black' : '1px solid lightgrey')};
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 360px;
+    width: 90%;
+` 
+export const TaskEntrySub = styled.div` 
+    ${taskEntryStandard};
+    background: white;
+    margin: 0em auto 0em auto;
+    width: 100%;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-right: 5em;
+
+    h2{
+        font-size: 2em;
+        text-shadow: none;
+        font-weight: 700;
+    }
+
+    h3{
+        text-shadow: none;
+    }
+
+    p{
+        margin-top:0;
+        font-weight: 600;
+        color: grey;
+    }
+
+    @media (min-width: 1200px){
+     ${taskEntryStandard};
+    }
+
+
 `
 
 
 export const InfoContainer = styled.div` 
     ${containerStyle};
+    
     z-index: -1;
     width: 100%;
     padding: 0.5em 1em;
@@ -316,10 +356,11 @@ export const InfoContainer = styled.div`
     position: relative;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 0.5em 0.5em 4em 0.5em;
+    padding: 1em 0.5em 3em 0.5em;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    
 
     &:before{
         content: '';
@@ -372,7 +413,7 @@ export const InfoContainer = styled.div`
 `
 
 export const WeatherHolder = styled.div` 
-   
+    
     text-align: right;
     position: relative;
     display: flex;
@@ -392,12 +433,14 @@ export const WeatherHolder = styled.div`
         font-size: 1.25em;
     }
 
-    padding-bottom: 2em;
+    
 
     @media (min-width: 1200px){
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;
+        padding-bottom: 2em;
+        
         h2{
             font-size: 1.5em;
             margin-top: 0em;
@@ -464,38 +507,59 @@ export const ThemeButton = styled.button`
 
 export const IconHolder = styled.div` 
     display: flex;
-    justify-content: space-between;
+    background: #CF8600;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    i{
+        font-size: 3em;
+        
+    }
+`
+
+const iconStyle = css` 
+    cursor: pointer;
+    padding: 1em 2em;
+    background: #CF8600;
+    width: 100%;
+    text-align: center;
+    &:hover{
+        background: #d98c00;
+
+    }
 `
 export const CompleteIcon = styled.div` 
-    cursor: pointer;
-    border-right: 1px solid black;
-    margin-right: 0.5em;    
-    padding-right: 0.5em;
+    ${iconStyle};
+    border-right: 4px solid #a86d00;
+    border-bottom-left-radius: 10px;
 `
 
 export const DeleteIcon = styled.div` 
-    cursor: pointer;
-    border-right: 1px solid black;
-    margin-right: 0.5em;    
-    padding-right: 0.5em;
+    ${iconStyle};
+    /* border-right: 1px solid black;
+    border-left: 1px solid black; */
 `
 
 
 export const ArchiveIcon = styled.div` 
-    cursor: pointer;
-    color: ${props => (props.theme === "light"? 'black' : 'white')};
+    ${iconStyle};
+    border-left: 4px solid #a86d00;
+    border-bottom-right-radius: 10px;
+    
 `
 
 export const TimeTitle = styled.h2` 
     font-size: 3.5em;
    
     padding: 0;
-    margin:0;
+    margin-top: 0.1em;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     position: relative; 
    
     @media (min-width:1200px){
+        margin-top: 0;
         font-size: 8em;
         font-weight: 100;
     }

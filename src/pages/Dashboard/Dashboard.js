@@ -24,7 +24,8 @@ import {QueryContainer,
         InfoContainer,
         GreaterContainer,
         WeatherCombo,
-        TempTitle
+        TempTitle,
+        TaskEntrySub
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
@@ -221,12 +222,14 @@ function LogIn(){
                             <TaskWindow theme={theme}>
                                 {tasks.length > 0? tasks.map(entry => {
                                     return(
-                                        <TaskEntry key={entry.docId}>
-                                            <div>
-                                
-                                                <p style={{marginBottom: "0"}}>{entry.task} </p>
-                                                <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
-                                            </div>
+                                        <TaskEntry>
+                                            <TaskEntrySub theme={theme} key={entry.docId}>
+                                                <div>
+                                                    <p>TASK</p>
+                                                    <h2 style={{marginBottom: "0"}}>{entry.task} </h2>
+                                                    <h3 style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</h3>
+                                                </div>   
+                                            </TaskEntrySub>
                                             <IconHolder>
                                                 <CompleteIcon>
                                                     <i class="fas fa-check"></i>
@@ -247,6 +250,7 @@ function LogIn(){
                             </TaskWindow>
                 
                 </TaskContainer>
+
 
             </SubContainer>
         </GreaterContainer>
