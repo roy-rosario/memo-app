@@ -310,8 +310,8 @@ export const TaskEntry = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 360px;
-    width: 90%;
+    height: 325px;
+    width: 75%;
 ` 
 export const TaskEntrySub = styled.div` 
     ${taskEntryStandard};
@@ -320,12 +320,13 @@ export const TaskEntrySub = styled.div`
     width: 100%;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
-    padding-right: 5em;
+    padding-right: 3em;
 
     h2{
-        font-size: 2em;
+        font-size: 1.75em;
         text-shadow: none;
         font-weight: 700;
+        padding-bottom: 0.5em;
     }
 
     h3{
@@ -336,6 +337,7 @@ export const TaskEntrySub = styled.div`
         margin-top:0;
         font-weight: 600;
         color: grey;
+        margin-bottom: 1em;
     }
 
     @media (min-width: 1200px){
@@ -511,16 +513,16 @@ export const IconHolder = styled.div`
     color: white;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-
+    
     i{
-        font-size: 3em;
+        font-size: 2em;
         
     }
 `
 
 const iconStyle = css` 
     cursor: pointer;
-    padding: 1em 2em;
+    padding: 1em 0em;
     background: #CF8600;
     width: 100%;
     text-align: center;
