@@ -3,16 +3,19 @@ import styled, {css} from 'styled-components'
 const containerStyle = css` 
     padding: 1em;
     margin-bottom: 3em;
+    
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
-    border-top-left-radius: 30px 30px;
-    border-bottom-right-radius: 30px 30px;
-    box-shadow:  ${props => props.theme === 'light'? '-15px -15px 1px lightblue' : '-15px -15px 1px blueviolet'};
+
+    box-shadow:  ${props => props.theme === 'light'? '0px -15px 1px lightblue' : '0px -15px 1px blueviolet'};
     /* border-top: 1px solid white;
     border-left: 1px solid white; */
     
     @media (min-width:1200px){
-        margin-bottom: 2em;
+        margin-bottom: 0em;
+        box-shadow:  ${props => props.theme === 'light'? '0px -15px 1px lightblue' : '-0px -15px 1px blueviolet'};
+        border-top-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
     }
 `
 
@@ -20,7 +23,7 @@ export const NavBar = styled.nav`
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
     padding: 1em;
-    margin-bottom: 4em;
+    margin-bottom: 0em;
     /* border-bottom: ${props => (props.theme === 'light'? '5px solid #CF8600' : '5px solid #7F5D87')}; */
     box-shadow: ${props => (props.theme === 'light'? '0px 5px 1px #CF8600' : '0px 5px 1px #7F5D87')};
 
@@ -33,28 +36,28 @@ export const NavBar = styled.nav`
 
     h2{
         font-size: 1.25em;
-        font-family: 'Alfa Slab One', 'cursive';
+        font-family: 'Alfa Slab One', cursive;
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
     }
 
-   @media (min-width: 600px){
+   @media (min-width: 1200px){
        font-size: 1.25rem;
-       margin-bottom: 5em;
        padding: 1em 3em;
+       margin-bottom: 3em;
    }
 
 `
 
 export const AccountDrop = styled.div` 
-    background-color: ${props => props.theme === 'light'? '#DCBE26' : '#7F5D87'};
+    background-color: ${props => props.theme === 'light'? '#ADD8E6' : '#7F5D87'};
     padding: 0.5em;
     border: 1px solid gray;
     position: absolute;
     top: 2.5em;
     right: 0.75em;
     display: none;
-    z-index: 0;
+
     border-bottom-right-radius: 30px 30px;
 
     &:hover{
@@ -91,7 +94,7 @@ export const ThemeHolder = styled.div`
     position: absolute;
     top: -0.07em;
     right: 4.6em;
-    z-index: 2;
+
     border-top-left-radius: 30px 30px;
     background-color: none;
     border-right: none;
@@ -100,7 +103,7 @@ export const ThemeHolder = styled.div`
         display: initial;
     }
 
-    @media (min-width: 600px){
+    @media (min-width: 1200px){
         top: -0.06em;
     }
 `
@@ -113,7 +116,7 @@ export const ThemeOptionLight = styled.div`
     text-align: center;
     cursor: pointer;
     color: ${props => (props.theme === "light"? 'white' : 'lightgrey')};
-    background-color: ${props => (props.theme === "light"? '#DCBE26' : 'rgba(0,0,0,0.25)')};
+    background-color: ${props => (props.theme === "light"? '#ADD8E6' : 'rgba(0,0,0,0.25)')};
     border-top-left-radius: 30px 30px;
     padding: 0.25em;
     
@@ -125,24 +128,36 @@ export const ThemeOptionDark = styled.div`
     color: ${props => (props.theme === "dark"? 'white' : 'lightgrey')};
     background-color: ${props => (props.theme === "dark"? '#7F5D87' : 'rgba(0,0,0,0.25)')};
     padding: 0.25em;
+  
 
 `
 
 
 // ----------- Main Components ------------
 
+export const GreaterContainer = styled.div` 
 
 
-export const MainContainer = styled.div` 
+@media (min-width: 1200px){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       
+}
+`
+
+
+export const SubContainer = styled.div` 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-left: 2em;
     width: 90%;
+
+
     margin: 0em auto 0em auto;
     
     h1,h2,h3,h4{
-        text-shadow: -3px -3px 1px ${props => props.theme === 'light'? '#CF8600' : '#7F5D87'};
+        
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
         transition: color 1s ease;
     }
@@ -153,19 +168,22 @@ export const MainContainer = styled.div`
         flex-direction: row;
         align-items: center;
         margin: 5em auto;
+        padding-left: 2em;
     }
 `
 
-export const LeftContainer = styled.div`
+export const MiddleContainer = styled.div`
     width: 100%;
-
+    
     @media (min-width: 1200px){
-       
+        height: 700px;
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
         margin-right: 2.5em;
-        width: 30%;
+        width: 40%;
+        padding: 0;
+        margin-top: 0; 
     }
 `
 
@@ -177,8 +195,11 @@ export const QueryContainer = styled.div`
 
     h4{
         margin: 0;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+
         font-size: 2.2em;
+        font-weight: 400;
     }
 
     input{
@@ -197,9 +218,10 @@ export const QueryContainer = styled.div`
         color: white;
     }
 
-    @media (min-width: 600px){
-        margin-bottom: 2.5em;
+    @media (min-width: 1200px){
+        margin-bottom: 0em;
         padding: 1.65em 1em;
+        width: 100%;
     }
 `
 
@@ -208,118 +230,247 @@ export const StatusContainer = styled.div`
 
     h3{
         margin-top: 0;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        
         font-size: 2em;
     }
     
     h4{
         font-size: 1.25em;
         display: inline;
-        font-family: 'Baloo Bhaijaan 2', 'cursive';
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        
         text-shadow: none;
     }
 
     @media (min-width: 1200px){
-       font-size: 1.25rem;
-        min-height: 450px;
+        width: 100%;
+        font-size: 1.25rem;
+        min-height: 475px;
+        
     }
 `
 
 export const TaskContainer = styled.div` 
-    
+    ${containerStyle};
+    width: 100%;
+    padding: 1em 2em;
     h2{
         font-size: 3em;
-        font-family: 'Baloo Bhaijaan 2', 'cursive'; 
-        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
 
+        margin: 0;
     }
   
-    ${containerStyle};
     
-    width: 100%;
+ 
     
   
     @media (min-width: 1200px){
+        height: 700px;
         font-size: 1.1rem;
-        width: 60%;
-        padding-right: 2em;
-        padding-left: 2em;
-        margin-right: 1.5em;
+        width: 100%;
+        padding-left: 3.5em;
+        border-bottom-right-radius: 30px 30px;
         h2{
             font-size: 3.5em;
         }
     }
 `
-export const taskHeader = styled.div` 
 
-`
 
 export const TaskWindow = styled.div` 
     ${containerStyle};
     box-shadow: none;
-    overflow-y: scroll;
-    height: 270px;
-    border: ${props => (props.theme === 'light'? '2px solid lightgray' : '3px solid #333333')};
-    background-color: ${props => (props.theme === 'light'? 'white' : '#616060')};
+    background: ${props => (props.theme === 'light'? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.1)')};
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
-
+   
     @media (min-width: 1200px){
         height: 500px;
+        box-shadow: none;
     }
 `
-
-
+const taskEntryStandard = css` 
+        margin-bottom: 0.5em;
+        align-items: center;
+        margin-bottom: 1em;
+        padding: 1em;
+        background-color: ${props => (props.theme === 'light'? 'lightblue': '#7F5D87')};
+        border-radius: 10px;
+`
 export const TaskEntry = styled.div` 
-    margin-bottom: 0.5em;
+    background: lightblue;
+    border-radius: 10px;
+    margin: 0 auto 0 auto;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: ${props => (props.theme === "light"? '1px solid black' : '1px solid lightgrey')};
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 310px;
+    width: 75%;
+    transition: ${props => (props.flip? 'transform 0.7s ease' : '')};
+    transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
+
+` 
+export const TaskEntrySub = styled.div` 
+    ${taskEntryStandard};
+    background: white;
+    margin: 0em auto 0em auto;
+    width: 100%;
+    height: 210px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-right: 3em;
+
+    h2{
+        font-size: 1.75em;
+        text-shadow: none;
+        font-weight: 700;
+        padding-bottom: 0.5em;
+    }
+
+    h3{
+        text-shadow: none;
+    }
+
+    p{
+        margin-top:0;
+        font-weight: 600;
+        color: grey;
+        margin-bottom: 1em;
+    }
+
+    @media (min-width: 1200px){
+     ${taskEntryStandard};
+    }
+
+
 `
 
 
-export const RightContainer = styled.div` 
+export const InfoContainer = styled.div` 
     ${containerStyle};
+    
+    z-index: -1;
     width: 100%;
-    padding:0.5em;
+    padding: 0.5em 1em;
+    box-shadow: none;
+    position: relative;
+    border-top-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding: 1em 0.5em 3em 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    
 
-    background: url("./images/night-image.jpg");
-    background-size: cover;
-    background-position: center;
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-image: url("./images/night-image.jpg");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.8;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        z-index: -1;
+    }
+
+    
 
     @media (min-width: 1200px){
         width: 28%;
-        height: 640px;
+        height: 700px;
         background-color: initial;
         box-shadow:  none;
-        border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
-        /* border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
+        /* border: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')};
+        border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        align-items: initial;
         margin-right: 2em;
+        padding:1em;
+        border-top-left-radius: 30px 30px;
+        border-bottom-right-radius: 30px 30px;
+
+        &:before{
+        content: '';
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        background-image: url("./images/night-image.jpg");
+        background-size: cover;
+        background-position: bottom;
+        opacity: 0.5;
+        border-top-left-radius: 0px;
+        border-bottom-right-radius: 20px 20px;
+        }
     }
 `
 
 export const WeatherHolder = styled.div` 
+    
     text-align: right;
-    padding-right: em;
+    position: relative;
+    display: flex;
+    align-items: center;
     h2{
-        font-size: 3.5em;
+     
         margin-left: 0.25em;
-        font-size: 3em;
+        font-size: 1.25em;
         display: inline;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        margin-top: 0;
     }
 
     i{
-        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
-        font-size: 3em;
+        
+        font-size: 1.25em;
     }
 
-    padding-bottom: 2em;
+    
+
+    @media (min-width: 1200px){
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding-bottom: 2em;
+        
+        h2{
+            font-size: 1.5em;
+            margin-top: 0em;
+            margin-bottom: 0.25em;
+        }
+
+        i{
+            font-size: 1.5em;
+            
+        }
+    }   
 `
 
+export const WeatherCombo = styled.div` 
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+`
 
+export const TempTitle = styled.div` 
+    font-size: 2.5em;    
+
+    @media (min-width: 1200px){
+        h2{font-size: 1.5em;}
+    }
+`
 
 
 // ----------- buttons / icons ----------------
@@ -360,40 +511,61 @@ export const ThemeButton = styled.button`
 
 export const IconHolder = styled.div` 
     display: flex;
-    justify-content: space-between;
+    background: #CF8600;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    min-height: 64px;
+    i{
+        font-size: 2em;
+        
+    }
+`
+
+const iconStyle = css` 
+    cursor: pointer;
+    padding: 1em 0em;
+    background: #CF8600;
+    width: 100%;
+    text-align: center;
+    &:hover{
+        background: #d98c00;
+
+    }
 `
 export const CompleteIcon = styled.div` 
-    cursor: pointer;
-    border-right: 1px solid black;
-    margin-right: 0.5em;    
-    padding-right: 0.5em;
+    ${iconStyle};
+    border-right: 4px solid #a86d00;
+    border-bottom-left-radius: 10px;
 `
 
 export const DeleteIcon = styled.div` 
-    cursor: pointer;
-    border-right: 1px solid black;
-    margin-right: 0.5em;    
-    padding-right: 0.5em;
+    ${iconStyle};
+    /* border-right: 1px solid black;
+    border-left: 1px solid black; */
 `
 
 
 export const ArchiveIcon = styled.div` 
-    cursor: pointer;
-    color: ${props => (props.theme === "light"? 'black' : 'white')};
+    ${iconStyle};
+    border-left: 4px solid #a86d00;
+    border-bottom-right-radius: 10px;
+    
 `
 
 export const TimeTitle = styled.h2` 
-    font-size: 4em;
-    font-weight: 300;
+    font-size: 3.5em;
+   
     padding: 0;
-    margin:0;
-    font-family: 'Cousine', monospace;
-    /* word-wrap: break-word;
-    line-height: 0.8em; */
-    
-
+    margin-top: 0.1em;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    position: relative; 
+   
     @media (min-width:1200px){
-        font-size: 6em;
+        margin-top: 0;
+        font-size: 8em;
+        font-weight: 100;
     }
 
    

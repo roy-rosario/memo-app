@@ -3,7 +3,7 @@ import styled, {createGlobalStyle} from 'styled-components'
 export const GlobalStyled = createGlobalStyle` 
     *{
         box-sizing: border-box;
-        
+        font-family: 'Roboto', sans-serif;
     }
 
     html{

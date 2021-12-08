@@ -15,6 +15,9 @@ function WeatherIcon({condition}){
     else if(current === 'mist'){
         return <i class="fas fa-stream"></i>
     }
+    else if(current === 'rain'){
+        return <i class="fas fa-cloud-showers-heavy"></i>
+    }
     else{
         return(<p></p>)
     }

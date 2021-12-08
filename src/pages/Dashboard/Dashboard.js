@@ -10,8 +10,8 @@ import {QueryContainer,
         ThemeOptionLight,
         ThemeOptionDark,
         TaskContainer,
-        MainContainer,
-        LeftContainer,
+        SubContainer,
+        MiddleContainer,
         StatusContainer,
         TaskWindow,
         taskHeader,
@@ -19,10 +19,13 @@ import {QueryContainer,
         DeleteIcon,
         CompleteIcon,
         ArchiveIcon,
-        RightContainer,
         TimeTitle,
-        TimePic,
-        WeatherHolder
+        WeatherHolder,
+        InfoContainer,
+        GreaterContainer,
+        WeatherCombo,
+        TempTitle,
+        TaskEntrySub
     } from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
@@ -38,6 +41,9 @@ function LogIn(){
     const [tasks, setTasks] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
+    const [currentCard, setCurrentCard] = useState(0)
+    const [cardFlip, setCardFlip] = useState(false)
+    const [contentVisible , setCardVisible] = useState(true)
     const [weather, setWeather] = useState('')
     const [timeSwitch, setTimeSwitch] = useState('false')
     const [themeLock, setThemeLock] = useState(false)
@@ -76,7 +82,7 @@ function LogIn(){
 
 
     async function getWeather(){
-        await axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=53140&appid=e7d9245955d672e33a8a8b8a439db265&units=imperial`)
+        await axios.get(`https://api.openweathermap.org/data/2.5/weather?zip=10457&appid=e7d9245955d672e33a8a8b8a439db265&units=imperial`)
         .then(res => {
             if(res.data){
                 setTemp(res.data.main.temp.toString().slice(0,2))
@@ -133,6 +139,18 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
+    const flipNext = () =>{
+            setCardFlip(true)
+            setCardVisible(false)
+            setTimeout(()=>{
+                setCurrentCard(prev => prev+1)
+                setCardFlip(false)
+                setCardVisible(true)
+            }, 500)
+
+        }
+
+    
     
     return(
         <>
@@ -164,83 +182,94 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <MainContainer theme={theme}>
+        <GreaterContainer>
 
-        <LeftContainer>
-
-            <StatusBar theme={theme} tasks={tasks}/>
-
-            <QueryContainer theme={theme}>
-
-                <label><h4>Add a Task</h4></label>
-                <input
-                    value={task}
-                    type="text"
-                    maxLength="50"
-                    onChange = {(e => setTask(e.target.value))}
-                />
-
+            <InfoContainer theme={theme}>
+                {time && <TimeTitle>{time}</TimeTitle>}
                 
+                <WeatherHolder theme={theme}>
+                    {/* <i  class="far fa-sun"></i> */}
+                    <WeatherCombo>
+                        <WeatherIcon condition={weather}/>
+                        <h2>{weather}</h2>
+                    </WeatherCombo>
+                    {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                </WeatherHolder>
+            
+            </InfoContainer>
 
-                <StanButton 
-                    theme={theme}
-                    onClick={addTask} 
-                    disabled = {task === ""}
-                >
-                    Submit a Task
-                </StanButton>
+            <SubContainer theme={theme}>
 
-            </QueryContainer>
+                <MiddleContainer>
+
+                    <StatusBar theme={theme} tasks={tasks}/>
+
+                    <QueryContainer theme={theme}>
+
+                        <label><h4>Add a Task</h4></label>
+                        <input
+                            value={task}
+                            type="text"
+                            maxLength="50"
+                            onChange = {(e => setTask(e.target.value))}
+                        />
+
+                        
+
+                        <StanButton 
+                            theme={theme}
+                            onClick={addTask} 
+                            disabled = {task === ""}
+                        >
+                            Submit a Task
+                        </StanButton>
+
+                    </QueryContainer>
 
 
-        </LeftContainer>
+                </MiddleContainer>
 
-        <TaskContainer theme={theme}>
-            <taskHeader>
-                <h2>Tasks</h2>
-            </taskHeader>
-            <TaskWindow theme={theme}>
-                {tasks.length > 0? tasks.map(entry => {
-                    return(
-                        <TaskEntry key={entry.docId}>
-                            <div>
-                
-                                <p style={{marginBottom: "0"}}>{entry.task} </p>
-                                <p style={{fontSize: "0.8rem"}}>Created: {entry.dateCreated}</p>
-                            </div>
-                            <IconHolder>
-                                <CompleteIcon>
-                                    <i class="fas fa-check"></i>
-                                </CompleteIcon>
-                                <DeleteIcon
-                                    theme={theme}
-                                    onClick={()=>{deleteTask(entry.docId)}}
-                                >
-                                    <i class="far fa-trash-alt"></i>
-                                </DeleteIcon>
-                                <ArchiveIcon theme={theme}>
-                                    <i class="fas fa-book"></i>
-                                </ArchiveIcon>
-                            </IconHolder>
-                        </TaskEntry>
-                    )
-                }) : <p>There are no tasks to display</p>}
-            </TaskWindow>
-        </TaskContainer>
+                <TaskContainer theme={theme}>
+                    <taskHeader>
+                        <h2>Tasks</h2>
+                    </taskHeader>
+                    
+                            <TaskWindow theme={theme}>
+                                {tasks.length > 0? tasks.map(entry => {
+                                    if(entry === tasks[currentCard]){
+                                        return(
+                                            <TaskEntry flip={cardFlip}>
+                                                <TaskEntrySub theme={theme} key={entry.docId}>                                               
+                                                        <p>{contentVisible  && 'task'}</p>
+                                                        <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                        <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                                </TaskEntrySub>
+                                                <IconHolder>
+                                                    <CompleteIcon>
+                                                        {contentVisible && <i class="fas fa-check"></i>}
+                                                    </CompleteIcon>
+                                                    <DeleteIcon
+                                                        theme={theme}
+                                                        onClick={()=>{deleteTask(entry.docId)}}
+                                                    >
+                                                        {contentVisible && <i class="far fa-trash-alt"></i>}
+                                                    </DeleteIcon>
+                                                    <ArchiveIcon theme={theme}>
+                                                        {contentVisible && <i class="fas fa-book"></i>}
+                                                    </ArchiveIcon>
+                                                </IconHolder>
+                                            </TaskEntry>
+                                        )
+                                    }
+                                }) : <p>There are no tasks to display</p>}
+                            </TaskWindow>
+                                
+                        <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next</button>
+                </TaskContainer>
 
-        <RightContainer theme={theme}>
-            {time && <TimeTitle>{time}</TimeTitle>}
-              
-              <WeatherHolder theme={theme}>
-                {/* <i  class="far fa-sun"></i> */}
-                <WeatherIcon condition={weather}/>
-                <h2>{weather}</h2>
-                {temp && <h2>{temp}°</h2>}
-              </WeatherHolder>
-          
-        </RightContainer>
 
-        </MainContainer>
+            </SubContainer>
+        </GreaterContainer>
     </>
     )
 }

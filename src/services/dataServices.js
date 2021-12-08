@@ -12,7 +12,6 @@ export const addDoc = async(task, id) =>{
 
     return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString()})
     .then(() =>{
-        console.log(date)
         return true
     })
     .catch(err =>{
