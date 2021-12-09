@@ -285,7 +285,7 @@ function LogIn(){
                                 } ) : <p>There are no tasks to display</p>}
                             </TaskWindow>
                                 
-                        <button onClick={flipNext} >next {index}</button>
+                        <button onClick={flipNext} >next </button>
                    
                 </TaskContainer>
 

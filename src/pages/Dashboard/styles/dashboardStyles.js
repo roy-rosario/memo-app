@@ -6,7 +6,8 @@ const containerStyle = css`
     
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
-
+    border-top-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
     box-shadow:  ${props => props.theme === 'light'? '0px -15px 1px lightblue' : '0px -15px 1px blueviolet'};
     /* border-top: 1px solid white;
     border-left: 1px solid white; */
@@ -285,7 +286,6 @@ export const TaskContainer = styled.div`
 export const TaskWindow = styled.div` 
     ${containerStyle};
     box-shadow: none;
-    background: ${props => (props.theme === 'light'? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.1)')};
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
     position: relative;
     min-height: 350px;
@@ -316,7 +316,7 @@ export const TaskEntry = styled.div`
     transition: transform 0.5s ease;
     /* position: absolute; */
     /* z-index: ${props => (props.depth)}; */
-
+  
 ` 
 export const TaskEntrySub = styled.div` 
     ${taskEntryStandard};
