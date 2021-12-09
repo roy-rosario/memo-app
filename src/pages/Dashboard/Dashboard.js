@@ -51,7 +51,7 @@ function LogIn(){
     const user = auth.currentUser
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
-
+    let index = 0
     useEffect(()=>{
         if(!localStorage.getItem("token")){
             history.push('/')
@@ -236,10 +236,10 @@ function LogIn(){
                     
                             <TaskWindow theme={theme}>
                                 {tasks.length > 0? tasks.map(entry => {
-                                    if(entry === tasks[currentCard]){
+                                        
                                         return(
-                                            <TaskEntry flip={cardFlip}>
-                                                <TaskEntrySub theme={theme} key={entry.docId}>                                               
+                                            <TaskEntry key={entry.docId} depth={index} flip={cardFlip}>
+                                                <TaskEntrySub theme={theme} >                                               
                                                         <p>{contentVisible  && 'task'}</p>
                                                         <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
                                                         <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
@@ -259,9 +259,10 @@ function LogIn(){
                                                     </ArchiveIcon>
                                                 </IconHolder>
                                             </TaskEntry>
+                                           
                                         )
-                                    }
-                                }) : <p>There are no tasks to display</p>}
+                                        
+                                } ) : <p>There are no tasks to display</p>}
                             </TaskWindow>
                                 
                         <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next</button>
