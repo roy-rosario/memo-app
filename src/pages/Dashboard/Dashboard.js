@@ -52,7 +52,6 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     let index = 0
-    const [number, setNumber] = useState(0)
     useEffect(()=>{
         if(!localStorage.getItem("token")){
             history.push('/')
@@ -146,21 +145,25 @@ function LogIn(){
     const flipNext = () =>{
             setCardFlip(true)
             setContentVisible(false)
+            
             setTimeout(()=>{
-                
-            if(currentCard < 2){
+                setCardFlip(false)
+            }, 200)
+
+            setTimeout(()=>{
+                setContentVisible(true)
+            }, 400)
+
+            if(currentCard < tasks.length - 1){
                 setCurrentCard(prev => prev+1)
             }
             else{
                 setCurrentCard(0)
             }
             
+            
             index++
            
-            
-            setCardFlip(false)
-            setContentVisible(true)
-            }, 500)
 
         }
 
