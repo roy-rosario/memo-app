@@ -14,7 +14,7 @@ import {QueryContainer,
         MiddleContainer,
         StatusContainer,
         TaskWindow,
-        taskHeader,
+        TaskHeader,
         IconHolder,
         DeleteIcon,
         CompleteIcon,
@@ -188,7 +188,7 @@ function LogIn(){
                 {time && <TimeTitle>{time}</TimeTitle>}
                 
                 <WeatherHolder theme={theme}>
-                    {/* <i  class="far fa-sun"></i> */}
+                    {/* <i  className="far fa-sun"></i> */}
                     <WeatherCombo>
                         <WeatherIcon condition={weather}/>
                         <h2>{weather}</h2>
@@ -230,37 +230,40 @@ function LogIn(){
                 </MiddleContainer>
 
                 <TaskContainer theme={theme}>
-                    <taskHeader>
+                   
                         <h2>Tasks</h2>
-                    </taskHeader>
-                    
+                   
                             <TaskWindow theme={theme}>
                                 {tasks.length > 0? tasks.map(entry => {
                                         
+                                  
+                                     if(entry === tasks[currentCard]){
                                         return(
                                             <TaskEntry key={entry.docId} depth={index} flip={cardFlip}>
-                                                <TaskEntrySub theme={theme} >                                               
-                                                        <p>{contentVisible  && 'task'}</p>
-                                                        <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
-                                                        <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                                </TaskEntrySub>
-                                                <IconHolder>
-                                                    <CompleteIcon>
-                                                        {contentVisible && <i class="fas fa-check"></i>}
-                                                    </CompleteIcon>
-                                                    <DeleteIcon
-                                                        theme={theme}
-                                                        onClick={()=>{deleteTask(entry.docId)}}
-                                                    >
-                                                        {contentVisible && <i class="far fa-trash-alt"></i>}
-                                                    </DeleteIcon>
-                                                    <ArchiveIcon theme={theme}>
-                                                        {contentVisible && <i class="fas fa-book"></i>}
-                                                    </ArchiveIcon>
-                                                </IconHolder>
-                                            </TaskEntry>
-                                           
-                                        )
+                                                    
+                                            <TaskEntrySub theme={theme} >                                               
+                                                     <p>{contentVisible  && 'task'}</p>
+                                                     <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                     <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                            </TaskEntrySub>
+                                            <IconHolder>
+                                                <CompleteIcon>
+                                                            {contentVisible && <i className="fas fa-check"></i>}
+                                                </CompleteIcon>
+                                                 <DeleteIcon
+                                                      theme={theme}
+                                                      onClick={()=>{deleteTask(entry.docId)}}
+                                                 >
+                                                     {contentVisible && <i className="far fa-trash-alt"></i>}
+                                                  </DeleteIcon>
+                                                  <ArchiveIcon theme={theme}>
+                                                       {contentVisible && <i className="fas fa-book"></i>}
+                                                   </ArchiveIcon>
+                                            </IconHolder>
+                                        </TaskEntry>
+                                         )
+                                    }
+                                                                          
                                         
                                 } ) : <p>There are no tasks to display</p>}
                             </TaskWindow>

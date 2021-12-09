@@ -287,7 +287,9 @@ export const TaskWindow = styled.div`
     box-shadow: none;
     background: ${props => (props.theme === 'light'? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.1)')};
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
-   
+    position: relative;
+    min-height: 350px;
+  
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
@@ -310,8 +312,12 @@ export const TaskEntry = styled.div`
     justify-content: flex-end;
     min-height: 310px;
     width: 75%;
-    transition: ${props => (props.flip? 'transform 0.7s ease' : '')};
-    transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
+    /* transition: ${props => (props.flip? 'transform 0.7s ease' : '')};
+    transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')}; */
+    transform: ${props => (props.movement? "translateX(-10em)" : "translateX(0em)")};
+    transition: transform 0.5s ease;
+    /* position: absolute; */
+    /* z-index: ${props => (props.depth)}; */
 
 ` 
 export const TaskEntrySub = styled.div` 
