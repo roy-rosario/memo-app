@@ -43,7 +43,7 @@ function LogIn(){
     const [temp, setTemp] = useState('')
     const [currentCard, setCurrentCard] = useState(0)
     const [cardFlip, setCardFlip] = useState(false)
-    const [contentVisible , setCardVisible] = useState(true)
+    const [contentVisible , setContentVisible] = useState(true)
     const [weather, setWeather] = useState('')
     const [timeSwitch, setTimeSwitch] = useState('false')
     const [themeLock, setThemeLock] = useState(false)
@@ -52,11 +52,13 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     let index = 0
+    const [number, setNumber] = useState(0)
     useEffect(()=>{
         if(!localStorage.getItem("token")){
             history.push('/')
         }
         getWeather()
+        console.log(index)
     },[])
 
     useEffect(()=>{
@@ -139,13 +141,25 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
+
+
     const flipNext = () =>{
             setCardFlip(true)
-            setCardVisible(false)
+            setContentVisible(false)
             setTimeout(()=>{
+                
+            if(currentCard < 2){
                 setCurrentCard(prev => prev+1)
-                setCardFlip(false)
-                setCardVisible(true)
+            }
+            else{
+                setCurrentCard(0)
+            }
+            
+            index++
+           
+            
+            setCardFlip(false)
+            setContentVisible(true)
             }, 500)
 
         }
@@ -268,7 +282,8 @@ function LogIn(){
                                 } ) : <p>There are no tasks to display</p>}
                             </TaskWindow>
                                 
-                        <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next</button>
+                        <button onClick={flipNext} >next {index}</button>
+                   
                 </TaskContainer>
 
 
