@@ -25,8 +25,11 @@ import {QueryContainer,
         GreaterContainer,
         WeatherCombo,
         TempTitle,
-        TaskEntrySub
-    } from './styles/dashboardStyles' 
+        TaskEntrySub,
+        Last, 
+        Next
+    } 
+from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
@@ -272,10 +275,10 @@ function LogIn(){
                 </MiddleContainer>
 
                 <TaskContainer theme={theme}>
-                   
                         <h2>Tasks</h2>
                    
                             <TaskWindow theme={theme}>
+                                <Next theme={theme} onClick={flipLast} disabled={currentCard === 0}><i class="fas fa-chevron-left"></i></Next>    
                                 {tasks.length > 0? tasks.map(entry => {
                                         
                                   
@@ -308,10 +311,18 @@ function LogIn(){
                                                                           
                                         
                                 } ) : <p>There are no tasks to display</p>}
+                                <Last 
+                                    theme={theme} 
+                                    onClick={flipNext} 
+                                    disabled={currentCard === tasks.length-1}
+                                    // onMouseDown={setBig(true)} 
+                                    // onMouseUp={setBig(false)}
+                                    // size={big}
+                                >
+                                    <i class="fas fa-chevron-right"></i> 
+                                </Last>
                             </TaskWindow>
                         
-                        <button onClick={flipLast} disabled={currentCard === 0}>last </button>                             
-                        <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next </button>
                    
                 </TaskContainer>
 
