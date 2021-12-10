@@ -167,6 +167,31 @@ function LogIn(){
 
         }
 
+        const flipLast = () =>{
+            setCardFlip(true)
+            setContentVisible(false)
+            
+            setTimeout(()=>{
+                setCardFlip(false)
+            }, 100)
+
+            setTimeout(()=>{
+                setContentVisible(true)
+            }, 400)
+
+            if(currentCard > 0){
+                setCurrentCard(prev => prev-1)
+            }
+            else{
+                setCurrentCard(tasks.length-1)
+            }
+            
+            
+            index--
+           
+
+        }
+
     
     
     return(
@@ -256,7 +281,7 @@ function LogIn(){
                                   
                                      if(entry === tasks[currentCard]){
                                         return(
-                                            <TaskEntry key={entry.docId} depth={index} flip={cardFlip}>
+                                            <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
                                                     
                                             <TaskEntrySub theme={theme} >                                               
                                                      <p>{contentVisible  && 'task'}</p>
@@ -264,7 +289,7 @@ function LogIn(){
                                                      <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                             </TaskEntrySub>
                                             <IconHolder>
-                                                <CompleteIcon>
+                                                <CompleteIcon theme={theme}>
                                                             {contentVisible && <i className="fas fa-check"></i>}
                                                 </CompleteIcon>
                                                  <DeleteIcon
@@ -284,8 +309,9 @@ function LogIn(){
                                         
                                 } ) : <p>There are no tasks to display</p>}
                             </TaskWindow>
-                                
-                        <button onClick={flipNext} >next </button>
+                        
+                        <button onClick={flipLast} disabled={currentCard === 0}>last </button>                             
+                        <button onClick={flipNext} disabled={currentCard === tasks.length-1}>next </button>
                    
                 </TaskContainer>
 

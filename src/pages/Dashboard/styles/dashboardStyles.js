@@ -159,7 +159,7 @@ export const SubContainer = styled.div`
     
     h1,h2,h3,h4{
         
-        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'white'};
         transition: color 1s ease;
     }
 
@@ -304,7 +304,7 @@ const taskEntryStandard = css`
         border-radius: 10px;
 `
 export const TaskEntry = styled.div` 
-    background: lightblue;
+    background: ${props => (props.theme === 'light'? 'lightblue' : 'blueviolet')};
     border-radius: 10px;
     margin: 0 auto 0 auto;
     display: flex;
@@ -320,7 +320,7 @@ export const TaskEntry = styled.div`
 ` 
 export const TaskEntrySub = styled.div` 
     ${taskEntryStandard};
-    background: white;
+    background: ${props => (props.theme === 'light'? 'white': 'grey')};
     margin: 0em auto 0em auto;
     width: 100%;
     height: 210px;
@@ -515,7 +515,7 @@ export const ThemeButton = styled.button`
 
 export const IconHolder = styled.div` 
     display: flex;
-    background: #CF8600;
+    background: ${props => (props.theme === 'light'? '#CF8600': '#7F5D87')};
     color: white;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -529,17 +529,20 @@ export const IconHolder = styled.div`
 const iconStyle = css` 
     cursor: pointer;
     padding: 1em 0em;
-    background: #CF8600;
+    background: ${props => (props.theme === 'light'? '#CF8600': '#7F5D87')};
     width: 100%;
     text-align: center;
+    border: ${props => (props.theme === 'light'? '4px solid #a86d00': '4px solid #604666')};
     &:hover{
-        background: #d98c00;
+        background:  ${props => (props.theme === 'light'? '#d98c00': '#8e6896')};
 
     }
 `
 export const CompleteIcon = styled.div` 
     ${iconStyle};
-    border-right: 4px solid #a86d00;
+    border-top: none;
+    border-left: none;
+    border-bottom: none;
     border-bottom-left-radius: 10px;
 `
 
@@ -547,12 +550,15 @@ export const DeleteIcon = styled.div`
     ${iconStyle};
     /* border-right: 1px solid black;
     border-left: 1px solid black; */
+    border: none;
 `
 
 
 export const ArchiveIcon = styled.div` 
     ${iconStyle};
-    border-left: 4px solid #a86d00;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     border-bottom-right-radius: 10px;
     
 `
