@@ -288,7 +288,8 @@ export const TaskWindow = styled.div`
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
     position: relative;
     min-height: 350px;
-  
+    display: flex;
+    align-items: center;
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
@@ -591,3 +592,23 @@ export const TimePic = styled.div`
         margin:0;
     }
 `
+
+const arrowStyles = css` 
+    height: 50px;
+    color: white;
+    font-size: 2em;
+
+    &:hover{
+        color:  #dbdbdb;
+    }
+`
+
+export const Next = styled.div` 
+    ${arrowStyles};
+`
+
+export const Last = styled.div` 
+    ${arrowStyles};
+`
+
+e
