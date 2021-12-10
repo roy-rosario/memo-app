@@ -39,7 +39,7 @@ export const NavBar = styled.nav`
         font-size: 1.25em;
         font-family: 'Alfa Slab One', cursive;
         text-shadow: -3px -3px 1px ${props => props.theme === 'light'? 'lightblue' : 'blueviolet'};
-        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'lightskyblue'};
+        color: ${props => props.theme === 'light'? 'b#b8fff4' : 'white'};
     }
 
    @media (min-width: 1200px){
@@ -80,7 +80,7 @@ export const AccountDrop = styled.div`
 export const NavAccountName = styled.h4`
     font-weight: 500;
     cursor: default;
-    color: ${props => props.theme === 'light'? 'white' : 'lightskyblue'};
+    color: white;
     padding-bottom: 1em;
 
     &:hover + ${AccountDrop}{
@@ -160,7 +160,7 @@ export const SubContainer = styled.div`
     h1,h2,h3,h4{
         
         color: ${props => props.theme === 'light'? 'b#b8fff4' : 'white'};
-        transition: color 1s ease;
+        
     }
 
 
@@ -262,7 +262,6 @@ export const TaskContainer = styled.div`
         font-size: 3em;
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
-
         margin: 0;
     }
   
@@ -342,7 +341,7 @@ export const TaskEntrySub = styled.div`
     p{
         margin-top:0;
         font-weight: 600;
-        color: grey;
+        color: ${props =>(props.theme === 'light'? 'grey':'lightgrey')};
         margin-bottom: 1em;
     }
 
