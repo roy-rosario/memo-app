@@ -45,7 +45,7 @@ export const NavBar = styled.nav`
    @media (min-width: 1200px){
        font-size: 1.25rem;
        padding: 1em 3em;
-       margin-bottom: 3em;
+       margin-bottom: 1.5em;
    }
 
 `
@@ -274,7 +274,7 @@ export const TaskContainer = styled.div`
         font-size: 1.1rem;
         width: 100%;
         padding-left: 3.5em;
-        border-bottom-right-radius: 30px 30px;
+        border-bottom-right-radius: 0px;
         h2{
             font-size: 3.5em;
         }
@@ -293,6 +293,8 @@ export const TaskWindow = styled.div`
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
+        display: block;
+        overflow: none;
     }
 `
 const taskEntryStandard = css` 
@@ -311,11 +313,19 @@ export const TaskEntry = styled.div`
     flex-direction: column;
     justify-content: flex-end;
     min-height: 310px;
-    width: 75%;
+    width: 100%;
     transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
     transition: transform 0.5s ease;
     /* position: absolute; */
     /* z-index: ${props => (props.depth)}; */
+
+    @media (min-width: 1200px){
+        min-height: initial;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-bottom: 1em;
+    }
+
   
 ` 
 export const TaskEntrySub = styled.div` 
@@ -347,7 +357,23 @@ export const TaskEntrySub = styled.div`
     }
 
     @media (min-width: 1200px){
-     ${taskEntryStandard};
+       width: 90%;
+       height:100%;
+       margin: 0;
+       display: flex;
+       justify-content: space-between;
+       padding: 1em; 
+    
+       h2{
+           font-size: 1.25em;
+           margin-bottom: 0;
+           padding: 0;
+       }
+
+       p{
+           margin-top: 0;
+           padding
+       }
     }
 
 
@@ -524,6 +550,17 @@ export const IconHolder = styled.div`
         font-size: 2em;
         
     }
+
+    @media (min-width: 1200px){
+        background: none;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+
+        i{
+            font-size: 1.15em;
+            
+        }
+    }
 `
 
 const iconStyle = css` 
@@ -536,6 +573,17 @@ const iconStyle = css`
     &:hover{
         background:  ${props => (props.theme === 'light'? '#d98c00': '#8e6896')};
 
+    }
+
+    @media (min-width: 1200px){
+        margin-right: 0.5em;
+        border: none;
+        border-radius: 100%;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `
 export const CompleteIcon = styled.div` 
@@ -597,17 +645,29 @@ const arrowStyles = css`
     height: 50px;
     color: white;
     font-size: 2em;
-
-    &:hover{
-        color:  #dbdbdb;
+    transition: all 0.15s ease;
+    cursor: pointer;
+    @media (min-width: 1200px){
+        display: none;
     }
 `
 
 export const Next = styled.div` 
     ${arrowStyles};
-`
+    margin-left: 0.25em;
+    &:hover{
+        color:  #dbdbdb;
+        font-size: ${props => (props.size? '3em' : '2em')};
+    }
+    `
 
 export const Last = styled.div` 
     ${arrowStyles};
+    margin-right: 0.25em;
+    
+    &:hover{
+        color:  #dbdbdb;
+        font-size: ${props => (props.size? '3em' : '2em')};
+    }
 `
 
