@@ -316,14 +316,14 @@ export const TaskEntry = styled.div`
     width: 100%;
     transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
     transition: transform 0.5s ease;
-    /* position: absolute; */
-    /* z-index: ${props => (props.depth)}; */
+    
 
     @media (min-width: 1200px){
         min-height: initial;
         flex-direction: row;
         justify-content: flex-end;
         margin-bottom: 1em;
+        
     }
 
   
