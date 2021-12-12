@@ -152,7 +152,15 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
-
+    const diamondSelect = (id) =>{
+        
+        if(diamondActive !== id){
+            setdiamondActive(id)
+        }
+        else{
+            setdiamondActive(null)
+        }
+    }
 
     const flipNext = () =>{
             setCardFlip(true)
@@ -318,9 +326,11 @@ function LogIn(){
                                     .map(entry => {
                                         return(
                                             <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                <Diamond onClick={()=>{setdiamondActive(prev => !prev)}}
+                                                <Diamond 
                                                 theme={theme} 
-                                                activated={diamondActive} ></Diamond>
+                                                onClick={()=>{diamondSelect(entry.docId)}}
+                                                activated={diamondActive === entry.docId}  
+                                                />
                                                 <TaskEntrySub theme={theme} >                                               
                                                         
                                                         <div style={{width: '100%'}}>
@@ -381,39 +391,6 @@ function LogIn(){
                                         }
                                         
                                     }
-
-                                    // else if(!matchResult){
-                                    //     return(
-                                    //         <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                    //             <Diamond onClick={()=>{setdiamondActive(prev => !prev)}}
-                                    //             theme={theme} 
-                                    //             activated={diamondActive} ></Diamond>
-                                    //             <TaskEntrySub theme={theme} >                                               
-                                                        
-                                    //                     <div style={{width: '100%'}}>
-                                    //                         <p>{contentVisible  && 'task'}</p>
-                                    //                         <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
-                                    //                         <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                    //                     </div>
-                                    //                     <IconHolder>
-                                    //                         <CompleteIcon theme={theme}>
-                                    //                             {contentVisible && <i className="fas fa-check"></i>}
-                                    //                         </CompleteIcon>
-                                    //                         <DeleteIcon
-                                    //                             theme={theme}
-                                    //                             onClick={()=>{deleteTask(entry.docId)}}
-                                    //                         >
-                                    //                             {contentVisible && <i className="far fa-trash-alt"></i>}
-                                    //                         </DeleteIcon>
-                                    //                         <ArchiveIcon theme={theme}>
-                                    //                             {contentVisible && <i className="fas fa-book"></i>}
-                                    //                         </ArchiveIcon>
-                                    //                     </IconHolder>
-                                    //             </TaskEntrySub>
-                                
-                                    //      </TaskEntry>
-                                    //      )
-                                    // }
                                                                     
                                         
                                 } ) : <p>There are no tasks to display</p>}
