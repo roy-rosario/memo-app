@@ -168,7 +168,7 @@ export const SubContainer = styled.div`
         width: 75%;
         flex-direction: row;
         align-items: center;
-        margin: 5em auto;
+        margin: 3.25em auto;
         padding-left: 2em;
     }
 `
@@ -258,6 +258,7 @@ export const TaskContainer = styled.div`
     ${containerStyle};
     width: 100%;
     padding: 1em 2em;
+    
     h2{
         font-size: 3em;
         font-family: 'Roboto', sans-serif;
@@ -303,27 +304,29 @@ const taskEntryStandard = css`
         margin-bottom: 1em;
         padding: 1em;
         background-color: ${props => (props.theme === 'light'? 'lightblue': '#7F5D87')};
-        border-radius: 10px;
+        
 `
 export const TaskEntry = styled.div` 
     background: ${props => (props.theme === 'light'? 'lightblue' : 'blueviolet')};
-    border-radius: 10px;
+
     margin: 0 auto 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     min-height: 310px;
     width: 100%;
-    transform: ${props => (props.flip? 'rotateY(180deg)' : 'rotateY(0deg)')};
+    transform: ${props => (props.flip? 'rotateY(360deg)' : 'rotateY(0deg)')};
     transition: transform 0.5s ease;
-    
+    border-top-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
 
     @media (min-width: 1200px){
         min-height: initial;
         flex-direction: row;
-        justify-content: flex-end;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 1em;
-        
+        padding-left: 1.5em;
     }
 
   
@@ -337,6 +340,8 @@ export const TaskEntrySub = styled.div`
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
     padding-right: 3em;
+    border-top-left-radius: 30px 30px;
+    
 
     h2{
         font-size: 1.75em;
@@ -357,13 +362,19 @@ export const TaskEntrySub = styled.div`
     }
 
     @media (min-width: 1200px){
-       width: 90%;
        height:100%;
        margin: 0;
        display: flex;
        justify-content: space-between;
-       padding: 1em; 
-    
+       padding: 0.5em 1em 0.5em 1.5em; 
+       border-bottom-right-radius: 30px 30px;
+       align-items: center;
+
+       h3{
+            margin-bottom: 0.25em;
+           padding: 0;
+        }
+
        h2{
            font-size: 1.25em;
            margin-bottom: 0;
@@ -371,8 +382,10 @@ export const TaskEntrySub = styled.div`
        }
 
        p{
-           margin-top: 0;
-           padding
+           margin-bottom: 0.5em;
+           padding:0;
+           font-size: 0.8em;
+           font-weight: 500;
        }
     }
 
@@ -543,9 +556,8 @@ export const IconHolder = styled.div`
     display: flex;
     background: ${props => (props.theme === 'light'? '#CF8600': '#7F5D87')};
     color: white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
     min-height: 64px;
+    border-bottom-right-radius: 30px 30px;
     i{
         font-size: 2em;
         
@@ -553,8 +565,7 @@ export const IconHolder = styled.div`
 
     @media (min-width: 1200px){
         background: none;
-        border-bottom-left-radius: 0px;
-        border-bottom-right-radius: 0px;
+        
 
         i{
             font-size: 1.15em;
@@ -571,7 +582,7 @@ const iconStyle = css`
     text-align: center;
     border: ${props => (props.theme === 'light'? '4px solid #a86d00': '4px solid #604666')};
     &:hover{
-        background:  ${props => (props.theme === 'light'? '#d98c00': '#8e6896')};
+        background:  ${props => (props.theme === 'light'? '#e69500': '#8e6896')};
 
     }
 
@@ -591,7 +602,7 @@ export const CompleteIcon = styled.div`
     border-top: none;
     border-left: none;
     border-bottom: none;
-    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 0px;
 `
 
 export const DeleteIcon = styled.div` 
@@ -607,8 +618,7 @@ export const ArchiveIcon = styled.div`
     border-top: none;
     border-right: none;
     border-bottom: none;
-    border-bottom-right-radius: 10px;
-    
+    border-bottom-right-radius: 30px 30px;
 `
 
 export const TimeTitle = styled.h2` 
@@ -657,7 +667,7 @@ export const Next = styled.div`
     margin-left: 0.25em;
     &:hover{
         color:  #dbdbdb;
-        font-size: ${props => (props.size? '3em' : '2em')};
+        font-size: ${props => (props.scaling? '3em' : '2em')};
     }
     `
 
@@ -667,7 +677,17 @@ export const Last = styled.div`
     
     &:hover{
         color:  #dbdbdb;
-        font-size: ${props => (props.size? '3em' : '2em')};
+        font-size: ${props => (props.scaling? '3em' : '2em')};
     }
+`
+
+export const Diamond = styled.div`
+    border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
+    min-width: 25px;
+    min-height: 25px;
+    margin-right: 1.5em;
+    transform: rotateZ(45deg);
+    cursor: pointer;
+    background-color: ${props => (props.activated? 'yellow' : 'initial')}
 `
 

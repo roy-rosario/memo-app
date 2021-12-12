@@ -27,7 +27,8 @@ import {QueryContainer,
         TempTitle,
         TaskEntrySub,
         Last, 
-        Next
+        Next,
+        Diamond
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -51,12 +52,17 @@ function LogIn(){
     const [timeSwitch, setTimeSwitch] = useState(false)
     const [themeLock, setThemeLock] = useState(false)
     const [big, setBig] = useState(false)
+    const [diamondActive, setdiamondActive] = useState(false)
+    const [pageNumber, setPageNumber] = useState(0)
     const auth = getAuth()
     const user = auth.currentUser
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     let index = 0
     const matchResult = window.matchMedia("(max-width: 1199px)").matches;
+    const itemsPerPage = 4
+    let itemsVisited = pageNumber * itemsPerPage
+    const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
     
     useEffect(()=>{
@@ -64,7 +70,6 @@ function LogIn(){
             history.push('/')
         }
         getWeather()
-        console.log(index)
     },[])
 
     useEffect(()=>{
@@ -184,7 +189,7 @@ function LogIn(){
 
             setTimeout(()=>{
                 setContentVisible(true)
-            }, 400)
+            }, 500)
 
             if(currentCard > 0){
                 setCurrentCard(prev => prev-1)
@@ -199,7 +204,23 @@ function LogIn(){
 
         }
 
-    
+        
+
+        const pageNext = () =>{
+            if(pageNumber < pageCount-1){
+                setPageNumber(pageNumber+1)
+            }
+            else{
+                return null
+            }
+        }
+
+        const pagePrevious = () =>{
+            if(pageNumber > 0){
+                setPageNumber(pageNumber-1)
+            }
+        }
+
     
     return(
         <>
@@ -288,10 +309,46 @@ function LogIn(){
                                     disabled={currentCard === 0}
                                     onMouseDown={()=>{setBig(true)}} 
                                     onMouseUp={()=>{setBig(false)}}
-                                    size={big}
+                                    scaling={big}
                                 >
                                     <i class="fas fa-chevron-left"></i>
-                                </Last>    
+                                </Last>
+                                {(!matchResult && tasks.length > 0) &&
+                                    tasks.slice(itemsVisited, itemsVisited + itemsPerPage)
+                                    .map(entry => {
+                                        return(
+                                            <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
+                                                <Diamond onClick={()=>{setdiamondActive(prev => !prev)}}
+                                                theme={theme} 
+                                                activated={diamondActive} ></Diamond>
+                                                <TaskEntrySub theme={theme} >                                               
+                                                        
+                                                        <div style={{width: '100%'}}>
+                                                            <p>{contentVisible  && 'task'}</p>
+                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                            <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                                        </div>
+                                                        <IconHolder>
+                                                            <CompleteIcon theme={theme}>
+                                                                {contentVisible && <i className="fas fa-check"></i>}
+                                                            </CompleteIcon>
+                                                            <DeleteIcon
+                                                                theme={theme}
+                                                                onClick={()=>{deleteTask(entry.docId)}}
+                                                            >
+                                                                {contentVisible && <i className="far fa-trash-alt"></i>}
+                                                            </DeleteIcon>
+                                                            <ArchiveIcon theme={theme}>
+                                                                {contentVisible && <i className="fas fa-book"></i>}
+                                                            </ArchiveIcon>
+                                                        </IconHolder>
+                                                </TaskEntrySub>
+                                
+                                         </TaskEntry>
+                                        )
+                                    }) 
+                                   
+                                }    
                                 {tasks.length > 0? tasks.map(entry => {
                                         
                                   if(matchResult){
@@ -325,35 +382,38 @@ function LogIn(){
                                         
                                     }
 
-                                    else if(!matchResult){
-                                        return(
-                                            <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                    
-                                            <TaskEntrySub theme={theme} >                                               
-                                                     {/* <p>{contentVisible  && 'task'}</p> */}
-                                                     <div style={{width: '100%'}}>
-                                                        <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
-                                                        <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                                     </div>
-                                                     <IconHolder>
-                                                        <CompleteIcon theme={theme}>
-                                                            {contentVisible && <i className="fas fa-check"></i>}
-                                                        </CompleteIcon>
-                                                        <DeleteIcon
-                                                            theme={theme}
-                                                            onClick={()=>{deleteTask(entry.docId)}}
-                                                        >
-                                                            {contentVisible && <i className="far fa-trash-alt"></i>}
-                                                        </DeleteIcon>
-                                                        <ArchiveIcon theme={theme}>
-                                                             {contentVisible && <i className="fas fa-book"></i>}
-                                                        </ArchiveIcon>
-                                                      </IconHolder>
-                                            </TaskEntrySub>
+                                    // else if(!matchResult){
+                                    //     return(
+                                    //         <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
+                                    //             <Diamond onClick={()=>{setdiamondActive(prev => !prev)}}
+                                    //             theme={theme} 
+                                    //             activated={diamondActive} ></Diamond>
+                                    //             <TaskEntrySub theme={theme} >                                               
+                                                        
+                                    //                     <div style={{width: '100%'}}>
+                                    //                         <p>{contentVisible  && 'task'}</p>
+                                    //                         <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                    //                         <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                    //                     </div>
+                                    //                     <IconHolder>
+                                    //                         <CompleteIcon theme={theme}>
+                                    //                             {contentVisible && <i className="fas fa-check"></i>}
+                                    //                         </CompleteIcon>
+                                    //                         <DeleteIcon
+                                    //                             theme={theme}
+                                    //                             onClick={()=>{deleteTask(entry.docId)}}
+                                    //                         >
+                                    //                             {contentVisible && <i className="far fa-trash-alt"></i>}
+                                    //                         </DeleteIcon>
+                                    //                         <ArchiveIcon theme={theme}>
+                                    //                             {contentVisible && <i className="fas fa-book"></i>}
+                                    //                         </ArchiveIcon>
+                                    //                     </IconHolder>
+                                    //             </TaskEntrySub>
                                 
-                                         </TaskEntry>
-                                         )
-                                    }
+                                    //      </TaskEntry>
+                                    //      )
+                                    // }
                                                                     
                                         
                                 } ) : <p>There are no tasks to display</p>}
@@ -363,13 +423,21 @@ function LogIn(){
                                     disabled={currentCard === tasks.length-1}
                                     onMouseDown={()=>{setBig(true)}} 
                                     onMouseUp={()=>{setBig(false)}}
-                                    size={big}
+                                    scaling={big}
                                 >
                                     <i class="fas fa-chevron-right"></i> 
                                 </Next>
                             </TaskWindow>
                         
-                   
+                        {   !matchResult &&
+                            <div>
+                                <button onClick={pagePrevious}>previous</button>
+                                <button onClick={pageNext}>next</button>
+                                <span style={{marginLeft: '2em'}}>{pageNumber+1} / {pageCount}</span>                                
+                            </div>
+
+                        }
+
                 </TaskContainer>
 
 
