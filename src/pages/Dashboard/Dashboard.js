@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react'
-import {QueryContainer, 
+import {
+        QueryContainer, 
         StanButton, 
         TaskEntry,
         NavBar,
