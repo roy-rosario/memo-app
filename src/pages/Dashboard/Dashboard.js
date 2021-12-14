@@ -28,7 +28,9 @@ import {QueryContainer,
         TaskEntrySub,
         Last, 
         Next,
-        Diamond
+        Diamond,
+        PageNav,
+        PageNumbers
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -311,7 +313,7 @@ function LogIn(){
                         <h2>Tasks</h2>
                    
                             <TaskWindow theme={theme}>
-                                <Last 
+                                {matchResult && <Last 
                                     theme={theme} 
                                     onClick={flipLast} 
                                     disabled={currentCard === 0}
@@ -320,7 +322,7 @@ function LogIn(){
                                     scaling={big}
                                 >
                                     <i class="fas fa-chevron-left"></i>
-                                </Last>
+                                </Last>}
                                 {(!matchResult && tasks.length > 0) &&
                                     tasks.slice(itemsVisited, itemsVisited + itemsPerPage)
                                     .map(entry => {
@@ -394,7 +396,7 @@ function LogIn(){
                                                                     
                                         
                                 } ) : <p>There are no tasks to display</p>}
-                                <Next 
+                                {matchResult && <Next 
                                     theme={theme} 
                                     onClick={flipNext} 
                                     disabled={currentCard === tasks.length-1}
@@ -403,15 +405,34 @@ function LogIn(){
                                     scaling={big}
                                 >
                                     <i class="fas fa-chevron-right"></i> 
-                                </Next>
+                                </Next>}
                             </TaskWindow>
                         
                         {   !matchResult &&
-                            <div>
-                                <button onClick={pagePrevious}>previous</button>
-                                <button onClick={pageNext}>next</button>
-                                <span style={{marginLeft: '2em'}}>{pageNumber+1} / {pageCount}</span>                                
-                            </div>
+                            <PageNav>
+                                <Last 
+                                    theme={theme} 
+                                    onClick={pagePrevious} 
+                                    disabled={currentCard === 0}
+                                    onMouseDown={()=>{setBig(true)}} 
+                                    onMouseUp={()=>{setBig(false)}}
+                                    scaling={big}
+                                >
+                                    <i class="fas fa-chevron-left"></i> 
+                                </Last>
+                                
+                                <PageNumbers>{pageNumber+1} / {pageCount}</PageNumbers>
+                                <Next 
+                                    theme={theme} 
+                                    onClick={pageNext} 
+                                    disabled={currentCard === tasks.length-1}
+                                    onMouseDown={()=>{setBig(true)}} 
+                                    onMouseUp={()=>{setBig(false)}}
+                                    scaling={big}
+                                >
+                                    <i class="fas fa-chevron-right"></i> 
+                                </Next>                                
+                            </PageNav>
 
                         }
 

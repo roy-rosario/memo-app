@@ -291,6 +291,7 @@ export const TaskWindow = styled.div`
     min-height: 350px;
     display: flex;
     align-items: center;
+    padding: 1em;
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
@@ -304,12 +305,14 @@ const taskEntryStandard = css`
         margin-bottom: 1em;
         padding: 1em;
         background-color: ${props => (props.theme === 'light'? 'lightblue': '#7F5D87')};
+
+        
         
 `
 export const TaskEntry = styled.div` 
     background: ${props => (props.theme === 'light'? 'lightblue' : 'blueviolet')};
 
-    margin: 0 auto 0 auto;
+    margin: 0 0.5em 0 0.5em;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -319,6 +322,7 @@ export const TaskEntry = styled.div`
     transition: transform 0.5s ease;
     border-top-left-radius: 30px 30px;
     border-bottom-right-radius: 30px 30px;
+    
 
     @media (min-width: 1200px){
         min-height: initial;
@@ -574,6 +578,17 @@ export const IconHolder = styled.div`
     }
 `
 
+export const PageNav = styled.div` 
+    display: flex;
+    font-size: 1.5em;
+
+    margin-left: 14.5em;
+`
+
+export const PageNumbers = styled.span` 
+    margin 0 1em;
+`
+
 const iconStyle = css` 
     cursor: pointer;
     padding: 1em 0em;
@@ -654,31 +669,47 @@ export const TimePic = styled.div`
 const arrowStyles = css` 
     height: 50px;
     color: white;
-    font-size: 2em;
     transition: all 0.15s ease;
     cursor: pointer;
+    font-size: 2em;
     @media (min-width: 1200px){
-        display: none;
+       font-size: 1em;
     }
 `
 
 export const Next = styled.div` 
     ${arrowStyles};
-    margin-left: 0.25em;
-    &:hover{
-        color:  #dbdbdb;
-        font-size: ${props => (props.scaling? '3em' : '2em')};
-    }
-    `
-
-export const Last = styled.div` 
-    ${arrowStyles};
-    margin-right: 0.25em;
     
     &:hover{
         color:  #dbdbdb;
         font-size: ${props => (props.scaling? '3em' : '2em')};
     }
+    
+
+    @media (min-width: 1200px){
+        &:hover{
+        color:  #dbdbdb;
+        font-size: ${props => (props.scaling? '1em' : '1em')};
+    }
+`
+
+export const Last = styled.div` 
+    ${arrowStyles};
+    
+    
+    &:hover{
+        font-size: ${props => (props.scaling? '3em' : '2em')};
+        color:  #dbdbdb;
+    };
+
+    @media (min-width: 1200px){
+        &:hover{
+            color:  #dbdbdb;
+            font-size: ${props => (props.scaling? '1em' : '1em')};       
+        }
+
+        
+    };
 `
 
 export const Diamond = styled.div`
