@@ -75,6 +75,12 @@ function LogIn(){
         getWeather()
     },[])
 
+    useEffect(() =>{
+        if(pageNumber >= pageCount){
+            setPageNumber(0)
+        }
+    },[pageCount])
+
     useEffect(()=>{
         fetchTasks()
         
@@ -84,6 +90,7 @@ function LogIn(){
         getTime()
         // getWeather() disabled because the weather API only allows few request, so only fetch data on initial render
         reTrigger()
+        
     }, [timeSwitch])
 
     async function getTime(){
@@ -111,6 +118,7 @@ function LogIn(){
     const reTrigger = ()=>{
         setTimeout(()=> {
             setTimeSwitch(prev => !prev)
+            
         }, 1000)
     }
 
@@ -131,6 +139,9 @@ function LogIn(){
             const whatever = await retrieveDocs(user.uid)
     
             setTasks(whatever)
+            if(pageNumber >= pageCount){
+            setPageNumber(0)
+        }
         }
     }, [user])
     
@@ -142,7 +153,7 @@ function LogIn(){
         if(res){
             fetchTasks()
         }
-      
+
     }
     
 
@@ -220,6 +231,7 @@ function LogIn(){
         const pageNext = () =>{
             if(pageNumber < pageCount-1){
                 setPageNumber(pageNumber+1)
+                
             }
             else{
                 return null
@@ -314,7 +326,8 @@ function LogIn(){
                         <h2>Tasks</h2>
                    
                             <TaskWindow theme={theme}>
-                                {matchResult && <Last 
+                                {matchResult && tasks.length > 0 && 
+                                <Last 
                                     theme={theme} 
                                     onClick={flipLast} 
                                     disabled={currentCard === 0}
@@ -397,7 +410,7 @@ function LogIn(){
                                                                     
                                         
                                 } ) : <p>There are no tasks to display</p>}
-                                {matchResult && <Next 
+                                {matchResult && tasks.length > 0 && <Next 
                                     theme={theme} 
                                     onClick={flipNext} 
                                     disabled={currentCard === tasks.length-1}
@@ -409,7 +422,7 @@ function LogIn(){
                                 </Next>}
                             </TaskWindow>
                         
-                        {   !matchResult &&
+                        {   !matchResult && tasks.length > 0 &&
                             <PageNav>
                                 <Last 
                                     theme={theme} 
