@@ -1,15 +1,15 @@
 import React from 'react'
-import {StatusContainer, TextEditor} from '../styles/dashboardStyles'
+import {StatusContainer, TextEditor, StanButton} from '../styles/dashboardStyles'
 import { archiveDoc } from '../../../services/dataServices'
 
-export default function StatusBar({theme, tasks, change, info, mode_, write_back}){
+export default function StatusBar({theme, tasks, change, info, mode_, write_back, cancel_}){
     return(
             <StatusContainer theme={theme}>
                 {mode_?
-                <TextEditor>
-                    <input value={info} onChange={e => (change(e.target.value))}/>
-                    <button onClick={write_back}>submit</button>
-                    <button>cancel</button>
+                <TextEditor theme={theme}>
+                    <textarea value={info} maxLength="50" onChange={e => (change(e.target.value))}/>
+                    <StanButton theme={theme} onClick={write_back}>submit</StanButton>
+                    <StanButton theme={theme} onClick={()=>{cancel_(false)}}>cancel</StanButton>
                 </TextEditor>
                 :
                 <>

@@ -31,7 +31,8 @@ import {
         Next,
         Diamond,
         PageNav,
-        PageNumbers
+        PageNumbers,
+        EditIcon
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -317,6 +318,7 @@ function LogIn(){
                         mode_={editMode} 
                         info={taskTitle} 
                         change={setTaskTitle}
+                        cancel_={setEditMode}
                         write_back = {editTask}
                     />
 
@@ -387,9 +389,12 @@ function LogIn(){
                                                             >
                                                                 {contentVisible && <i className="far fa-trash-alt"></i>}
                                                             </DeleteIcon>
-                                                            <ArchiveIcon onClick={() =>{edit(entry)}} theme={theme}>
+                                                            <ArchiveIcon theme={theme}>
                                                                 {contentVisible && <i className="fas fa-book"></i>}
                                                             </ArchiveIcon>
+                                                            <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
+                                                                {contentVisible && <i className="fas fa-pen"></i>}
+                                                            </EditIcon>
                                                         </IconHolder>
                                                 </TaskEntrySub>
                                 
@@ -421,9 +426,12 @@ function LogIn(){
                                                   >
                                                       {contentVisible && <i className="far fa-trash-alt"></i>}
                                                    </DeleteIcon>
-                                                   <ArchiveIcon theme={theme} onClick={()=>{edit(entry)}}>
-                                                        {contentVisible && <i className="fas fa-book"></i>}
+                                                   <ArchiveIcon theme={theme}>
+                                                                {contentVisible && <i className="fas fa-book"></i>}
                                                     </ArchiveIcon>
+                                                    <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
+                                                        {contentVisible && <i className="fas fa-pen"></i>}
+                                                    </EditIcon>
                                              </IconHolder>
                                           </TaskEntry>
                                           )

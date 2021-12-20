@@ -520,17 +520,32 @@ export const TempTitle = styled.div`
 `
 
 export const TextEditor = styled.div` 
-    color: black;
-    background-color: white;
+    color: ${props => (props.theme === 'light'? 'black': 'white')};
+    background: ${props => (props.theme === 'light'? 'white': 'grey')};
     border-top-left-radius: 30px 30px;
     border-bottom-right-radius: 30px 30px;
     padding: 1em;
     width: 100%;
 
-    input{
+    textarea{
         display: block;
         margin-bottom: 1em;
         border: none;
+        font-weight: 700;
+        font-size: 1.5em;
+        resize: none;
+        border-bottom: 1px solid lightgrey;
+        width: 100%;
+        outline: none;
+        color: ${props => (props.theme === 'light'? 'black': 'white')};
+        background: ${props => (props.theme === 'light'? 'white': 'grey')};
+    }
+
+    @media (min-width:1200px){
+        min-height: 400px;
+        textarea{
+            font-size: 1em;
+        }
     }
 `
 
@@ -644,6 +659,13 @@ export const DeleteIcon = styled.div`
 
 
 export const ArchiveIcon = styled.div` 
+    ${iconStyle};
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+`
+
+export const EditIcon = styled.div` 
     ${iconStyle};
     border-top: none;
     border-right: none;
