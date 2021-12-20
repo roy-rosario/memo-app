@@ -519,6 +519,21 @@ export const TempTitle = styled.div`
     }
 `
 
+export const TextEditor = styled.div` 
+    color: black;
+    background-color: white;
+    border-top-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    padding: 1em;
+    width: 100%;
+
+    input{
+        display: block;
+        margin-bottom: 1em;
+        border: none;
+    }
+`
+
 
 // ----------- buttons / icons ----------------
 

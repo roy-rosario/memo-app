@@ -38,16 +38,19 @@ import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
-import {addDoc, retrieveDocs, removeDoc} from '../../services/dataServices'
+import {addDoc, retrieveDocs, removeDoc, editDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 
 
 function LogIn(){
     const [task, setTask] = useState('')
+    const [taskTitle, setTaskTitle] = useState('')
     const [tasks, setTasks] = useState('')
+    const [currentId, setCurrentId] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
+    const [editMode, setEditMode] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
     const [cardFlip, setCardFlip] = useState(false)
     const [contentVisible , setContentVisible] = useState(true)
@@ -132,7 +135,14 @@ function LogIn(){
     },[task, user])
     
    
-    
+    const editTask = useCallback(async() =>{
+        const check = await editDoc(taskTitle, user.uid, currentId)
+
+        if(check){
+            fetchTasks()
+            setEditMode(prev => !prev)
+        }
+    },[taskTitle, user])
 
     const fetchTasks = useCallback(async() =>{
         if(user && user.uid){
@@ -244,6 +254,12 @@ function LogIn(){
             }
         }
 
+        const edit = (entry) =>{
+            setCurrentId(entry.docId)
+            setEditMode(prev => !prev)
+            setTaskTitle(entry.task)
+        }
+
     
     return(
         <>
@@ -295,7 +311,14 @@ function LogIn(){
 
                 <MiddleContainer>
 
-                    <StatusBar theme={theme} tasks={tasks}/>
+                    <StatusBar 
+                        theme={theme} 
+                        tasks={tasks} 
+                        mode_={editMode} 
+                        info={taskTitle} 
+                        change={setTaskTitle}
+                        write_back = {editTask}
+                    />
 
                     <QueryContainer theme={theme}>
 
@@ -364,7 +387,7 @@ function LogIn(){
                                                             >
                                                                 {contentVisible && <i className="far fa-trash-alt"></i>}
                                                             </DeleteIcon>
-                                                            <ArchiveIcon theme={theme}>
+                                                            <ArchiveIcon onClick={() =>{edit(entry)}} theme={theme}>
                                                                 {contentVisible && <i className="fas fa-book"></i>}
                                                             </ArchiveIcon>
                                                         </IconHolder>
@@ -398,7 +421,7 @@ function LogIn(){
                                                   >
                                                       {contentVisible && <i className="far fa-trash-alt"></i>}
                                                    </DeleteIcon>
-                                                   <ArchiveIcon theme={theme}>
+                                                   <ArchiveIcon theme={theme} onClick={()=>{edit(entry)}}>
                                                         {contentVisible && <i className="fas fa-book"></i>}
                                                     </ArchiveIcon>
                                              </IconHolder>
