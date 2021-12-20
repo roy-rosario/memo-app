@@ -1,5 +1,5 @@
 import {getDB} from '../utils/firebase-config'
-import {setDoc, doc, collection, getDocs, query, where, deleteDoc} from 'firebase/firestore'
+import {setDoc, doc, collection, getDocs, query, where, deleteDoc, updateDoc} from 'firebase/firestore'
 
 
 
@@ -19,6 +19,23 @@ export const addDoc = async(task, id) =>{
         return false
     })
 }
+
+export const editDoc = async(task, id, docId) =>{
+    const db = getDB()
+
+    const docRef = doc(collection(db, 'tasks'), docId)
+
+
+    return await updateDoc(docRef, {task: task, userId: id})
+    .then(() =>{
+        return true
+    })
+    .catch(err =>{
+        alert(err)
+        return false
+    })
+}
+
 
 export const retrieveDocs = async(id) =>{
     const db = getDB()
