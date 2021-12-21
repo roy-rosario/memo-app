@@ -419,6 +419,7 @@ export const InfoContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    text-shadow: 0px 0px 3px black;
     
 
     &:before{
@@ -428,7 +429,7 @@ export const InfoContainer = styled.div`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background-image: url("./images/night-image.jpg");
+        background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')};
         background-size: cover;
         background-position: center;
         opacity: 0.8;
@@ -461,7 +462,7 @@ export const InfoContainer = styled.div`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background-image: url("./images/night-image.jpg");
+        background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image.jpg")' : 'url("./images/night-image.jpg")')};
         background-size: cover;
         background-position: bottom;
         opacity: 0.5;
