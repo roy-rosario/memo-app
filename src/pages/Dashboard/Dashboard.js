@@ -33,7 +33,8 @@ import {
         PageNav,
         PageNumbers,
         EditIcon,
-        EditCover
+        EditCover,
+        AddButton
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -327,7 +328,8 @@ function LogIn(){
                     <QueryContainer theme={theme}>
 
                         <label><h4>Add a Task</h4></label>
-                        <input
+                        <AddButton theme={theme}><i class="fas fa-plus"></i></AddButton>
+                        {/* <input
                             value={task}
                             type="text"
                             maxLength="50"
@@ -342,7 +344,7 @@ function LogIn(){
                             disabled = {task === ""}
                         >
                             Submit a Task
-                        </StanButton>
+                        </StanButton> */}
 
                     </QueryContainer>
 
