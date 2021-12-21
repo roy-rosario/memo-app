@@ -267,6 +267,11 @@ function LogIn(){
             setTaskTitle(entry.task)
         }
 
+        const cancel = () =>{
+            setInitialAdd(false)
+            setEditMode(prev => !prev)
+        }
+
     
     return(
         <>
@@ -325,7 +330,7 @@ function LogIn(){
                         mode_={editMode} 
                         info={initialAdd? task : taskTitle} 
                         change={initialAdd? setTask : setTaskTitle}
-                        cancel_={setEditMode}
+                        cancel_={cancel}
                         write_back = {initialAdd? addTask : editTask}
                     />
 

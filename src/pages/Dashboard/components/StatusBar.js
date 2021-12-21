@@ -10,7 +10,7 @@ export default function StatusBar({theme, tasks, change, info, mode_, write_back
                         <textarea value={info} maxLength="50" onChange={e => (change(e.target.value))}/>
                         <div>
                             <StanButton theme={theme} onClick={write_back}>save</StanButton>
-                            <StanButton theme={theme} onClick={()=>{cancel_(false)}}>cancel</StanButton>
+                            <StanButton theme={theme} onClick={cancel_}>cancel</StanButton>
                         </div>
                     </TextEditor>
                     }
