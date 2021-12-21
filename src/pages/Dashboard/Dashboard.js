@@ -53,6 +53,8 @@ function LogIn(){
     const [currentId, setCurrentId] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
+    const [tracked, setTracked] = useState(null)
+    const [trackedMessage, setTrackedMessage] = useState('')
     const [initialAdd, setInitialAdd] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
@@ -62,7 +64,7 @@ function LogIn(){
     const [timeSwitch, setTimeSwitch] = useState(false)
     const [themeLock, setThemeLock] = useState(false)
     const [big, setBig] = useState(false)
-    const [diamondActive, setdiamondActive] = useState(false)
+    const [diamondActive, setdiamondActive] = useState(null)
     const [pageNumber, setPageNumber] = useState(0)
     const auth = getAuth()
     const user = auth.currentUser
@@ -272,6 +274,22 @@ function LogIn(){
             setEditMode(prev => !prev)
         }
 
+        const tracking = (entry) =>{
+            
+
+            
+            if(tracked !== entry.docId){
+                setTracked(entry.docId)
+                setTrackedMessage(entry.task)
+            }
+           
+            else{
+                setTracked(null)
+                setTrackedMessage('')
+            }
+            
+        }
+
     
     return(
         <>
@@ -309,6 +327,8 @@ function LogIn(){
             <InfoContainer theme={theme}>
                 {time && <TimeTitle>{time}</TimeTitle>}
                 
+                {tracked && <p>{trackedMessage}</p>}
+
                 <WeatherHolder theme={theme}>
                     {/* <i  className="far fa-sun"></i> */}
                     <WeatherCombo>
@@ -390,7 +410,10 @@ function LogIn(){
                                             <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
                                                 <Diamond 
                                                 theme={theme} 
-                                                onClick={()=>{diamondSelect(entry.docId)}}
+                                                onClick={()=>{
+                                                    diamondSelect(entry.docId)
+                                                    tracking(entry)
+                                                }}
                                                 activated={diamondActive === entry.docId}  
                                                 />
                                                 <TaskEntrySub theme={theme} >                                               
