@@ -1,13 +1,17 @@
+/* eslint-disable no-undef */
 import React, {useContext, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ThemeContext, ThemeContextProvider} from './utils/themeContext'
+import {EditContext, EditContextProvider} from './utils/editContext'
 import {GlobalStyled} from './styles/defaultStyles'
 
 const GlobalStyle = () =>{
   const {theme, set_Theme} = useContext(ThemeContext)
+  const {editMode} = useContext(EditContext)
+
 
   useEffect(()=>{
     let currentTheme = localStorage.getItem('theme')
@@ -20,17 +24,23 @@ const GlobalStyle = () =>{
   }, [])
 
   return(
-      <GlobalStyled theme={theme} />
+      <GlobalStyled theme={theme}  eMode={editMode}/>
   )
 }
 
+
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeContextProvider>
-      <GlobalStyle />
-      <App />
-    </ThemeContextProvider>
-  </React.StrictMode>,
+
+    <React.StrictMode>
+      <ThemeContextProvider>
+        <EditContextProvider>
+          <GlobalStyle />
+          <App />
+        </EditContextProvider>
+      </ThemeContextProvider>
+    </React.StrictMode>
+
+  ,
   document.getElementById('root')
 );
 
