@@ -32,7 +32,8 @@ import {
         Diamond,
         PageNav,
         PageNumbers,
-        EditIcon
+        EditIcon,
+        EditCover
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -257,13 +258,14 @@ function LogIn(){
 
         const edit = (entry) =>{
             setCurrentId(entry.docId)
-            setEditMode(prev => !prev)
+            setEditMode(true)
             setTaskTitle(entry.task)
         }
 
     
     return(
         <>
+       {editMode && <EditCover/>}
         <NavBar theme={theme}>
             <h2>memo-app</h2>
 

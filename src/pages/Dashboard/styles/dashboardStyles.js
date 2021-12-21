@@ -182,7 +182,7 @@ export const MiddleContainer = styled.div`
         flex-direction: column-reverse;
         justify-content: space-between;
         margin-right: 2.5em;
-        width: 40%;
+        width: 50%;
         padding: 0;
         margin-top: 0; 
     }
@@ -228,6 +228,7 @@ export const QueryContainer = styled.div`
 
 export const StatusContainer = styled.div` 
     ${containerStyle};
+    position: relative;
 
     h3{
         margin-top: 0;
@@ -526,6 +527,16 @@ export const TextEditor = styled.div`
     border-bottom-right-radius: 30px 30px;
     padding: 1em;
     width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    min-height: 323px;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     textarea{
         display: block;
@@ -546,6 +557,18 @@ export const TextEditor = styled.div`
         textarea{
             font-size: 1em;
         }
+    }
+`
+
+export const EditCover = styled.div` 
+    background-color: rgba(0,0,0, 0.3);
+    position: absolute;
+    width: 100vw;
+    height: 130vh;
+    z-index: 1;
+    
+    @media (min-width: 1200px){
+        height: 100vh;
     }
 `
 
