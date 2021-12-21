@@ -33,7 +33,8 @@ import {
         PageNav,
         PageNumbers,
         EditIcon,
-        EditCover
+        EditCover,
+        AddButton
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -52,6 +53,7 @@ function LogIn(){
     const [currentId, setCurrentId] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
+    const [initialAdd, setInitialAdd] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
     const [cardFlip, setCardFlip] = useState(false)
@@ -128,11 +130,14 @@ function LogIn(){
     }
 
     const addTask = useCallback(async() =>{
+        
         const check = await addDoc(task, user.uid)
 
         if(check){
             setTask('')
             fetchTasks()
+            setEditMode(prev => !prev)
+            setInitialAdd(false)
         }
     },[task, user])
     
@@ -262,6 +267,11 @@ function LogIn(){
             setTaskTitle(entry.task)
         }
 
+        const cancel = () =>{
+            setInitialAdd(false)
+            setEditMode(prev => !prev)
+        }
+
     
     return(
         <>
@@ -318,16 +328,25 @@ function LogIn(){
                         theme={theme} 
                         tasks={tasks} 
                         mode_={editMode} 
-                        info={taskTitle} 
-                        change={setTaskTitle}
-                        cancel_={setEditMode}
-                        write_back = {editTask}
+                        info={initialAdd? task : taskTitle} 
+                        change={initialAdd? setTask : setTaskTitle}
+                        cancel_={cancel}
+                        write_back = {initialAdd? addTask : editTask}
                     />
 
                     <QueryContainer theme={theme}>
 
                         <label><h4>Add a Task</h4></label>
-                        <input
+                        <AddButton 
+                            onClick={()=>{
+                                setInitialAdd(true)
+                                setEditMode(true)
+                            }}
+                            theme={theme}
+                        >
+                            <i class="fas fa-plus"></i>
+                        </AddButton>
+                        {/* <input
                             value={task}
                             type="text"
                             maxLength="50"
@@ -342,7 +361,7 @@ function LogIn(){
                             disabled = {task === ""}
                         >
                             Submit a Task
-                        </StanButton>
+                        </StanButton> */}
 
                     </QueryContainer>
 

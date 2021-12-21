@@ -193,13 +193,16 @@ export const MiddleContainer = styled.div`
 
 export const QueryContainer = styled.div`
     ${containerStyle};
+    display: flex;
+    justify-content: space-between;
+    padding: 1em 1.75em;
 
     h4{
         margin: 0;
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
 
-        font-size: 2.2em;
+        font-size: 2.25em;
         font-weight: 400;
     }
 
@@ -221,8 +224,12 @@ export const QueryContainer = styled.div`
 
     @media (min-width: 1200px){
         margin-bottom: 0em;
-        padding: 1.65em 1em;
+        padding: 2em 1.75em 2.5em 1.75em;
         width: 100%;
+
+        h4{
+            font-size: 2.75em;
+        }
     }
 `
 
@@ -250,7 +257,7 @@ export const StatusContainer = styled.div`
     @media (min-width: 1200px){
         width: 100%;
         font-size: 1.25rem;
-        min-height: 475px;
+        min-height: 520px;
         
     }
 `
@@ -694,6 +701,18 @@ export const EditIcon = styled.div`
     border-right: none;
     border-bottom: none;
     border-bottom-right-radius: 30px 30px;
+`
+
+export const AddButton = styled.div`
+    ${iconStyle};
+    @media (max-width: 1200px){
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        border: none;
+    }
+
+
 `
 
 export const TimeTitle = styled.h2` 
