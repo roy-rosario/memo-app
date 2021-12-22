@@ -44,6 +44,7 @@ import {useHistory} from 'react-router-dom'
 import {addDoc, retrieveDocs, removeDoc, editDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
+import { EditContext } from '../../utils/editContext'
 
 
 function LogIn(){
@@ -56,7 +57,6 @@ function LogIn(){
     const [tracked, setTracked] = useState(null)
     const [trackedMessage, setTrackedMessage] = useState('')
     const [initialAdd, setInitialAdd] = useState(false)
-    const [editMode, setEditMode] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
     const [cardFlip, setCardFlip] = useState(false)
     const [contentVisible , setContentVisible] = useState(true)
@@ -70,6 +70,7 @@ function LogIn(){
     const user = auth.currentUser
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
+    const {editMode, toggleEditMode} = useContext(EditContext)
     let index = 0
     const matchResult = window.matchMedia("(max-width: 1199px)").matches;
     const itemsPerPage = 4
@@ -138,7 +139,7 @@ function LogIn(){
         if(check){
             setTask('')
             fetchTasks()
-            setEditMode(prev => !prev)
+            toggleEditMode()
             setInitialAdd(false)
         }
     },[task, user])
@@ -149,7 +150,7 @@ function LogIn(){
 
         if(check){
             fetchTasks()
-            setEditMode(prev => !prev)
+            toggleEditMode()
         }
     },[taskTitle, user])
 
@@ -265,13 +266,13 @@ function LogIn(){
 
         const edit = (entry) =>{
             setCurrentId(entry.docId)
-            setEditMode(true)
+            toggleEditMode()
             setTaskTitle(entry.task)
         }
 
         const cancel = () =>{
             setInitialAdd(false)
-            setEditMode(prev => !prev)
+            toggleEditMode()
         }
 
         const tracking = (entry) =>{
@@ -360,7 +361,7 @@ function LogIn(){
                         <AddButton 
                             onClick={()=>{
                                 setInitialAdd(true)
-                                setEditMode(true)
+                                toggleEditMode()
                             }}
                             theme={theme}
                         >

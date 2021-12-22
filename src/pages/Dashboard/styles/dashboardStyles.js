@@ -562,6 +562,7 @@ export const TextEditor = styled.div`
 
     @media (min-width:1200px){
         min-height: 400px;
+        width: 100%;
         textarea{
             font-size: 1em;
         }
