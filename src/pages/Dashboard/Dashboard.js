@@ -457,14 +457,14 @@ function LogIn(){
                                              <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
                                                      
                                              <TaskEntrySub theme={theme} >                                               
-                                                      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>{contentVisible  && 'task'}</p> <Diamond 
+                                                      {contentVisible  && <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>task</p> <Diamond 
                                                 theme={theme} 
                                                 onClick={()=>{
                                                     diamondSelect(entry.docId)
                                                     tracking(entry)
                                                 }}
                                                 activated={diamondActive === entry.docId}  
-                                                /></div>
+                                                /></div>}
                                                       <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
                                                       <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                              </TaskEntrySub>

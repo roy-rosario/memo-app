@@ -351,7 +351,7 @@ export const TaskEntrySub = styled.div`
     height: 210px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
-    padding-right: 3em;
+    padding-right: 1.5em;
     border-top-left-radius: 30px 30px;
     
 
@@ -795,11 +795,20 @@ export const Last = styled.div`
 
 export const Diamond = styled.div`
     border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
-    min-width: 25px;
-    min-height: 25px;
-    margin-right: 1.5em;
+    min-width: 18px;
+    min-height: 18px;
     transform: rotateZ(45deg);
     cursor: pointer;
-    background-color: ${props => (props.activated? 'yellow' : 'initial')}
+    background-color: ${props => (props.activated? 'yellow' : 'initial')};
+
+    @media (min-width: 1200px){
+        border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
+        min-width: 25px;
+        min-height: 25px;
+        margin-right: 1.5em;
+        transform: rotateZ(45deg);
+        cursor: pointer;
+        background-color: ${props => (props.activated? 'yellow' : 'initial')};
+    }
 `
 
