@@ -351,7 +351,7 @@ export const TaskEntrySub = styled.div`
     height: 210px;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px;
-    padding-right: 3em;
+    padding-right: 1.5em;
     border-top-left-radius: 30px 30px;
     
 
@@ -410,16 +410,13 @@ export const InfoContainer = styled.div`
     
     z-index: -1;
     width: 100%;
-    padding: 0.5em 1em;
     box-shadow: none;
     position: relative;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 1em 0.5em 3em 0.5em;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    padding: 1em 0.5em 1em 0.5em;
     text-shadow: 0px 0px 3px black;
+    min-height: 295px;
     
 
     &:before{
@@ -449,7 +446,7 @@ export const InfoContainer = styled.div`
         border-bottom: ${props => (props.theme === 'light'? '10px solid lightblue' : '10px solid blueviolet')}; */
         display: flex;
         flex-direction: column;
-        align-items: initial;
+        justify-content: space-between;
         margin-right: 2em;
         padding:1em;
         border-top-left-radius: 30px 30px;
@@ -478,6 +475,7 @@ export const WeatherHolder = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    
     h2{
      
         margin-left: 0.25em;
@@ -500,6 +498,7 @@ export const WeatherHolder = styled.div`
         justify-content: flex-end;
         align-items: flex-end;
         padding-bottom: 2em;
+        margin-top: 4.5em;
         
         h2{
             font-size: 1.5em;
@@ -573,7 +572,7 @@ export const EditCover = styled.div`
     background-color: rgba(0,0,0, 0.3);
     position: absolute;
     width: 100vw;
-    height: 130vh;
+    height: 135vh;
     z-index: 1;
     
     @media (min-width: 1200px){
@@ -583,6 +582,16 @@ export const EditCover = styled.div`
 
 
 // ----------- buttons / icons ----------------
+
+export const TrackedTitle = styled.p` 
+    font-size: 2em;
+    font-style: italic;
+
+    @media (min-width: 1200px){
+        font-size: 3.25em;
+        margin-top: 0;
+    }
+`
 
 export const StanButton = styled.button` 
 
@@ -725,11 +734,13 @@ export const TimeTitle = styled.h2`
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     position: relative; 
+    margin-bottom: 0.5em;
    
     @media (min-width:1200px){
         margin-top: 0;
         font-size: 8em;
         font-weight: 100;
+        margin-bottom: 0.5em;
     }
 
    
@@ -795,11 +806,20 @@ export const Last = styled.div`
 
 export const Diamond = styled.div`
     border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
-    min-width: 25px;
-    min-height: 25px;
-    margin-right: 1.5em;
+    min-width: 18px;
+    min-height: 18px;
     transform: rotateZ(45deg);
     cursor: pointer;
-    background-color: ${props => (props.activated? 'yellow' : 'initial')}
+    background-color: ${props => (props.activated? 'yellow' : 'initial')};
+
+    @media (min-width: 1200px){
+        border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
+        min-width: 25px;
+        min-height: 25px;
+        margin-right: 1.5em;
+        transform: rotateZ(45deg);
+        cursor: pointer;
+        background-color: ${props => (props.activated? 'yellow' : 'initial')};
+    }
 `
 
