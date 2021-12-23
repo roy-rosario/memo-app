@@ -147,7 +147,7 @@ function LogIn(){
     
    
     const editTask = useCallback(async() =>{
-        const check = await editDoc(taskTitle, currentId)
+        const check = await editDoc({task: taskTitle}, currentId)
 
         if(check){
             fetchTasks()

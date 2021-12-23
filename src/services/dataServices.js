@@ -20,13 +20,13 @@ export const addDoc = async(task, id) =>{
     })
 }
 
-export const editDoc = async(task, docId) =>{
+export const editDoc = async(data, docId) =>{
     const db = getDB()
 
     const docRef = doc(collection(db, 'tasks'), docId)
 
 
-    return await updateDoc(docRef, {task: task})
+    return await updateDoc(docRef, data)
     .then(() =>{
         return true
     })
