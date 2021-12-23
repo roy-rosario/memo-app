@@ -34,7 +34,8 @@ import {
         PageNumbers,
         EditIcon,
         EditCover,
-        AddButton
+        AddButton,
+        TrackedTitle
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -324,22 +325,49 @@ function LogIn(){
         </NavBar>
 
         <GreaterContainer>
-
-            <InfoContainer theme={theme}>
-                {time && <TimeTitle>{time}</TimeTitle>}
-                
-                {tracked && <p>{trackedMessage}</p>}
-
-                <WeatherHolder theme={theme}>
-                    {/* <i  className="far fa-sun"></i> */}
-                    <WeatherCombo>
-                        <WeatherIcon condition={weather}/>
-                        <h2>{weather}</h2>
-                    </WeatherCombo>
-                    {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
-                </WeatherHolder>
+    
+            {matchResult? 
             
-            </InfoContainer>
+                <InfoContainer theme={theme}>
+
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+
+                        {time && <TimeTitle>{time}</TimeTitle>}
+                        
+                        <WeatherHolder theme={theme}>
+                            {/* <i  className="far fa-sun"></i> */}
+                            <WeatherCombo>
+                                <WeatherIcon condition={weather}/>
+                                <h2>{weather}</h2>
+                            </WeatherCombo>
+                            {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                        </WeatherHolder>
+
+                    </div>
+                
+                    {tracked && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>"{trackedMessage}"</TrackedTitle></>}
+                 </InfoContainer>
+            
+            :
+
+                <InfoContainer theme={theme}>
+                   
+                    {time && <TimeTitle>{time}</TimeTitle>}
+                
+                    {tracked && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>"{trackedMessage}"</TrackedTitle></>}
+
+                    <WeatherHolder theme={theme}>
+                        {/* <i  className="far fa-sun"></i> */}
+                        <WeatherCombo>
+                            <WeatherIcon condition={weather}/>
+                            <h2>{weather}</h2>
+                        </WeatherCombo>
+                        {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                    </WeatherHolder>
+
+                </InfoContainer>
+
+            }
 
             <SubContainer theme={theme}>
 
