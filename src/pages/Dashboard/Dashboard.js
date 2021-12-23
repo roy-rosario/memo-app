@@ -166,6 +166,7 @@ function LogIn(){
         }
     }, [user])
     
+    console.log(currentCard)
     
 
     const deleteTask = async(id) =>{
@@ -458,7 +459,9 @@ function LogIn(){
                                                             </CompleteIcon>
                                                             <DeleteIcon
                                                                 theme={theme}
-                                                                onClick={()=>{deleteTask(entry.docId)}}
+                                                                onClick={()=>{
+                                                                    deleteTask(entry.docId)
+                                                                }}
                                                             >
                                                                 {contentVisible && <i className="far fa-trash-alt"></i>}
                                                             </DeleteIcon>
@@ -502,7 +505,16 @@ function LogIn(){
                                                  </CompleteIcon>
                                                   <DeleteIcon
                                                        theme={theme}
-                                                       onClick={()=>{deleteTask(entry.docId)}}
+                                                       onClick={()=>{
+                                                            if(currentCard === tasks.length -1){
+                                                                    setCurrentCard(0)
+                                                                    deleteTask(entry.docId)
+                                                                }
+                                                                else{
+                                                                    deleteTask(entry.docId)
+                                                                }
+                                                            }
+                                                        }
                                                   >
                                                       {contentVisible && <i className="far fa-trash-alt"></i>}
                                                    </DeleteIcon>

@@ -10,7 +10,7 @@ export const addDoc = async(task, id) =>{
 
     let date = new Date()
 
-    return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString().slice(3)})
+    return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString().slice(3), dateActual: date.getTime(), tracked: false})
     .then(() =>{
         return true
     })
