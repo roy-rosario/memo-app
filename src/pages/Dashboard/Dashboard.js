@@ -294,6 +294,7 @@ function LogIn(){
 
         const trackDoc = async(entry) =>{
             
+            
             if(entry.tracked){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
@@ -311,29 +312,7 @@ function LogIn(){
                     setTrackedMessage(entry.task)
                     setTracked(entry.docId)
                 }
-            }
-            
-            // if(!entry.tracked){
-            //     let check = await editDoc(entry.docId, {tracked: !entry.tracked})
-
-            //     if(check){
-            //         fetchTasks()
-            //         setTrackedMessage(entry.task)
-            //         setTracked(entry.docId)
-            //      }
-            // }
-           
-            // else{
-            //     let check = await editDoc(entry.docId, {tracked: !entry.tracked})
-
-            //     if(check){
-            //         fetchTasks()
-            //         setTrackedMessage('')
-            //         setTracked(false)
-            //      }
-                
-            // }
-
+            }         
             
         }
 
