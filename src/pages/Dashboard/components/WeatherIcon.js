@@ -18,6 +18,9 @@ function WeatherIcon({condition}){
     else if(current === 'rain'){
         return <i class="fas fa-cloud-showers-heavy"></i>
     }
+    else if(current === 'snow'){
+        return <i class="fas fa-snowflake"></i>
+    }
     else{
         return(<p></p>)
     }
