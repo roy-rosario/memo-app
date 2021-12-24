@@ -20,7 +20,7 @@ export const addDoc = async(task, id) =>{
     })
 }
 
-export const editDoc = async(data, docId) =>{
+export const editDoc = async(docId, data) =>{
     const db = getDB()
 
     const docRef = doc(collection(db, 'tasks'), docId)

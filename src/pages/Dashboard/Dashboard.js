@@ -147,7 +147,7 @@ function LogIn(){
     
    
     const editTask = useCallback(async() =>{
-        const check = await editDoc({task: taskTitle}, currentId)
+        const check = await editDoc(currentId, {task: taskTitle})
 
         if(check){
             fetchTasks()
@@ -197,6 +197,7 @@ function LogIn(){
             setdiamondActive(null)
         }
     }
+
 
     const flipNext = () =>{
             setCardFlip(true)
@@ -277,7 +278,7 @@ function LogIn(){
             toggleEditMode()
         }
 
-        const tracking = (entry) =>{
+        const trackDoc = (entry) =>{
             
 
             
@@ -442,7 +443,7 @@ function LogIn(){
                                                 theme={theme} 
                                                 onClick={()=>{
                                                     diamondSelect(entry.docId)
-                                                    tracking(entry)
+                                                    trackDoc(entry)
                                                 }}
                                                 activated={diamondActive === entry.docId}  
                                                 />
@@ -492,7 +493,7 @@ function LogIn(){
                                                 theme={theme} 
                                                 onClick={()=>{
                                                     diamondSelect(entry.docId)
-                                                    tracking(entry)
+                                                    trackDoc(entry)
                                                 }}
                                                 activated={diamondActive === entry.docId}  
                                                 /></div>}
