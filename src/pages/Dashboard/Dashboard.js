@@ -46,6 +46,7 @@ import {addDoc, retrieveDocs, removeDoc, editDoc} from '../../services/dataServi
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
+import { async } from '@firebase/util'
 
 
 function LogIn(){
@@ -55,8 +56,8 @@ function LogIn(){
     const [currentId, setCurrentId] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
-    const [tracked, setTracked] = useState(null)
-    const [trackedMessage, setTrackedMessage] = useState('')
+    const [tracked, setTracked] = useState("")
+    const [trackedMessage, setTrackedMessage] = useState(tasks)
     const [initialAdd, setInitialAdd] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
     const [cardFlip, setCardFlip] = useState(false)
@@ -84,18 +85,21 @@ function LogIn(){
             history.push('/')
         }
         getWeather()
+        
     },[])
 
+
+
     useEffect(() =>{
-        if(pageNumber >= pageCount){
+        if(pageNumber > pageCount){
             setPageNumber(0)
         }
     },[pageCount])
 
     useEffect(()=>{
         fetchTasks()
-        
-    }, [user])
+        initialTracking()
+    }, [user, tasks])
 
     useEffect(()=>{
         getTime()
@@ -103,6 +107,16 @@ function LogIn(){
         reTrigger()
         
     }, [timeSwitch])
+
+ 
+    const initialTracking = () =>{
+        for(let i = 0; i < tasks.length ; i++){
+            if(tasks[i].tracked){
+                setTrackedMessage(tasks[i].task)
+                setTracked(tasks[i].docId)
+            }
+        }
+    }
 
     async function getTime(){
         await axios.get('http://worldtimeapi.org/api/timezone/America/New_York')
@@ -147,7 +161,7 @@ function LogIn(){
     
    
     const editTask = useCallback(async() =>{
-        const check = await editDoc(taskTitle, currentId)
+        const check = await editDoc(currentId, {task: taskTitle})
 
         if(check){
             fetchTasks()
@@ -160,9 +174,9 @@ function LogIn(){
             const whatever = await retrieveDocs(user.uid)
     
             setTasks(whatever)
-            if(pageNumber >= pageCount){
-            setPageNumber(0)
-        }
+        //     if(pageNumber >= pageCount){
+        //     setPageNumber(0)
+        // }
         }
     }, [user])
     
@@ -196,6 +210,7 @@ function LogIn(){
             setdiamondActive(null)
         }
     }
+
 
     const flipNext = () =>{
             setCardFlip(true)
@@ -276,19 +291,28 @@ function LogIn(){
             toggleEditMode()
         }
 
-        const tracking = (entry) =>{
-            
 
+        const trackDoc = async(entry) =>{
             
-            if(tracked !== entry.docId){
-                setTracked(entry.docId)
-                setTrackedMessage(entry.task)
+            
+            if(entry.tracked){
+                let check = await editDoc(entry.docId, {tracked: !entry.tracked})
+
+                if(check){
+                    fetchTasks()
+                    setTrackedMessage('')
+                    setTracked('')
+                }
             }
-           
-            else{
-                setTracked(null)
-                setTrackedMessage('')
-            }
+            else if(tracked.length < 1){
+                let check = await editDoc(entry.docId, {tracked: !entry.tracked})
+
+                if(check){
+                    fetchTasks()
+                    setTrackedMessage(entry.task)
+                    setTracked(entry.docId)
+                }
+            }         
             
         }
 
@@ -440,16 +464,15 @@ function LogIn(){
                                                 <Diamond 
                                                 theme={theme} 
                                                 onClick={()=>{
-                                                    diamondSelect(entry.docId)
-                                                    tracking(entry)
+                                                    trackDoc(entry)
                                                 }}
-                                                activated={diamondActive === entry.docId}  
+                                                activated={entry.tracked}  
                                                 />
                                                 <TaskEntrySub theme={theme} >                                               
                                                         
                                                         <div style={{width: '100%'}}>
                                                             <p>{contentVisible  && 'task'}</p>
-                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,20).trim()+"..."} </h2>
                                                             <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
                                                         <IconHolder>
@@ -458,7 +481,9 @@ function LogIn(){
                                                             </CompleteIcon>
                                                             <DeleteIcon
                                                                 theme={theme}
-                                                                onClick={()=>{deleteTask(entry.docId)}}
+                                                                onClick={()=>{
+                                                                    deleteTask(entry.docId)
+                                                                }}
                                                             >
                                                                 {contentVisible && <i className="far fa-trash-alt"></i>}
                                                             </DeleteIcon>
@@ -488,12 +513,11 @@ function LogIn(){
                                                       {contentVisible  && <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>task</p> <Diamond 
                                                 theme={theme} 
                                                 onClick={()=>{
-                                                    diamondSelect(entry.docId)
-                                                    tracking(entry)
+                                                    trackDoc(entry)
                                                 }}
-                                                activated={diamondActive === entry.docId}  
+                                                activated={entry.tracked}  
                                                 /></div>}
-                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,25).trim()+"..."} </h2>
                                                       <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                              </TaskEntrySub>
                                              <IconHolder>
@@ -502,7 +526,16 @@ function LogIn(){
                                                  </CompleteIcon>
                                                   <DeleteIcon
                                                        theme={theme}
-                                                       onClick={()=>{deleteTask(entry.docId)}}
+                                                       onClick={()=>{
+                                                            if(currentCard === tasks.length -1){
+                                                                    setCurrentCard(0)
+                                                                    deleteTask(entry.docId)
+                                                                }
+                                                                else{
+                                                                    deleteTask(entry.docId)
+                                                                }
+                                                            }
+                                                        }
                                                   >
                                                       {contentVisible && <i className="far fa-trash-alt"></i>}
                                                    </DeleteIcon>

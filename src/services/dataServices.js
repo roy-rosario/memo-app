@@ -10,7 +10,7 @@ export const addDoc = async(task, id) =>{
 
     let date = new Date()
 
-    return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString().slice(3)})
+    return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString().slice(3), dateActual: date.getTime(), tracked: false})
     .then(() =>{
         return true
     })
@@ -20,13 +20,13 @@ export const addDoc = async(task, id) =>{
     })
 }
 
-export const editDoc = async(task, docId) =>{
+export const editDoc = async(docId, data) =>{
     const db = getDB()
 
     const docRef = doc(collection(db, 'tasks'), docId)
 
 
-    return await updateDoc(docRef, {task: task})
+    return await updateDoc(docRef, data)
     .then(() =>{
         return true
     })
@@ -35,6 +35,8 @@ export const editDoc = async(task, docId) =>{
         return false
     })
 }
+
+
 
 
 export const retrieveDocs = async(id) =>{
