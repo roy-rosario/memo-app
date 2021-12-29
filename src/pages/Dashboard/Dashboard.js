@@ -472,7 +472,7 @@ function LogIn(){
                                                         
                                                         <div style={{width: '100%'}}>
                                                             <p>{contentVisible  && 'task'}</p>
-                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,20).trim()+"..."} </h2>
                                                             <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
                                                         <IconHolder>
@@ -517,7 +517,7 @@ function LogIn(){
                                                 }}
                                                 activated={entry.tracked}  
                                                 /></div>}
-                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task} </h2>
+                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,25).trim()+"..."} </h2>
                                                       <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                              </TaskEntrySub>
                                              <IconHolder>
