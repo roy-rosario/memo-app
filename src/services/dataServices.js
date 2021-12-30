@@ -1,5 +1,5 @@
 import {getDB} from '../utils/firebase-config'
-import {setDoc, doc, collection, getDocs, query, where, deleteDoc, updateDoc} from 'firebase/firestore'
+import {setDoc, doc, collection, getDocs, query, where, deleteDoc, updateDoc, orderBy} from 'firebase/firestore'
 
 
 
@@ -39,10 +39,10 @@ export const editDoc = async(docId, data) =>{
 
 
 
-export const retrieveDocs = async(id) =>{
+export const retrieveDocs = async(id, collectionName) =>{
     const db = getDB()
 
-        const q = query(collection(db, 'tasks'), where("userId", "==", id))
+        const q = query(collection(db, collectionName), orderBy("dateActual"),  where("userId", "==", id))
 
         return await getDocs(q)
         .then((snapShot)=>{
@@ -56,7 +56,7 @@ export const retrieveDocs = async(id) =>{
             return placeholder
         })
         .catch(err => {
-            alert(err)
+            console.log(err)
             return ([])
         })
     

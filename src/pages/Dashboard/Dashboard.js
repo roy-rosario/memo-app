@@ -171,7 +171,7 @@ function LogIn(){
 
     const fetchTasks = useCallback(async() =>{
         if(user && user.uid){
-            const whatever = await retrieveDocs(user.uid)
+            const whatever = await retrieveDocs(user.uid, 'tasks')
     
             setTasks(whatever)
         //     if(pageNumber >= pageCount){
