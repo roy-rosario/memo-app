@@ -99,7 +99,9 @@ function LogIn(){
     useEffect(()=>{
         fetchTasks()
         initialTracking()
-    }, [user, tasks])
+    }, [user])
+
+    // tasks was tracked here previously, removed to test
 
     useEffect(()=>{
         getTime()
