@@ -20,6 +20,21 @@ export const addDoc = async(task, id) =>{
     })
 }
 
+export const completeDoc = async(data, id) => {
+    const db = getDB()
+
+    const docRef = doc(collection(db, 'completed'))
+
+    return await setDoc(docRef, {data, tracked: false, id})
+    .then(()=>{
+        return true
+    })
+    .catch(err =>{
+        alert(err)
+        return false
+    })
+}
+
 export const editDoc = async(docId, data) =>{
     const db = getDB()
 

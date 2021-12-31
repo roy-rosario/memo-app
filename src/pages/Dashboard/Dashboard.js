@@ -42,7 +42,7 @@ import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
-import {addDoc, retrieveDocs, removeDoc, editDoc} from '../../services/dataServices'
+import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
@@ -88,18 +88,19 @@ function LogIn(){
         
     },[])
 
-
-
-    useEffect(() =>{
+    useEffect(()=>{
         if(pageNumber > pageCount){
             setPageNumber(0)
         }
-    },[pageCount])
+    }, [pageNumber])
+
+   
 
     useEffect(()=>{
         fetchTasks()
         initialTracking()
     }, [user])
+
 
     // tasks was tracked here previously, removed to test
 
@@ -176,9 +177,9 @@ function LogIn(){
             const whatever = await retrieveDocs(user.uid, 'tasks')
     
             setTasks(whatever)
-        //     if(pageNumber >= pageCount){
-        //     setPageNumber(0)
-        // }
+            // if(pageNumber > pageCount){
+            //     setPageNumber(0)
+            // }
         }
     }, [user])
     
@@ -192,6 +193,10 @@ function LogIn(){
         }
 
     }
+
+    // const completeTask = async(id) =>{
+    //     const res = await completeDoc(...entry,id)
+    // } 
     
 
     const onLogOut = () =>{
