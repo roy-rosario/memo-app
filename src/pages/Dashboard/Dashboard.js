@@ -99,7 +99,9 @@ function LogIn(){
     useEffect(()=>{
         fetchTasks()
         initialTracking()
-    }, [user, tasks])
+    }, [user])
+
+    // tasks was tracked here previously, removed to test
 
     useEffect(()=>{
         getTime()
@@ -171,7 +173,7 @@ function LogIn(){
 
     const fetchTasks = useCallback(async() =>{
         if(user && user.uid){
-            const whatever = await retrieveDocs(user.uid)
+            const whatever = await retrieveDocs(user.uid, 'tasks')
     
             setTasks(whatever)
         //     if(pageNumber >= pageCount){
