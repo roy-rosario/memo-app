@@ -3,6 +3,7 @@ import {StatusContainer, TextEditor, StanButton, EditCover} from '../styles/dash
 import { archiveDoc } from '../../../services/dataServices'
 
 export default function StatusBar({theme, tasks, change, info, mode_, write_back, cancel_}){
+
     return(
             <StatusContainer theme={theme}>
                 

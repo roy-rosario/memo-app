@@ -46,7 +46,7 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc} from '../../servi
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
-import { async } from '@firebase/util'
+
 
 
 function LogIn(){
@@ -194,9 +194,13 @@ function LogIn(){
 
     }
 
-    // const completeTask = async(id) =>{
-    //     const res = await completeDoc(...entry,id)
-    // } 
+    const completeTask = async(entry) =>{
+        const res = await completeDoc({...entry, tracked: false})
+
+        if(res){
+            deleteTask(entry.docId)
+        }
+    } 
     
 
     const onLogOut = () =>{
@@ -483,7 +487,7 @@ function LogIn(){
                                                             <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
                                                         <IconHolder>
-                                                            <CompleteIcon theme={theme}>
+                                                            <CompleteIcon theme={theme} onClick={()=>{completeTask(entry)}}>
                                                                 {contentVisible && <i className="fas fa-check"></i>}
                                                             </CompleteIcon>
                                                             <DeleteIcon
@@ -524,11 +528,11 @@ function LogIn(){
                                                 }}
                                                 activated={entry.tracked}  
                                                 /></div>}
-                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,25).trim()+"..."} </h2>
+                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && ( entry.task.length > 17? entry.task.slice(0,25).trim()+"..." : entry.task.slice(0,25))} </h2>
                                                       <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                              </TaskEntrySub>
                                              <IconHolder>
-                                                 <CompleteIcon theme={theme}>
+                                                 <CompleteIcon theme={theme} onClick={()=>{completeTask(entry)}}>
                                                              {contentVisible && <i className="fas fa-check"></i>}
                                                  </CompleteIcon>
                                                   <DeleteIcon
