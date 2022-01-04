@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react'
 import {
         QueryContainer, 
-        StanButton, 
-        TaskEntry,
         NavBar,
         AccountDrop,
         NavAccountName,
@@ -13,25 +11,12 @@ import {
         TaskContainer,
         SubContainer,
         MiddleContainer,
-        StatusContainer,
-        TaskWindow,
-        IconHolder,
-        DeleteIcon,
-        CompleteIcon,
-        ArchiveIcon,
         TimeTitle,
         WeatherHolder,
         InfoContainer,
         GreaterContainer,
         WeatherCombo,
         TempTitle,
-        TaskEntrySub,
-        Last, 
-        Next,
-        Diamond,
-        PageNav,
-        PageNumbers,
-        EditIcon,
         EditCover,
         AddButton,
         TrackedTitle
@@ -45,6 +30,7 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc} from '../../servi
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
+import TaskComponent from './components/TaskComponent'
 
 
 
@@ -326,6 +312,71 @@ function LogIn(){
             
         }
 
+        let generalProps ={
+            task: task,
+            setTask: setTask,
+            taskTitle: taskTitle,
+            setTaskTitle: setTaskTitle,
+            tasks: tasks,
+            setTasks: setTask,
+            currentId: currentId,
+            setCurrentId: setCurrentId,
+            time: time,
+            setTime: setTime,
+            temp: temp,
+            setTemp: setTemp,
+            tracked: tracked,
+            setTracked: setTracked,
+            trackedMessage: trackedMessage,
+            setTrackedMessage: setTrackedMessage,
+            initialAdd: initialAdd,
+            setInitialAdd: setInitialAdd,
+            currentCard: currentCard,
+            setCurrentCard: setCurrentCard,
+            cardFlip: cardFlip,
+            setCardFlip: setCardFlip,
+            contentVisible: contentVisible,
+            setContentVisible: setContentVisible,
+            weather: weather,
+            setWeather: setWeather,
+            timeSwitch: timeSwitch,
+            setTimeSwitch: setTimeSwitch,
+            themeLock: themeLock,
+            setThemeLock: setThemeLock,
+            big: big,
+            setBig: setBig,
+            diamondActive: diamondActive,
+            setdiamondActive: setdiamondActive,
+            setPageNumber: setPageNumber,
+            trackDoc: trackDoc,
+            pageNext: pageNext,
+            pagePrevious: pagePrevious,
+            addTask: addTask,
+            initialTracking: initialTracking,
+            fetchTasks: fetchTasks,
+            editTask: editTask,
+            completeTask: completeTask,
+            deleteTask: deleteTask,
+            edit: edit,
+            flipLast: flipLast,
+            flipNext: flipNext,
+            cancel: cancel,
+            theme: theme,
+            toggleLightTheme: toggleLightTheme,
+            toggleDarkTheme: toggleDarkTheme,
+            toggleEditMode: toggleEditMode,
+            toggleThemeSelector: toggleThemeSelector,
+            auth: auth,
+            matchResult: matchResult,
+            user: user,
+            history: history,
+            editMode: editMode,
+            index : index,
+            itemsPerPage : itemsPerPage,
+            itemsVisited : itemsVisited,
+            pageCount : pageCount,
+            pageNumber: pageNumber
+        }
     
     return(
         <>
@@ -451,161 +502,9 @@ function LogIn(){
 
                 </MiddleContainer>
 
-                <TaskContainer theme={theme}>
-                        <h2>Tasks</h2>
-                   
-                            <TaskWindow theme={theme}>
-                                {matchResult && tasks.length > 0 && 
-                                <Last 
-                                    theme={theme} 
-                                    onClick={flipLast} 
-                                    disabled={currentCard === 0}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-left"></i>
-                                </Last>}
-                                {(!matchResult && tasks.length > 0) &&
-                                    tasks.slice(itemsVisited, itemsVisited + itemsPerPage)
-                                    .map(entry => {
-                                        return(
-                                            <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                <Diamond 
-                                                theme={theme} 
-                                                onClick={()=>{
-                                                    trackDoc(entry)
-                                                }}
-                                                activated={entry.tracked}  
-                                                />
-                                                <TaskEntrySub theme={theme} >                                               
-                                                        
-                                                        <div style={{width: '100%'}}>
-                                                            <p>{contentVisible  && 'task'}</p>
-                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && (entry.task.length > 19? entry.task.slice(0,20).trim()+"..." : entry.task)} </h2>
-                                                            <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                                        </div>
-                                                        <IconHolder>
-                                                            <CompleteIcon theme={theme} onClick={()=>{completeTask(entry)}}>
-                                                                {contentVisible && <i className="fas fa-check"></i>}
-                                                            </CompleteIcon>
-                                                            <DeleteIcon
-                                                                theme={theme}
-                                                                onClick={()=>{
-                                                                    deleteTask(entry.docId)
-                                                                }}
-                                                            >
-                                                                {contentVisible && <i className="far fa-trash-alt"></i>}
-                                                            </DeleteIcon>
-                                                            <ArchiveIcon theme={theme}>
-                                                                {contentVisible && <i className="fas fa-book"></i>}
-                                                            </ArchiveIcon>
-                                                            <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
-                                                                {contentVisible && <i className="fas fa-pen"></i>}
-                                                            </EditIcon>
-                                                        </IconHolder>
-                                                </TaskEntrySub>
-                                
-                                         </TaskEntry>
-                                        )
-                                    }) 
-                                   
-                                }    
-                                {tasks.length > 0? tasks.map(entry => {
-                                        
-                                  if(matchResult){
-
-                                      if(entry === tasks[currentCard]){
-                                         return(
-                                             <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                     
-                                             <TaskEntrySub theme={theme} >                                               
-                                                      {contentVisible  && <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>task</p> <Diamond 
-                                                theme={theme} 
-                                                onClick={()=>{
-                                                    trackDoc(entry)
-                                                }}
-                                                activated={entry.tracked}  
-                                                /></div>}
-                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && ( entry.task.length > 17? entry.task.slice(0,25).trim()+"..." : entry.task.slice(0,25))} </h2>
-                                                      <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                             </TaskEntrySub>
-                                             <IconHolder>
-                                                 <CompleteIcon theme={theme} onClick={()=>{completeTask(entry)}}>
-                                                             {contentVisible && <i className="fas fa-check"></i>}
-                                                 </CompleteIcon>
-                                                  <DeleteIcon
-                                                       theme={theme}
-                                                       onClick={()=>{
-                                                            if(currentCard === tasks.length -1){
-                                                                    setCurrentCard(0)
-                                                                    deleteTask(entry.docId)
-                                                                }
-                                                                else{
-                                                                    deleteTask(entry.docId)
-                                                                }
-                                                            }
-                                                        }
-                                                  >
-                                                      {contentVisible && <i className="far fa-trash-alt"></i>}
-                                                   </DeleteIcon>
-                                                   <ArchiveIcon theme={theme}>
-                                                                {contentVisible && <i className="fas fa-book"></i>}
-                                                    </ArchiveIcon>
-                                                    <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
-                                                        {contentVisible && <i className="fas fa-pen"></i>}
-                                                    </EditIcon>
-                                             </IconHolder>
-                                          </TaskEntry>
-                                          )
-                                        }
-                                        
-                                    }
-                                                                    
-                                        
-                                } ) : <p>There are no tasks to display</p>}
-                                {matchResult && tasks.length > 0 && <Next 
-                                    theme={theme} 
-                                    onClick={flipNext} 
-                                    disabled={currentCard === tasks.length-1}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-right"></i> 
-                                </Next>}
-                            </TaskWindow>
-                        
-                        {   !matchResult && tasks.length > 0 &&
-                            <PageNav>
-                                <Last 
-                                    theme={theme} 
-                                    onClick={pagePrevious} 
-                                    disabled={currentCard === 0}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-left"></i> 
-                                </Last>
-                                
-                                <PageNumbers>{pageNumber+1} / {pageCount}</PageNumbers>
-                                <Next 
-                                    theme={theme} 
-                                    onClick={pageNext} 
-                                    disabled={currentCard === tasks.length-1}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-right"></i> 
-                                </Next>                                
-                            </PageNav>
-
-                        }
-
-                </TaskContainer>
-
+                {/* case switch for all types of task containers - have it follow a state variable */}
+                
+                <TaskComponent data={generalProps}/>
 
             </SubContainer>
         </GreaterContainer>
