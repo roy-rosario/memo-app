@@ -15,7 +15,6 @@ import {
         MiddleContainer,
         StatusContainer,
         TaskWindow,
-        TaskHeader,
         IconHolder,
         DeleteIcon,
         CompleteIcon,
