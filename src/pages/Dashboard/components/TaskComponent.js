@@ -83,7 +83,7 @@ function TaskComponent({data}){
                                                             >
                                                                 {data.contentVisible && <i className="far fa-trash-alt"></i>}
                                                             </DeleteIcon>
-                                                            <ArchiveIcon theme={data.theme}>
+                                                            <ArchiveIcon theme={data.theme} onClick={()=>{data.archiveTask(entry)}}>
                                                                 {data.contentVisible && <i className="fas fa-book"></i>}
                                                             </ArchiveIcon>
                                                             <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
@@ -137,7 +137,7 @@ function TaskComponent({data}){
                                                   >
                                                       {data.contentVisible && <i className="far fa-trash-alt"></i>}
                                                    </DeleteIcon>
-                                                   <ArchiveIcon theme={data.theme}>
+                                                   <ArchiveIcon theme={data.theme} onClick={()=>{data.archiveTask(entry)}}>
                                                                 {data.contentVisible && <i className="fas fa-book"></i>}
                                                     </ArchiveIcon>
                                                     <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>

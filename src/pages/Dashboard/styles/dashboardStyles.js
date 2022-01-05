@@ -293,7 +293,7 @@ export const TaskContainer = styled.div`
     ${containerStyle};
     width: 100%;
     padding: 1em 2em;
-    margin-bottom: 0;
+    margin-bottom: 1em;
     h2{
         font-size: 3em;
         font-family: 'Roboto', sans-serif;

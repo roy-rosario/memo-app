@@ -35,6 +35,21 @@ export const completeDoc = async(data) => {
     })
 }
 
+export const archiveDoc = async(data) => {
+    const db = getDB()
+
+    const docRef = doc(collection(db, 'archived'))
+
+    return await setDoc(docRef, data)
+    .then(()=>{
+        return true
+    })
+    .catch(err =>{
+        alert(err)
+        return false
+    })
+}
+
 export const editDoc = async(docId, data) =>{
     const db = getDB()
 

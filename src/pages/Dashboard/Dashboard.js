@@ -25,7 +25,7 @@ import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
-import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc} from '../../services/dataServices'
+import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, archiveDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
@@ -63,7 +63,6 @@ function LogIn(){
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
-    
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
@@ -194,6 +193,15 @@ function LogIn(){
             deleteTask(entry.docId)
         }
     } 
+
+    const archiveTask = async(entry) =>{
+        const res = await archiveDoc({...entry, tracked: false})
+
+        if(res){
+            deleteTask(entry.docId)
+        }
+    } 
+    
     
 
     const onLogOut = () =>{
@@ -367,6 +375,7 @@ function LogIn(){
             fetchTasks: fetchTasks,
             editTask: editTask,
             completeTask: completeTask,
+            archiveTask: archiveTask,
             deleteTask: deleteTask,
             edit: edit,
             flipLast: flipLast,
