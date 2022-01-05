@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useContext, useCallback} from 'react'
 import {
         QueryContainer, 
-        StanButton, 
-        TaskEntry,
         NavBar,
         AccountDrop,
         NavAccountName,
@@ -10,29 +8,14 @@ import {
         ThemeHolder,
         ThemeOptionLight,
         ThemeOptionDark,
-        TaskContainer,
         SubContainer,
         MiddleContainer,
-        StatusContainer,
-        TaskWindow,
-        TaskHeader,
-        IconHolder,
-        DeleteIcon,
-        CompleteIcon,
-        ArchiveIcon,
         TimeTitle,
         WeatherHolder,
         InfoContainer,
         GreaterContainer,
         WeatherCombo,
         TempTitle,
-        TaskEntrySub,
-        Last, 
-        Next,
-        Diamond,
-        PageNav,
-        PageNumbers,
-        EditIcon,
         EditCover,
         AddButton,
         TrackedTitle
@@ -42,11 +25,11 @@ import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
-import {addDoc, retrieveDocs, removeDoc, editDoc} from '../../services/dataServices'
+import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
-import { async } from '@firebase/util'
+import TaskComponent from './components/TaskComponent'
 
 
 function LogIn(){
@@ -54,6 +37,7 @@ function LogIn(){
     const [taskTitle, setTaskTitle] = useState('')
     const [tasks, setTasks] = useState('')
     const [currentId, setCurrentId] = useState('')
+    const [collection, setCollection] = useState('tasks')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
     const [tracked, setTracked] = useState("")
@@ -80,6 +64,12 @@ function LogIn(){
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
     
+
+    const toggleTaskTypes = (collectionName) =>{
+        setCollection(collectionName)
+        fetchTasks(collectionName)
+    }
+    
     useEffect(()=>{
         if(!localStorage.getItem("token")){
             history.push('/')
@@ -88,18 +78,18 @@ function LogIn(){
         
     },[])
 
-
-
-    useEffect(() =>{
+    useEffect(()=>{
         if(pageNumber > pageCount){
             setPageNumber(0)
         }
-    },[pageCount])
+    }, [pageNumber])
+
 
     useEffect(()=>{
-        fetchTasks()
+        fetchTasks("tasks")
         initialTracking()
     }, [user])
+
 
     // tasks was tracked here previously, removed to test
 
@@ -155,30 +145,34 @@ function LogIn(){
 
         if(check){
             setTask('')
-            fetchTasks()
+            fetchTasks(collection)
             toggleEditMode()
             setInitialAdd(false)
         }
     },[task, user])
     
-   
+    
     const editTask = useCallback(async() =>{
         const check = await editDoc(currentId, {task: taskTitle})
 
         if(check){
-            fetchTasks()
+            fetchTasks(collection)
             toggleEditMode()
         }
     },[taskTitle, user])
 
-    const fetchTasks = useCallback(async() =>{
+    const fetchTasks = useCallback(async(collection_name) =>{
         if(user && user.uid){
-            const whatever = await retrieveDocs(user.uid, 'tasks')
+            const whatever = await retrieveDocs(user.uid, collection_name)
     
-            setTasks(whatever)
-        //     if(pageNumber >= pageCount){
-        //     setPageNumber(0)
-        // }
+            if(whatever){
+                setTasks(whatever)
+                console.log(whatever)
+            }
+            
+            // if(pageNumber > pageCount){
+            //     setPageNumber(0)
+            // }
         }
     }, [user])
     
@@ -188,10 +182,18 @@ function LogIn(){
         const res = await removeDoc(id)
         
         if(res){
-            fetchTasks()
+            fetchTasks(collection)
         }
 
     }
+
+    const completeTask = async(entry) =>{
+        const res = await completeDoc({...entry, tracked: false})
+
+        if(res){
+            deleteTask(entry.docId)
+        }
+    } 
     
 
     const onLogOut = () =>{
@@ -301,7 +303,7 @@ function LogIn(){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
-                    fetchTasks()
+                    fetchTasks(collection)
                     setTrackedMessage('')
                     setTracked('')
                 }
@@ -310,7 +312,7 @@ function LogIn(){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
-                    fetchTasks()
+                    fetchTasks(collection)
                     setTrackedMessage(entry.task)
                     setTracked(entry.docId)
                 }
@@ -318,6 +320,74 @@ function LogIn(){
             
         }
 
+        let generalProps ={
+            task: task,
+            setTask: setTask,
+            taskTitle: taskTitle,
+            setTaskTitle: setTaskTitle,
+            tasks: tasks,
+            setTasks: setTask,
+            collection: collection,
+            setCollection: setCollection,
+            toggleTaskTypes: toggleTaskTypes,
+            currentId: currentId,
+            setCurrentId: setCurrentId,
+            time: time,
+            setTime: setTime,
+            temp: temp,
+            setTemp: setTemp,
+            tracked: tracked,
+            setTracked: setTracked,
+            trackedMessage: trackedMessage,
+            setTrackedMessage: setTrackedMessage,
+            initialAdd: initialAdd,
+            setInitialAdd: setInitialAdd,
+            currentCard: currentCard,
+            setCurrentCard: setCurrentCard,
+            cardFlip: cardFlip,
+            setCardFlip: setCardFlip,
+            contentVisible: contentVisible,
+            setContentVisible: setContentVisible,
+            weather: weather,
+            setWeather: setWeather,
+            timeSwitch: timeSwitch,
+            setTimeSwitch: setTimeSwitch,
+            themeLock: themeLock,
+            setThemeLock: setThemeLock,
+            big: big,
+            setBig: setBig,
+            diamondActive: diamondActive,
+            setdiamondActive: setdiamondActive,
+            setPageNumber: setPageNumber,
+            trackDoc: trackDoc,
+            pageNext: pageNext,
+            pagePrevious: pagePrevious,
+            addTask: addTask,
+            initialTracking: initialTracking,
+            fetchTasks: fetchTasks,
+            editTask: editTask,
+            completeTask: completeTask,
+            deleteTask: deleteTask,
+            edit: edit,
+            flipLast: flipLast,
+            flipNext: flipNext,
+            cancel: cancel,
+            theme: theme,
+            toggleLightTheme: toggleLightTheme,
+            toggleDarkTheme: toggleDarkTheme,
+            toggleEditMode: toggleEditMode,
+            toggleThemeSelector: toggleThemeSelector,
+            auth: auth,
+            matchResult: matchResult,
+            user: user,
+            history: history,
+            editMode: editMode,
+            index : index,
+            itemsPerPage : itemsPerPage,
+            itemsVisited : itemsVisited,
+            pageCount : pageCount,
+            pageNumber: pageNumber,
+        }
     
     return(
         <>
@@ -443,161 +513,9 @@ function LogIn(){
 
                 </MiddleContainer>
 
-                <TaskContainer theme={theme}>
-                        <h2>Tasks</h2>
-                   
-                            <TaskWindow theme={theme}>
-                                {matchResult && tasks.length > 0 && 
-                                <Last 
-                                    theme={theme} 
-                                    onClick={flipLast} 
-                                    disabled={currentCard === 0}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-left"></i>
-                                </Last>}
-                                {(!matchResult && tasks.length > 0) &&
-                                    tasks.slice(itemsVisited, itemsVisited + itemsPerPage)
-                                    .map(entry => {
-                                        return(
-                                            <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                <Diamond 
-                                                theme={theme} 
-                                                onClick={()=>{
-                                                    trackDoc(entry)
-                                                }}
-                                                activated={entry.tracked}  
-                                                />
-                                                <TaskEntrySub theme={theme} >                                               
-                                                        
-                                                        <div style={{width: '100%'}}>
-                                                            <p>{contentVisible  && 'task'}</p>
-                                                            <h2 style={{marginBottom: "0"}}>{contentVisible  && (entry.task.length > 19? entry.task.slice(0,20).trim()+"..." : entry.task)} </h2>
-                                                            <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                                        </div>
-                                                        <IconHolder>
-                                                            <CompleteIcon theme={theme}>
-                                                                {contentVisible && <i className="fas fa-check"></i>}
-                                                            </CompleteIcon>
-                                                            <DeleteIcon
-                                                                theme={theme}
-                                                                onClick={()=>{
-                                                                    deleteTask(entry.docId)
-                                                                }}
-                                                            >
-                                                                {contentVisible && <i className="far fa-trash-alt"></i>}
-                                                            </DeleteIcon>
-                                                            <ArchiveIcon theme={theme}>
-                                                                {contentVisible && <i className="fas fa-book"></i>}
-                                                            </ArchiveIcon>
-                                                            <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
-                                                                {contentVisible && <i className="fas fa-pen"></i>}
-                                                            </EditIcon>
-                                                        </IconHolder>
-                                                </TaskEntrySub>
-                                
-                                         </TaskEntry>
-                                        )
-                                    }) 
-                                   
-                                }    
-                                {tasks.length > 0? tasks.map(entry => {
-                                        
-                                  if(matchResult){
-
-                                      if(entry === tasks[currentCard]){
-                                         return(
-                                             <TaskEntry theme={theme} key={entry.docId} depth={index} flip={cardFlip}>
-                                                     
-                                             <TaskEntrySub theme={theme} >                                               
-                                                      {contentVisible  && <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>task</p> <Diamond 
-                                                theme={theme} 
-                                                onClick={()=>{
-                                                    trackDoc(entry)
-                                                }}
-                                                activated={entry.tracked}  
-                                                /></div>}
-                                                      <h2 style={{marginBottom: "0"}}>{contentVisible  && entry.task.slice(0,25).trim()+"..."} </h2>
-                                                      <h3 style={{fontSize: "0.8rem"}}> {contentVisible  && 'Created: '+ entry.dateCreated}</h3>
-                                             </TaskEntrySub>
-                                             <IconHolder>
-                                                 <CompleteIcon theme={theme}>
-                                                             {contentVisible && <i className="fas fa-check"></i>}
-                                                 </CompleteIcon>
-                                                  <DeleteIcon
-                                                       theme={theme}
-                                                       onClick={()=>{
-                                                            if(currentCard === tasks.length -1){
-                                                                    setCurrentCard(0)
-                                                                    deleteTask(entry.docId)
-                                                                }
-                                                                else{
-                                                                    deleteTask(entry.docId)
-                                                                }
-                                                            }
-                                                        }
-                                                  >
-                                                      {contentVisible && <i className="far fa-trash-alt"></i>}
-                                                   </DeleteIcon>
-                                                   <ArchiveIcon theme={theme}>
-                                                                {contentVisible && <i className="fas fa-book"></i>}
-                                                    </ArchiveIcon>
-                                                    <EditIcon onClick={() =>{edit(entry)}} theme={theme}>
-                                                        {contentVisible && <i className="fas fa-pen"></i>}
-                                                    </EditIcon>
-                                             </IconHolder>
-                                          </TaskEntry>
-                                          )
-                                        }
-                                        
-                                    }
-                                                                    
-                                        
-                                } ) : <p>There are no tasks to display</p>}
-                                {matchResult && tasks.length > 0 && <Next 
-                                    theme={theme} 
-                                    onClick={flipNext} 
-                                    disabled={currentCard === tasks.length-1}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-right"></i> 
-                                </Next>}
-                            </TaskWindow>
-                        
-                        {   !matchResult && tasks.length > 0 &&
-                            <PageNav>
-                                <Last 
-                                    theme={theme} 
-                                    onClick={pagePrevious} 
-                                    disabled={currentCard === 0}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-left"></i> 
-                                </Last>
-                                
-                                <PageNumbers>{pageNumber+1} / {pageCount}</PageNumbers>
-                                <Next 
-                                    theme={theme} 
-                                    onClick={pageNext} 
-                                    disabled={currentCard === tasks.length-1}
-                                    onMouseDown={()=>{setBig(true)}} 
-                                    onMouseUp={()=>{setBig(false)}}
-                                    scaling={big}
-                                >
-                                    <i class="fas fa-chevron-right"></i> 
-                                </Next>                                
-                            </PageNav>
-
-                        }
-
-                </TaskContainer>
-
+                {/* case switch for all types of task containers - have it follow a state variable */}
+                
+                <TaskComponent data={generalProps}/>
 
             </SubContainer>
         </GreaterContainer>

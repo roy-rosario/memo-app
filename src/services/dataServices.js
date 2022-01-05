@@ -20,6 +20,21 @@ export const addDoc = async(task, id) =>{
     })
 }
 
+export const completeDoc = async(data) => {
+    const db = getDB()
+
+    const docRef = doc(collection(db, 'completed'))
+
+    return await setDoc(docRef, data)
+    .then(()=>{
+        return true
+    })
+    .catch(err =>{
+        alert(err)
+        return false
+    })
+}
+
 export const editDoc = async(docId, data) =>{
     const db = getDB()
 
@@ -40,6 +55,8 @@ export const editDoc = async(docId, data) =>{
 
 
 export const retrieveDocs = async(id, collectionName) =>{
+    const date = new Date()
+    
     const db = getDB()
 
         const q = query(collection(db, collectionName), orderBy("dateActual"),  where("userId", "==", id))
@@ -53,6 +70,7 @@ export const retrieveDocs = async(id, collectionName) =>{
                     docId: doc.id
                 })
             })
+            console.log('retrieved collection at ' + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds())
             return placeholder
         })
         .catch(err => {
