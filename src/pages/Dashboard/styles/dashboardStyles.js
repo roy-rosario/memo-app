@@ -293,7 +293,7 @@ export const TaskContainer = styled.div`
     ${containerStyle};
     width: 100%;
     padding: 1em 2em;
-    
+    margin-bottom: 0;
     h2{
         font-size: 3em;
         font-family: 'Roboto', sans-serif;
@@ -323,10 +323,10 @@ export const TaskWindow = styled.div`
     box-shadow: none;
     color: ${props => (props.theme === 'light'? 'black' : 'white')};
     position: relative;
-    min-height: 350px;
     display: flex;
     align-items: center;
     padding: 1em;
+    margin-bottom: 1em;
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
@@ -346,7 +346,6 @@ const taskEntryStandard = css`
 `
 export const TaskEntry = styled.div` 
     background: ${props => (props.theme === 'light'? 'lightblue' : 'blueviolet')};
-
     margin: 0 0.5em 0 0.5em;
     display: flex;
     flex-direction: column;

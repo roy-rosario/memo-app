@@ -31,11 +31,13 @@ function TaskComponent({data}){
                 <TaskContainer theme={data.theme}>
                         <TaskHeader>
                             <TaskTitle>{data.collection[0].toUpperCase() + data.collection.substring(1)}</TaskTitle> 
-                                <ListTypeTray>
-                                    <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
-                                    <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
-                                    <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
-                                </ListTypeTray>
+                                {!data.matchResult && 
+                                    <ListTypeTray>
+                                        <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
+                                        <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
+                                        <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
+                                    </ListTypeTray>                                
+                                }
                         </TaskHeader>
                    
                             <TaskWindow theme={data.theme}>
@@ -188,6 +190,14 @@ function TaskComponent({data}){
                                 </Next>                                
                             </PageNav>
 
+                        }
+
+                        {data.matchResult && 
+                            <ListTypeTray>
+                                <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
+                                <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
+                                <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
+                            </ListTypeTray>                                
                         }
 
                 </TaskContainer>
