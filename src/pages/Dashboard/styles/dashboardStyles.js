@@ -263,7 +263,7 @@ export const StatusContainer = styled.div`
 `
 
 export const TaskTitle = styled.h2` 
-   
+   margin-top:0em;
 `
 
 export const ListTypeTray = styled.h2` 
@@ -651,14 +651,35 @@ export const ThemeButton = styled.button`
     transition: transform 0.5s ease; */
     margin: ${props => props.theme === 'light'? 'initial' : '0 0 0 auto'};
     transition: margin 7s ease;
-`
+    `
 
+export const PageNav = styled.div` 
+        display: flex;
+        font-size: 1.5em;
+        margin-left: 14.5em;
+`
+    
+export const PageNumbers = styled.span` 
+        margin 0 1em;
+`
 export const IconHolder = styled.div` 
     display: flex;
     background: ${props => (props.theme === 'light'? '#CF8600': '#7F5D87')};
     color: white;
     min-height: 64px;
     border-bottom-right-radius: 30px 30px;
+    
+    div:last-of-type{
+
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        border-bottom-right-radius: 30px 30px;
+        @media (min-width: 1200px){
+            border-bottom-right-radius: 100%;
+        }
+    }
+
     i{
         font-size: 2em;
         
@@ -675,16 +696,6 @@ export const IconHolder = styled.div`
     }
 `
 
-export const PageNav = styled.div` 
-    display: flex;
-    font-size: 1.5em;
-
-    margin-left: 14.5em;
-`
-
-export const PageNumbers = styled.span` 
-    margin 0 1em;
-`
 
 const iconStyle = css` 
     cursor: pointer;
@@ -715,6 +726,7 @@ export const CompleteIcon = styled.div`
     border-left: none;
     border-bottom: none;
     border-bottom-left-radius: 0px;
+    
 `
 
 export const DeleteIcon = styled.div` 
@@ -734,10 +746,16 @@ export const ArchiveIcon = styled.div`
 
 export const EditIcon = styled.div` 
     ${iconStyle};
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    border-bottom-right-radius: 30px 30px;
+`
+
+export const RevertIcon = styled.div` 
+    ${iconStyle};
+    border: none;
+    border-right: ${props => (props.theme === 'light'? '4px solid #a86d00': '4px solid #604666')};
+
+    @media (min-width: 1200px){
+        border-right: none;
+    }
 `
 
 export const AddButton = styled.div`

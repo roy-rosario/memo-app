@@ -35,6 +35,21 @@ export const completeDoc = async(data) => {
     })
 }
 
+// export const revertDoc = async(data) => {
+//     const db = getDB()
+
+//     const docRef = doc(collection(db, 'completed'))
+
+//     return await setDoc(docRef, data)
+//     .then(()=>{
+//         return true
+//     })
+//     .catch(err =>{
+//         alert(err)
+//         return false
+//     })
+// }
+
 export const archiveDoc = async(data) => {
     const db = getDB()
 

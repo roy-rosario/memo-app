@@ -25,7 +25,7 @@ import StatusBar from './components/StatusBar'
 import WeatherIcon from './components/WeatherIcon'
 import {getAuth} from 'firebase/auth'
 import {useHistory} from 'react-router-dom'
-import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, archiveDoc} from '../../services/dataServices'
+import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, revertDoc, archiveDoc} from '../../services/dataServices'
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
@@ -67,6 +67,9 @@ function LogIn(){
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
         fetchTasks(collectionName)
+        if(matchResult){
+            setCurrentCard(0)
+        }
     }
     
     useEffect(()=>{
@@ -195,6 +198,15 @@ function LogIn(){
         }
     } 
 
+    // const revertTask = async(entry) =>{
+    //     const res = await completeDoc({...entry, tracked: false})
+
+    //     if(res){
+    //         setCurrentCard(0)
+    //         deleteTask(entry.docId)
+    //     }
+    // } 
+
     const archiveTask = async(entry) =>{
         const res = await archiveDoc({...entry, tracked: false})
 
@@ -203,7 +215,6 @@ function LogIn(){
             deleteTask(entry.docId)
         }
     } 
-    
     
 
     const onLogOut = () =>{
