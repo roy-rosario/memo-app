@@ -1,3 +1,4 @@
+import { collection } from 'firebase/firestore'
 import {
 
         TaskEntry,
@@ -7,6 +8,7 @@ import {
         DeleteIcon,
         CompleteIcon,
         ArchiveIcon,
+        RevertIcon,
         TaskEntrySub,
         Last, 
         Next,
@@ -17,7 +19,7 @@ import {
         TaskTitle,
         TaskHeader,
         StanButton,
-        ListTypeTray
+        ListTypeTray,
     } 
 from '../styles/dashboardStyles' 
 
@@ -119,10 +121,25 @@ function TaskComponent({data}){
                                                       <h3 style={{fontSize: "0.8rem"}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                              </TaskEntrySub>
                                              <IconHolder>
-                                                 <CompleteIcon theme={data.theme} onClick={()=>{data.completeTask(entry)}}>
-                                                             {data.contentVisible && <i className="fas fa-check"></i>}
-                                                 </CompleteIcon>
-                                                  <DeleteIcon
+                                                 
+                                                {
+                                                     data.collection === 'tasks' && 
+                                                     <CompleteIcon theme={data.theme} onClick={()=>{data.completeTask(entry)}}>
+                                                     {data.contentVisible && <i className="fas fa-check"></i>}
+                                                    </CompleteIcon>
+                                                }
+                                                
+                                                {
+                                                    data.collection === 'completed'  &&
+                                                    <RevertIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                        {data.contentVisible && <i class="fas fa-arrow-left"></i>}
+                                                    </RevertIcon>
+                                                    
+                                                }
+
+                                                {
+                                                     
+                                                     <DeleteIcon
                                                        theme={data.theme}
                                                        onClick={()=>{
                                                             if(data.currentCard === data.tasks.length -1){
@@ -136,13 +153,26 @@ function TaskComponent({data}){
                                                         }
                                                   >
                                                       {data.contentVisible && <i className="far fa-trash-alt"></i>}
-                                                   </DeleteIcon>
-                                                   <ArchiveIcon theme={data.theme} onClick={()=>{data.archiveTask(entry)}}>
-                                                                {data.contentVisible && <i className="fas fa-book"></i>}
-                                                    </ArchiveIcon>
+                                                    </DeleteIcon>
+                                                 }
+                                                 
+                                                {
+                                                      data.collection === 'tasks' &&
+                                                        <ArchiveIcon theme={data.theme} onClick={()=>{data.archiveTask(entry)}}>
+                                                                    {data.contentVisible && <i className="fas fa-book"></i>}
+                                                        </ArchiveIcon>
+                                                }
+                                                  
+                                                {
+                                                      data.collection === 'tasks'  &&
                                                     <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
                                                         {data.contentVisible && <i className="fas fa-pen"></i>}
                                                     </EditIcon>
+                                                }
+
+                                                
+
+
                                              </IconHolder>
                                           </TaskEntry>
                                           )
