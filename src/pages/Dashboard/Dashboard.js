@@ -8,7 +8,6 @@ import {
         ThemeHolder,
         ThemeOptionLight,
         ThemeOptionDark,
-        TaskContainer,
         SubContainer,
         MiddleContainer,
         TimeTitle,
@@ -33,12 +32,12 @@ import { EditContext } from '../../utils/editContext'
 import TaskComponent from './components/TaskComponent'
 
 
-
 function LogIn(){
     const [task, setTask] = useState('')
     const [taskTitle, setTaskTitle] = useState('')
     const [tasks, setTasks] = useState('')
     const [currentId, setCurrentId] = useState('')
+    const [collection, setCollection] = useState('')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
     const [tracked, setTracked] = useState("")
@@ -65,6 +64,12 @@ function LogIn(){
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
     
+
+    const toggleTaskTypes = (collectionName) =>{
+        setCollection(collectionName)
+        fetchTasks(collectionName)
+    }
+    
     useEffect(()=>{
         if(!localStorage.getItem("token")){
             history.push('/')
@@ -79,10 +84,9 @@ function LogIn(){
         }
     }, [pageNumber])
 
-   
 
     useEffect(()=>{
-        fetchTasks()
+        fetchTasks("tasks")
         initialTracking()
     }, [user])
 
@@ -141,27 +145,31 @@ function LogIn(){
 
         if(check){
             setTask('')
-            fetchTasks()
+            fetchTasks(collection)
             toggleEditMode()
             setInitialAdd(false)
         }
     },[task, user])
     
-   
+    
     const editTask = useCallback(async() =>{
         const check = await editDoc(currentId, {task: taskTitle})
 
         if(check){
-            fetchTasks()
+            fetchTasks(collection)
             toggleEditMode()
         }
     },[taskTitle, user])
 
-    const fetchTasks = useCallback(async() =>{
+    const fetchTasks = useCallback(async(collection_name) =>{
         if(user && user.uid){
-            const whatever = await retrieveDocs(user.uid, 'tasks')
+            const whatever = await retrieveDocs(user.uid, collection_name)
     
-            setTasks(whatever)
+            if(whatever){
+                setTasks(whatever)
+                console.log(whatever)
+            }
+            
             // if(pageNumber > pageCount){
             //     setPageNumber(0)
             // }
@@ -174,7 +182,7 @@ function LogIn(){
         const res = await removeDoc(id)
         
         if(res){
-            fetchTasks()
+            fetchTasks(collection)
         }
 
     }
@@ -295,7 +303,7 @@ function LogIn(){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
-                    fetchTasks()
+                    fetchTasks(collection)
                     setTrackedMessage('')
                     setTracked('')
                 }
@@ -304,7 +312,7 @@ function LogIn(){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
-                    fetchTasks()
+                    fetchTasks(collection)
                     setTrackedMessage(entry.task)
                     setTracked(entry.docId)
                 }
@@ -319,6 +327,9 @@ function LogIn(){
             setTaskTitle: setTaskTitle,
             tasks: tasks,
             setTasks: setTask,
+            collection: collection,
+            setCollection: setCollection,
+            toggleTaskTypes: toggleTaskTypes,
             currentId: currentId,
             setCurrentId: setCurrentId,
             time: time,
@@ -375,7 +386,7 @@ function LogIn(){
             itemsPerPage : itemsPerPage,
             itemsVisited : itemsVisited,
             pageCount : pageCount,
-            pageNumber: pageNumber
+            pageNumber: pageNumber,
         }
     
     return(

@@ -262,6 +262,33 @@ export const StatusContainer = styled.div`
     }
 `
 
+export const TaskTitle = styled.h2` 
+   
+`
+
+export const ListTypeTray = styled.h2` 
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+
+    @media (min-width: 1200px){
+        margin-top: 0em;
+    }
+`
+
+export const TaskHeader = styled.div` 
+    display: flex;
+    flex-direction: column;
+    
+
+    @media (min-width: 1200px){
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1em;
+    }
+`
+
 export const TaskContainer = styled.div` 
     ${containerStyle};
     width: 100%;

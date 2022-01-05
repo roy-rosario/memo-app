@@ -16,7 +16,8 @@ import {
         EditIcon,
         TaskTitle,
         TaskHeader,
-        StanButton
+        StanButton,
+        ListTypeTray
     } 
 from '../styles/dashboardStyles' 
 
@@ -29,11 +30,12 @@ function TaskComponent({data}){
                 
                 <TaskContainer theme={data.theme}>
                         <TaskHeader>
-                            <TaskTitle>{data.collection}</TaskTitle> 
-                            <div>
-                                <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
-                                <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
-                            </div>
+                            <TaskTitle>{data.collection[0].toUpperCase() + data.collection.substring(1)}</TaskTitle> 
+                                <ListTypeTray>
+                                    <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
+                                    <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
+                                    <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
+                                </ListTypeTray>
                         </TaskHeader>
                    
                             <TaskWindow theme={data.theme}>
