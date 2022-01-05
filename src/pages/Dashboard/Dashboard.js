@@ -190,6 +190,7 @@ function LogIn(){
         const res = await completeDoc({...entry, tracked: false})
 
         if(res){
+            setCurrentCard(0)
             deleteTask(entry.docId)
         }
     } 
@@ -198,6 +199,7 @@ function LogIn(){
         const res = await archiveDoc({...entry, tracked: false})
 
         if(res){
+            setCurrentCard(0)
             deleteTask(entry.docId)
         }
     } 
