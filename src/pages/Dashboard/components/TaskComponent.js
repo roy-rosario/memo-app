@@ -13,7 +13,10 @@ import {
         Diamond,
         PageNav,
         PageNumbers,
-        EditIcon
+        EditIcon,
+        TaskTitle,
+        TaskHeader,
+        StanButton
     } 
 from '../styles/dashboardStyles' 
 
@@ -25,7 +28,13 @@ function TaskComponent({data}){
     return(
                 
                 <TaskContainer theme={data.theme}>
-                        <h2>Tasks</h2>
+                        <TaskHeader>
+                            <TaskTitle>{data.collection}</TaskTitle> 
+                            <div>
+                                <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
+                                <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
+                            </div>
+                        </TaskHeader>
                    
                             <TaskWindow theme={data.theme}>
                                 {data.matchResult && data.tasks.length > 0 && 
