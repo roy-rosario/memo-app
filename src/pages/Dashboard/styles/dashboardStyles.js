@@ -474,7 +474,7 @@ export const InfoContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-right: 2em;
+        margin-right: 1em;
         padding:1em;
         border-top-left-radius: 30px 30px;
         border-bottom-right-radius: 30px 30px;

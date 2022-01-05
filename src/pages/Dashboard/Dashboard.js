@@ -37,7 +37,7 @@ function LogIn(){
     const [taskTitle, setTaskTitle] = useState('')
     const [tasks, setTasks] = useState('')
     const [currentId, setCurrentId] = useState('')
-    const [collection, setCollection] = useState('')
+    const [collection, setCollection] = useState('tasks')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
     const [tracked, setTracked] = useState("")
