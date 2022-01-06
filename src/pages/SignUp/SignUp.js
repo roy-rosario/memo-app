@@ -42,7 +42,7 @@ function SignUp(){
             <Logo 
                 theme={theme} 
                 loaded={loaded}
-                margin= "3em"
+                margin= "0.75em"
             >
                 memo-app
             </Logo>

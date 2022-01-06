@@ -35,7 +35,7 @@ function LogIn(){
             <Logo 
                 theme={theme} 
                 loaded={loaded}
-                margin= "4em"
+                margin= "2em"
             >
                 memo-app
             </Logo>
