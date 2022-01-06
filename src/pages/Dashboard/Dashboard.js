@@ -81,8 +81,14 @@ function LogIn(){
     },[])
 
     useEffect(()=>{
-        if(pageNumber+1 > pageCount){
-            setPageNumber(0)
+        if( pageNumber+1 > pageCount){
+
+            if(pageNumber >= 1){
+                setPageNumber(pageNumber-1)
+            }
+            else{
+                setPageNumber(0)
+            }
         }
     }, [pageNumber, pageCount])
 
