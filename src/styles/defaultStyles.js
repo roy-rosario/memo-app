@@ -27,7 +27,7 @@ export const TotalContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     height: 100vh;
-    padding-bottom: 15em;
+    padding-bottom: 6em;
 `
 
 export const Logo = styled.h1` 
