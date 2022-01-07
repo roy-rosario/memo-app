@@ -553,6 +553,19 @@ export const TempTitle = styled.div`
     }
 `
 
+const textStyles = css` 
+    border: none;
+    border-bottom: 1px solid lightgray;
+`
+
+export const TextEditorTitle = styled.input`
+    ${textStyles};
+`
+
+export const TextEditorBody = styled.textarea`
+    ${textStyles};
+`
+
 export const TextEditor = styled.div` 
     color: ${props => (props.theme === 'light'? 'black': 'white')};
     background: ${props => (props.theme === 'light'? 'white': 'grey')};

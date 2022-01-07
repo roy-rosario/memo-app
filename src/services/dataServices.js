@@ -3,14 +3,14 @@ import {setDoc, doc, collection, getDocs, query, where, deleteDoc, updateDoc, or
 
 
 
-export const addDoc = async(task, id) =>{
+export const addDoc = async(task, body, id) =>{
     const db = getDB()
 
     const docRef = doc(collection(db, 'tasks'))
 
     let date = new Date()
 
-    return await setDoc(docRef, {task: task, userId: id, dateCreated: date.toDateString().slice(3), dateActual: date.getTime(), tracked: false})
+    return await setDoc(docRef, {task: task, taskBody: body, userId: id, dateCreated: date.toDateString().slice(3), dateActual: date.getTime(), tracked: false})
     .then(() =>{
         return true
     })
