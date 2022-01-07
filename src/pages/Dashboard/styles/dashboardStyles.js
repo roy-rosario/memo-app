@@ -553,44 +553,58 @@ export const TempTitle = styled.div`
     }
 `
 
-export const TextEditor = styled.div` 
-    color: ${props => (props.theme === 'light'? 'black': 'white')};
-    background: ${props => (props.theme === 'light'? 'white': 'grey')};
-    border-top-left-radius: 30px 30px;
-    border-bottom-right-radius: 30px 30px;
-    padding: 1em;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    min-height: 323px;
-    z-index: 11;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    textarea{
+const textStyles = css` 
         display: block;
         margin-bottom: 1em;
         border: none;
         font-weight: 700;
-        font-size: 1.5em;
+        font-size: 1.2em;
         resize: none;
         border-bottom: 1px solid lightgrey;
         width: 100%;
         outline: none;
         color: ${props => (props.theme === 'light'? 'black': 'white')};
         background: ${props => (props.theme === 'light'? 'white': 'grey')};
-    }
+`
 
+
+export const TextEditor = styled.div` 
+    color: ${props => (props.theme === 'light'? 'black': 'white')};
+    background: ${props => (props.theme === 'light'? 'white': 'grey')};
+    border-top-left-radius: 30px 30px;
+    border-bottom-right-radius: 30px 30px;
+    padding: 1em 1.5em;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: absolute;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    
+    
     @media (min-width:1200px){
         min-height: 400px;
         width: 100%;
-        textarea{
-            font-size: 1em;
-        }
+        top: initial;
+        bottom: 0;
+    }
+`
+
+export const TextEditorTitle = styled.input`
+    ${textStyles};
+`
+
+export const TextEditorBody = styled.textarea`
+    ${textStyles};
+    font-weight: 500;
+    font-size: 1rem;
+    min-height: 300px;
+
+    @media (min-width:1200px){
+        min-height:400px;
+
     }
 `
 

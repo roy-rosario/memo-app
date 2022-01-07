@@ -147,12 +147,13 @@ function LogIn(){
         }, 1000)
     }
 
-    const addTask = useCallback(async() =>{
+    const addTask = useCallback(async(body, setBody) =>{
         
-        const check = await addDoc(task, user.uid)
+        const check = await addDoc(task, body, user.uid)
 
         if(check){
             setTask('')
+            setBody("")
             fetchTasks(collection)
             toggleEditMode()
             setInitialAdd(false)
@@ -175,7 +176,6 @@ function LogIn(){
     
             if(whatever){
                 setTasks(whatever)
-                console.log(whatever)
             }
             
             // if(pageNumber > pageCount){
@@ -498,13 +498,7 @@ function LogIn(){
                 <MiddleContainer>
 
                     <StatusBar 
-                        theme={theme} 
-                        tasks={tasks} 
-                        mode_={editMode} 
-                        info={initialAdd? task : taskTitle} 
-                        change={initialAdd? setTask : setTaskTitle}
-                        cancel_={cancel}
-                        write_back = {initialAdd? addTask : editTask}
+                        data={generalProps}
                     />
 
                     <QueryContainer theme={theme}>
