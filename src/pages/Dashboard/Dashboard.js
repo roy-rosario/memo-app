@@ -29,6 +29,7 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, revertDoc, archiv
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
+import { EntryBodyContext} from '../../utils/entryBodyContext'
 import TaskComponent from './components/TaskComponent'
 
 
@@ -57,12 +58,14 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     const {editMode, toggleEditMode} = useContext(EditContext)
+    const {entryBody, setEntryBody} = useContext(EntryBodyContext)
     let index = 0
     const matchResult = window.matchMedia("(max-width: 1199px)").matches;
     const itemsPerPage = 4
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
+    // console.log(entryBody)
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
@@ -161,12 +164,13 @@ function LogIn(){
     },[task, user])
     
     
-    const editTask = useCallback(async() =>{
-        const check = await editDoc(currentId, {task: taskTitle})
+    
+    const editTask = useCallback(async(info) =>{
+        const check = await editDoc(currentId, {task: taskTitle, taskBody: info})
 
         if(check){
-            fetchTasks(collection)
             toggleEditMode()
+            fetchTasks(collection)
         }
     },[taskTitle, user])
 
@@ -311,11 +315,13 @@ function LogIn(){
             }
         }
 
-        const edit = (entry) =>{
-            setCurrentId(entry.docId)
-            toggleEditMode()
-            setTaskTitle(entry.task)
-        }
+        // const edit = (entry) =>{
+        //     setCurrentId(entry.docId)
+        //     console.log(currentId)
+        //     toggleEditMode()
+        //     setTaskTitle(entry.task)
+        //     setEntryBody(entry.taskBody)
+        // }
 
         const cancel = () =>{
             setInitialAdd(false)
@@ -396,7 +402,7 @@ function LogIn(){
             completeTask: completeTask,
             archiveTask: archiveTask,
             deleteTask: deleteTask,
-            edit: edit,
+            // edit: edit,
             flipLast: flipLast,
             flipNext: flipNext,
             cancel: cancel,
@@ -497,9 +503,10 @@ function LogIn(){
 
                 <MiddleContainer>
 
-                    <StatusBar 
-                        data={generalProps}
-                    />
+                        <StatusBar 
+                            data={generalProps}
+                        />
+
 
                     <QueryContainer theme={theme}>
 
@@ -537,7 +544,9 @@ function LogIn(){
 
                 {/* case switch for all types of task containers - have it follow a state variable */}
                 
-                <TaskComponent data={generalProps}/>
+
+                    <TaskComponent data={generalProps}/>
+
 
             </SubContainer>
         </GreaterContainer>

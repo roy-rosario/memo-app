@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { collection } from 'firebase/firestore'
 import {
 
@@ -21,11 +22,20 @@ import {
         StanButton,
         ListTypeTray,
     } 
-from '../styles/dashboardStyles' 
+from '../styles/dashboardStyles'
+import {EntryBodyContext} from '../../../utils/entryBodyContext' 
 
 
 
 function TaskComponent({data}){
+    const {entryBody, setEntryBody} = useContext(EntryBodyContext)
+
+    const edit = (entry) =>{
+        data.setCurrentId(entry.docId)
+        data.toggleEditMode()
+        data.setTaskTitle(entry.task)
+        setEntryBody(entry.taskBody)
+    }
 
     
     return(
@@ -120,7 +130,7 @@ function TaskComponent({data}){
                                                             
                                                             {
                                                                 data.collection === 'tasks'  &&
-                                                                <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                                <EditIcon onClick={() =>{edit(entry)}} theme={data.theme}>
                                                                     {data.contentVisible && <i className="fas fa-pen"></i>}
                                                                 </EditIcon>
                                                             }
@@ -208,7 +218,7 @@ function TaskComponent({data}){
                                                   
                                                 {
                                                       data.collection === 'tasks'  &&
-                                                    <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                    <EditIcon onClick={() =>{edit(entry)}} theme={data.theme}>
                                                         {data.contentVisible && <i className="fas fa-pen"></i>}
                                                     </EditIcon>
                                                 }
