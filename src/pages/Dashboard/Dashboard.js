@@ -41,7 +41,7 @@ function LogIn(){
     const [collection, setCollection] = useState('tasks')
     const [time, setTime] = useState('')
     const [temp, setTemp] = useState('')
-    const [tracked, setTracked] = useState("")
+    const [trackedId, setTrackedId] = useState("")
     const [trackedMessage, setTrackedMessage] = useState(tasks)
     const [initialAdd, setInitialAdd] = useState(false)
     const [currentCard, setCurrentCard] = useState(0)
@@ -115,7 +115,7 @@ function LogIn(){
         for(let i = 0; i < tasks.length ; i++){
             if(tasks[i].tracked){
                 setTrackedMessage(tasks[i].task)
-                setTracked(tasks[i].docId)
+                setTrackedId(tasks[i].docId)
             }
         }
     }
@@ -337,16 +337,16 @@ function LogIn(){
                 if(check){
                     fetchTasks(collection)
                     setTrackedMessage('')
-                    setTracked('')
+                    setTrackedId('')
                 }
             }
-            else if(tracked.length < 1){
+            else if(trackedId.length < 1){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
                     fetchTasks(collection)
                     setTrackedMessage(entry.task)
-                    setTracked(entry.docId)
+                    setTrackedId(entry.docId)
                 }
             }         
             
@@ -368,8 +368,8 @@ function LogIn(){
             setTime: setTime,
             temp: temp,
             setTemp: setTemp,
-            tracked: tracked,
-            setTracked: setTracked,
+            trackedId: trackedId,
+            setTrackedId: setTrackedId,
             trackedMessage: trackedMessage,
             setTrackedMessage: setTrackedMessage,
             initialAdd: initialAdd,
@@ -475,7 +475,7 @@ function LogIn(){
 
                     </div>
                 
-                    {tracked && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>"{trackedMessage}"</TrackedTitle></>}
+                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>"{trackedMessage}"</TrackedTitle></>}
                  </InfoContainer>
             
             :
@@ -484,7 +484,7 @@ function LogIn(){
                    
                     {time && <TimeTitle>{time}</TimeTitle>}
                 
-                    {tracked && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>"{trackedMessage}"</TrackedTitle></>}
+                    {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>"{trackedMessage}"</TrackedTitle></>}
 
                     <WeatherHolder theme={theme}>
                         {/* <i  className="far fa-sun"></i> */}
