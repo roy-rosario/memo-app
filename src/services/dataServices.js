@@ -23,7 +23,7 @@ export const addDoc = async(task, body, id) =>{
 export const completeDoc = async(data) => {
     const db = getDB()
 
-    const docRef = doc(collection(db, 'completed'))
+    const docRef = doc(db, 'completed', data.docId)
 
     return await setDoc(docRef, data)
     .then(()=>{
@@ -35,25 +35,25 @@ export const completeDoc = async(data) => {
     })
 }
 
-// export const revertDoc = async(data) => {
-//     const db = getDB()
+export const revertDoc = async(data) => {
+    const db = getDB()
 
-//     const docRef = doc(collection(db, 'completed'))
+    const docRef = doc(db, 'tasks', data.docId)
 
-//     return await setDoc(docRef, data)
-//     .then(()=>{
-//         return true
-//     })
-//     .catch(err =>{
-//         alert(err)
-//         return false
-//     })
-// }
+    return await setDoc(docRef, data)
+    .then(()=>{
+        return true
+    })
+    .catch(err =>{
+        alert(err)
+        return false
+    })
+}
 
 export const archiveDoc = async(data) => {
     const db = getDB()
 
-    const docRef = doc(collection(db, 'archived'))
+    const docRef = doc(db, 'archived', data.docId)
 
     return await setDoc(docRef, data)
     .then(()=>{
@@ -76,7 +76,7 @@ export const editDoc = async(docId, data) =>{
         return true
     })
     .catch(err =>{
-        alert(err)
+        console.log(err)
         return false
     })
 }
@@ -110,10 +110,10 @@ export const retrieveDocs = async(id, collectionName) =>{
     
 }
 
-export const removeDoc = async(id) =>{
+export const removeDoc = async(id, collectionName) =>{
     const db = getDB()
 
-    const docRef = doc(db, 'tasks', id)
+    const docRef = doc(db, collectionName, id)
 
     return await deleteDoc(docRef)
     .then(()=>{

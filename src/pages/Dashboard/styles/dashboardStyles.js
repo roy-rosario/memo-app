@@ -594,6 +594,7 @@ export const TextEditor = styled.div`
 
 export const TextEditorTitle = styled.input`
     ${textStyles};
+    padding: 0.5em 0em;
 `
 
 export const TextEditorBody = styled.textarea`

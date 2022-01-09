@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp/SignUp'
 import Dashboard from './pages/Dashboard/Dashboard'
 import React, {useState, useEffect} from 'react'
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
+import {EntryBodyContextProvider} from './utils/entryBodyContext'
 
 
 initializeFirebase()
@@ -27,7 +28,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={LogIn}/>
         <Route path="/signup" component={SignUp}/>
-        <Route path="/dashboard" component={Dashboard}/>
+        <EntryBodyContextProvider>
+          <Route path="/dashboard" component={Dashboard}/>
+        </EntryBodyContextProvider>
       </Switch>
     </BrowserRouter>
   );

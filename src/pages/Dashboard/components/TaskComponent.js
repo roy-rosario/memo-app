@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { collection } from 'firebase/firestore'
 import {
 
@@ -21,11 +22,20 @@ import {
         StanButton,
         ListTypeTray,
     } 
-from '../styles/dashboardStyles' 
+from '../styles/dashboardStyles'
+import {EntryBodyContext} from '../../../utils/entryBodyContext' 
 
 
 
 function TaskComponent({data}){
+    const {entryBody, setEntryBody} = useContext(EntryBodyContext)
+
+    const edit = (entry) =>{
+        data.setCurrentId(entry.docId)
+        data.toggleEditMode()
+        data.setTaskTitle(entry.task)
+        setEntryBody(entry.taskBody)
+    }
 
     
     return(
@@ -74,7 +84,7 @@ function TaskComponent({data}){
                                                         <div style={{width: '100%'}}>
                                                             <p>{data.contentVisible  && 'task'}</p>
                                                             <h2 style={{marginBottom: "0"}}>{data.contentVisible  && (entry.task.length > 19? entry.task.slice(0,20).trim()+"..." : entry.task)} </h2>
-                                                            <h3 style={{fontSize: "0.8rem"}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                                            <h3 style={{fontSize: "0.8 "}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
                                                         <IconHolder>
                                                             {
@@ -86,7 +96,7 @@ function TaskComponent({data}){
                                                             
                                                             {
                                                                 data.collection === 'completed'  &&
-                                                                <RevertIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                                <RevertIcon onClick={() =>{data.revertTask(entry)}} theme={data.theme}>
                                                                     {data.contentVisible && <i class="fas fa-arrow-left"></i>}
                                                                 </RevertIcon>
                                                                 
@@ -99,10 +109,10 @@ function TaskComponent({data}){
                                                                 onClick={()=>{
                                                                         if(data.currentCard === data.tasks.length -1){
                                                                                 data.setCurrentCard(0)
-                                                                                data.deleteTask(entry.docId)
+                                                                                data.deleteTask(entry.docId, data.collection)
                                                                             }
                                                                             else{
-                                                                                data.deleteTask(entry.docId)
+                                                                                data.deleteTask(entry.docId, data.collection)
                                                                             }
                                                                         }
                                                                     }
@@ -120,7 +130,7 @@ function TaskComponent({data}){
                                                             
                                                             {
                                                                 data.collection === 'tasks'  &&
-                                                                <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                                <EditIcon onClick={() =>{edit(entry)}} theme={data.theme}>
                                                                     {data.contentVisible && <i className="fas fa-pen"></i>}
                                                                 </EditIcon>
                                                             }
@@ -174,7 +184,7 @@ function TaskComponent({data}){
                                                 
                                                 {
                                                     data.collection === 'completed'  &&
-                                                    <RevertIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                    <RevertIcon onClick={() =>{data.revertTask(entry)}}  theme={data.theme}>
                                                         {data.contentVisible && <i class="fas fa-arrow-left"></i>}
                                                     </RevertIcon>
                                                     
@@ -185,15 +195,15 @@ function TaskComponent({data}){
                                                      <DeleteIcon
                                                        theme={data.theme}
                                                        onClick={()=>{
-                                                            if(data.currentCard === data.tasks.length -1){
-                                                                    data.setCurrentCard(0)
-                                                                    data.deleteTask(entry.docId)
-                                                                }
-                                                                else{
-                                                                    data.deleteTask(entry.docId)
-                                                                }
+                                                        if(data.currentCard === data.tasks.length -1){
+                                                                data.setCurrentCard(0)
+                                                                data.deleteTask(entry.docId, data.collection)
+                                                            }
+                                                            else{
+                                                                data.deleteTask(entry.docId, data.collection)
                                                             }
                                                         }
+                                                    }
                                                   >
                                                       {data.contentVisible && <i className="far fa-trash-alt"></i>}
                                                     </DeleteIcon>
@@ -208,7 +218,7 @@ function TaskComponent({data}){
                                                   
                                                 {
                                                       data.collection === 'tasks'  &&
-                                                    <EditIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                    <EditIcon onClick={() =>{edit(entry)}} theme={data.theme}>
                                                         {data.contentVisible && <i className="fas fa-pen"></i>}
                                                     </EditIcon>
                                                 }

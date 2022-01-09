@@ -29,6 +29,7 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, revertDoc, archiv
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
+import { EntryBodyContext} from '../../utils/entryBodyContext'
 import TaskComponent from './components/TaskComponent'
 
 
@@ -57,6 +58,7 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     const {editMode, toggleEditMode} = useContext(EditContext)
+    const {entryBody, setEntryBody} = useContext(EntryBodyContext)
     let index = 0
     const matchResult = window.matchMedia("(max-width: 1199px)").matches;
     const itemsPerPage = 4
@@ -161,12 +163,13 @@ function LogIn(){
     },[task, user])
     
     
-    const editTask = useCallback(async() =>{
-        const check = await editDoc(currentId, {task: taskTitle})
+    
+    const editTask = useCallback(async(info) =>{
+        const check = await editDoc(currentId, {task: taskTitle, taskBody: info})
 
         if(check){
-            fetchTasks(collection)
             toggleEditMode()
+            fetchTasks(collection)
         }
     },[taskTitle, user])
 
@@ -186,8 +189,8 @@ function LogIn(){
     
     
 
-    const deleteTask = async(id) =>{
-        const res = await removeDoc(id)
+    const deleteTask = async(id, collection_name) =>{
+        const res = await removeDoc(id, collection_name)
         
         if(res){
             fetchTasks(collection)
@@ -200,25 +203,25 @@ function LogIn(){
 
         if(res){
             setCurrentCard(0)
-            deleteTask(entry.docId)
+            deleteTask(entry.docId, 'tasks')
         }
     } 
 
-    // const revertTask = async(entry) =>{
-    //     const res = await completeDoc({...entry, tracked: false})
+    const revertTask = async(entry) =>{
+        const res = await revertDoc({...entry, tracked: false})
 
-    //     if(res){
-    //         setCurrentCard(0)
-    //         deleteTask(entry.docId)
-    //     }
-    // } 
+        if(res){
+            setCurrentCard(0)
+            deleteTask(entry.docId, 'completed')
+        }
+    } 
 
     const archiveTask = async(entry) =>{
         const res = await archiveDoc({...entry, tracked: false})
 
         if(res){
             setCurrentCard(0)
-            deleteTask(entry.docId)
+            deleteTask(entry.docId, 'tasks')
         }
     } 
     
@@ -311,11 +314,13 @@ function LogIn(){
             }
         }
 
-        const edit = (entry) =>{
-            setCurrentId(entry.docId)
-            toggleEditMode()
-            setTaskTitle(entry.task)
-        }
+        // const edit = (entry) =>{
+        //     setCurrentId(entry.docId)
+        //     console.log(currentId)
+        //     toggleEditMode()
+        //     setTaskTitle(entry.task)
+        //     setEntryBody(entry.taskBody)
+        // }
 
         const cancel = () =>{
             setInitialAdd(false)
@@ -390,13 +395,14 @@ function LogIn(){
             pageNext: pageNext,
             pagePrevious: pagePrevious,
             addTask: addTask,
+            revertTask: revertTask,
             initialTracking: initialTracking,
             fetchTasks: fetchTasks,
             editTask: editTask,
             completeTask: completeTask,
             archiveTask: archiveTask,
             deleteTask: deleteTask,
-            edit: edit,
+            // edit: edit,
             flipLast: flipLast,
             flipNext: flipNext,
             cancel: cancel,
@@ -497,9 +503,10 @@ function LogIn(){
 
                 <MiddleContainer>
 
-                    <StatusBar 
-                        data={generalProps}
-                    />
+                        <StatusBar 
+                            data={generalProps}
+                        />
+
 
                     <QueryContainer theme={theme}>
 
@@ -537,7 +544,9 @@ function LogIn(){
 
                 {/* case switch for all types of task containers - have it follow a state variable */}
                 
-                <TaskComponent data={generalProps}/>
+
+                    <TaskComponent data={generalProps}/>
+
 
             </SubContainer>
         </GreaterContainer>
