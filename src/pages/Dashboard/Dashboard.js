@@ -80,6 +80,7 @@ function LogIn(){
         }
         getWeather()
         
+        
     },[])
 
     useEffect(()=>{
@@ -97,8 +98,11 @@ function LogIn(){
 
     useEffect(()=>{
         fetchTasks("tasks")
-        initialTracking()
     }, [user])
+
+    useEffect(()=>{
+        initialTracking()
+    }, [tasks])
 
 
     // tasks was tracked here previously, removed to test
@@ -114,8 +118,10 @@ function LogIn(){
     const initialTracking = () =>{
         for(let i = 0; i < tasks.length ; i++){
             if(tasks[i].tracked){
+                console.log(tasks[i])
                 setTrackedMessage(tasks[i].task)
                 setTrackedId(tasks[i].docId)
+                console.log(trackedMessage, trackedId)
             }
         }
     }
@@ -475,7 +481,7 @@ function LogIn(){
 
                     </div>
                 
-                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>"{trackedMessage}"</TrackedTitle></>}
+                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>{trackedMessage}</TrackedTitle></>}
                  </InfoContainer>
             
             :
@@ -484,7 +490,7 @@ function LogIn(){
                    
                     {time && <TimeTitle>{time}</TimeTitle>}
                 
-                    {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>"{trackedMessage}"</TrackedTitle></>}
+                    {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>{trackedMessage}</TrackedTitle></>}
 
                     <WeatherHolder theme={theme}>
                         {/* <i  className="far fa-sun"></i> */}
