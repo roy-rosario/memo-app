@@ -118,10 +118,8 @@ function LogIn(){
     const initialTracking = () =>{
         for(let i = 0; i < tasks.length ; i++){
             if(tasks[i].tracked){
-                console.log(tasks[i])
                 setTrackedMessage(tasks[i].task)
                 setTrackedId(tasks[i].docId)
-                console.log(trackedMessage, trackedId)
             }
         }
     }
