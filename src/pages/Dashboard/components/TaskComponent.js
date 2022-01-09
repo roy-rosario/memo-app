@@ -84,7 +84,7 @@ function TaskComponent({data}){
                                                         <div style={{width: '100%'}}>
                                                             <p>{data.contentVisible  && 'task'}</p>
                                                             <h2 style={{marginBottom: "0"}}>{data.contentVisible  && (entry.task.length > 19? entry.task.slice(0,20).trim()+"..." : entry.task)} </h2>
-                                                            <h3 style={{fontSize: "0.8rem"}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
+                                                            <h3 style={{fontSize: "0.8 "}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
                                                         <IconHolder>
                                                             {
@@ -96,7 +96,7 @@ function TaskComponent({data}){
                                                             
                                                             {
                                                                 data.collection === 'completed'  &&
-                                                                <RevertIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                                <RevertIcon onClick={() =>{data.revertTask(entry)}} theme={data.theme}>
                                                                     {data.contentVisible && <i class="fas fa-arrow-left"></i>}
                                                                 </RevertIcon>
                                                                 
@@ -109,10 +109,10 @@ function TaskComponent({data}){
                                                                 onClick={()=>{
                                                                         if(data.currentCard === data.tasks.length -1){
                                                                                 data.setCurrentCard(0)
-                                                                                data.deleteTask(entry.docId)
+                                                                                data.deleteTask(entry.docId, data.collection)
                                                                             }
                                                                             else{
-                                                                                data.deleteTask(entry.docId)
+                                                                                data.deleteTask(entry.docId, data.collection)
                                                                             }
                                                                         }
                                                                     }

@@ -190,8 +190,8 @@ function LogIn(){
     
     
 
-    const deleteTask = async(id) =>{
-        const res = await removeDoc(id)
+    const deleteTask = async(id, collection_name) =>{
+        const res = await removeDoc(id, collection_name)
         
         if(res){
             fetchTasks(collection)
@@ -204,25 +204,25 @@ function LogIn(){
 
         if(res){
             setCurrentCard(0)
-            deleteTask(entry.docId)
+            deleteTask(entry.docId, 'tasks')
         }
     } 
 
-    // const revertTask = async(entry) =>{
-    //     const res = await completeDoc({...entry, tracked: false})
+    const revertTask = async(entry) =>{
+        const res = await revertDoc({...entry, tracked: false})
 
-    //     if(res){
-    //         setCurrentCard(0)
-    //         deleteTask(entry.docId)
-    //     }
-    // } 
+        if(res){
+            setCurrentCard(0)
+            deleteTask(entry.docId, 'completed')
+        }
+    } 
 
     const archiveTask = async(entry) =>{
         const res = await archiveDoc({...entry, tracked: false})
 
         if(res){
             setCurrentCard(0)
-            deleteTask(entry.docId)
+            deleteTask(entry.docId, 'tasks')
         }
     } 
     
@@ -396,6 +396,7 @@ function LogIn(){
             pageNext: pageNext,
             pagePrevious: pagePrevious,
             addTask: addTask,
+            revertTask: revertTask,
             initialTracking: initialTracking,
             fetchTasks: fetchTasks,
             editTask: editTask,
