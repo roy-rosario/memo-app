@@ -184,7 +184,7 @@ function TaskComponent({data}){
                                                 
                                                 {
                                                     data.collection === 'completed'  &&
-                                                    <RevertIcon onClick={() =>{data.edit(entry)}} theme={data.theme}>
+                                                    <RevertIcon onClick={() =>{data.revertTask(entry)}}  theme={data.theme}>
                                                         {data.contentVisible && <i class="fas fa-arrow-left"></i>}
                                                     </RevertIcon>
                                                     
@@ -195,15 +195,15 @@ function TaskComponent({data}){
                                                      <DeleteIcon
                                                        theme={data.theme}
                                                        onClick={()=>{
-                                                            if(data.currentCard === data.tasks.length -1){
-                                                                    data.setCurrentCard(0)
-                                                                    data.deleteTask(entry.docId)
-                                                                }
-                                                                else{
-                                                                    data.deleteTask(entry.docId)
-                                                                }
+                                                        if(data.currentCard === data.tasks.length -1){
+                                                                data.setCurrentCard(0)
+                                                                data.deleteTask(entry.docId, data.collection)
+                                                            }
+                                                            else{
+                                                                data.deleteTask(entry.docId, data.collection)
                                                             }
                                                         }
+                                                    }
                                                   >
                                                       {data.contentVisible && <i className="far fa-trash-alt"></i>}
                                                     </DeleteIcon>

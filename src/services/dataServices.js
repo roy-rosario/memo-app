@@ -23,7 +23,7 @@ export const addDoc = async(task, body, id) =>{
 export const completeDoc = async(data) => {
     const db = getDB()
 
-    const docRef = doc(collection(db, 'completed'))
+    const docRef = doc(db, 'completed', data.docId)
 
     return await setDoc(docRef, data)
     .then(()=>{
@@ -38,7 +38,7 @@ export const completeDoc = async(data) => {
 export const revertDoc = async(data) => {
     const db = getDB()
 
-    const docRef = doc(collection(db, 'tasks'))
+    const docRef = doc(db, 'tasks', data.docId)
 
     return await setDoc(docRef, data)
     .then(()=>{
@@ -53,7 +53,7 @@ export const revertDoc = async(data) => {
 export const archiveDoc = async(data) => {
     const db = getDB()
 
-    const docRef = doc(collection(db, 'archived'))
+    const docRef = doc(db, 'archived', data.docId)
 
     return await setDoc(docRef, data)
     .then(()=>{
@@ -76,7 +76,7 @@ export const editDoc = async(docId, data) =>{
         return true
     })
     .catch(err =>{
-        alert(err)
+        console.log(err)
         return false
     })
 }
