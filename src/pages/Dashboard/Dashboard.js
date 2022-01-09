@@ -200,6 +200,8 @@ function LogIn(){
         
         if(res){
             fetchTasks(collection)
+            setTrackedId('')
+            setTrackedMessage('')
         }
 
     }
@@ -210,6 +212,8 @@ function LogIn(){
         if(res){
             setCurrentCard(0)
             deleteTask(entry.docId, 'tasks')
+            setTrackedId('')
+            setTrackedMessage('')
         }
     } 
 
@@ -228,6 +232,8 @@ function LogIn(){
         if(res){
             setCurrentCard(0)
             deleteTask(entry.docId, 'tasks')
+            setTrackedId('')
+            setTrackedMessage('')
         }
     } 
     
