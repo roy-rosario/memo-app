@@ -65,7 +65,6 @@ function LogIn(){
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
 
-    // console.log(entryBody)
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
