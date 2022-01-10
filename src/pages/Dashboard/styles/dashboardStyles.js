@@ -451,7 +451,7 @@ export const InfoContainer = styled.div`
     border-bottom-right-radius: 0px;
     padding: 1em;
     text-shadow: 0px 0px 3px black;
-    min-height: 295px;
+    
     
 
     &:before{
