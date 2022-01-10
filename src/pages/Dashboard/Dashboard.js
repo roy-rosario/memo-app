@@ -530,7 +530,7 @@ function LogIn(){
                             data={generalProps}
                         />
 
-
+                {   !matchResult?
                     <QueryContainer theme={theme}>
 
                         <label><h4>Add a Task</h4></label>
@@ -561,7 +561,19 @@ function LogIn(){
                         </StanButton> */}
 
                     </QueryContainer>
-
+                    :
+                    <AddButton  
+                        display_={matchResult}
+                        onClick={()=>{
+                            setInitialAdd(true)
+                            toggleEditMode()
+                        }}
+                        theme={theme}
+                    >
+                        <i class="fas fa-plus"></i>
+                    </AddButton>
+                    }
+                
 
                 </MiddleContainer>
 
