@@ -118,10 +118,8 @@ function LogIn(){
     const initialTracking = () =>{
         for(let i = 0; i < tasks.length ; i++){
             if(tasks[i].tracked){
-                console.log(tasks[i])
                 setTrackedMessage(tasks[i].task)
                 setTrackedId(tasks[i].docId)
-                console.log(trackedMessage, trackedId)
             }
         }
     }
@@ -200,6 +198,8 @@ function LogIn(){
         
         if(res){
             fetchTasks(collection)
+            setTrackedId('')
+            setTrackedMessage('')
         }
 
     }
@@ -210,6 +210,8 @@ function LogIn(){
         if(res){
             setCurrentCard(0)
             deleteTask(entry.docId, 'tasks')
+            setTrackedId('')
+            setTrackedMessage('')
         }
     } 
 
@@ -228,6 +230,8 @@ function LogIn(){
         if(res){
             setCurrentCard(0)
             deleteTask(entry.docId, 'tasks')
+            setTrackedId('')
+            setTrackedMessage('')
         }
     } 
     
@@ -341,12 +345,25 @@ function LogIn(){
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
-                    fetchTasks(collection)
                     setTrackedMessage('')
                     setTrackedId('')
+                    fetchTasks(collection)
                 }
             }
-            else if(trackedId.length < 1){
+            else if(!entry.tracked){
+                for(let i = 0; i < tasks.length ; i++){
+                    if(tasks[i].tracked){
+                        // console.log(tasks[i])
+                        // setTrackedMessage(tasks[i].task)
+                        // setTrackedId(tasks[i].docId)
+                        // console.log(trackedMessage, trackedId)
+                        let check = await editDoc(tasks[i].docId, {tracked: false})
+                        if(check){
+                            setTrackedId('')
+                            setTrackedMessage('')
+                        }
+                    }
+                }
                 let check = await editDoc(entry.docId, {tracked: !entry.tracked})
 
                 if(check){
