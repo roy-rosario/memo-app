@@ -292,7 +292,7 @@ export const TaskHeader = styled.div`
 export const TaskContainer = styled.div` 
     ${containerStyle};
     width: 100%;
-    padding: 1em 2em;
+    padding: 1em;
     margin-bottom: 1em;
     h2{
         font-size: 3em;
@@ -309,7 +309,7 @@ export const TaskContainer = styled.div`
         height: 700px;
         font-size: 1.1rem;
         width: 100%;
-        padding-left: 3.5em;
+        padding: 1em 2em;
         border-bottom-right-radius: 0px;
         h2{
             font-size: 3.5em;
@@ -797,16 +797,13 @@ export const AddButton = styled.div`
     right: ${props => (props.display_? '0' : 'initial')};
     margin-left: ${props => (props.display_? 'auto' : 'initial')};
     margin-right: ${props => (props.display_? 'auto' : 'initial')};
-    bottom: ${props => (props.display_? '1em' : 'initial')};
-    height: 75px;
-    width: 75px;
+    bottom: ${props => (props.display_? '0.75em' : 'initial')};
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     border: none;
-    font-size: 1.5em;
 
     @media (min-width: 1200px){
-        height: 50px;
-        width: 50px;
         border-radius: 50%;
         border: none;
         font-size: 1em;
