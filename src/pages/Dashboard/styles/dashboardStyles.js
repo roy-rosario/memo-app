@@ -451,7 +451,7 @@ export const InfoContainer = styled.div`
     border-bottom-right-radius: 0px;
     padding: 1em;
     text-shadow: 0px 0px 3px black;
-    min-height: 295px;
+    min-height: 250px;
     
 
     &:before{
@@ -658,6 +658,9 @@ export const EditCover = styled.div`
 export const TrackedTitle = styled.p` 
     font-size: 2em;
     font-style: italic;
+    margin: 0;
+    margin-top: 0.25em;
+    margin-left: 0.5em;
 
     @media (min-width: 1200px){
         font-size: 3.25em;
