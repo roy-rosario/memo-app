@@ -68,7 +68,7 @@ function LogIn(){
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
     let today = new Date();
-    let timeStamp = today.getHours() + ":" + today.getMinutes()
+    let timeStamp = today.getHours() + ":" + (today.getMinutes()<10?'0':'') + today.getMinutes()
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
