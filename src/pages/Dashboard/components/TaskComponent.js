@@ -21,6 +21,7 @@ import {
         TaskHeader,
         StanButton,
         ListTypeTray,
+        CardButton,
     } 
 from '../styles/dashboardStyles'
 import {EntryBodyContext} from '../../../utils/entryBodyContext' 
@@ -43,13 +44,13 @@ function TaskComponent({data}){
                 <TaskContainer theme={data.theme}>
                         <TaskHeader>
                             <TaskTitle>{data.collection[0].toUpperCase() + data.collection.substring(1)}</TaskTitle> 
-                                {!data.matchResult && 
+                               
                                     <ListTypeTray>
-                                        <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
-                                        <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
-                                        <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
+                                        <CardButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</CardButton>
+                                        <CardButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</CardButton>
+                                        <CardButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</CardButton>
                                     </ListTypeTray>                                
-                                }
+                                
                         </TaskHeader>
                    
                             <TaskWindow theme={data.theme}>

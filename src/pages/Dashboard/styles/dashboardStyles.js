@@ -262,14 +262,10 @@ export const StatusContainer = styled.div`
     }
 `
 
-export const TaskTitle = styled.h2` 
-   margin-top:0em;
-`
 
-export const ListTypeTray = styled.h2` 
-    margin-top: 1em;
+export const ListTypeTray = styled.div` 
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 
     @media (min-width: 1200px){
         margin-top: 0em;
@@ -278,12 +274,10 @@ export const ListTypeTray = styled.h2`
 
 export const TaskHeader = styled.div` 
     display: flex;
-    flex-direction: column;
-    
+    justify-content: space-between;
+    width: 100%;
 
     @media (min-width: 1200px){
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
         padding: 0 1em;
     }
@@ -295,15 +289,13 @@ export const TaskContainer = styled.div`
     padding: 1em;
     margin-bottom: 1em;
     h2{
-        font-size: 3em;
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         margin: 0;
+        font-size: 1.25em;
     }
   
-    
- 
-    
+
   
     @media (min-width: 1200px){
         height: 700px;
@@ -314,7 +306,17 @@ export const TaskContainer = styled.div`
         h2{
             font-size: 3.5em;
         }
+
+        button{
+            font-size: initial;
+        }
     }
+`
+
+
+export const TaskTitle = styled.h2` 
+   margin-top:0em;
+
 `
 
 
@@ -382,7 +384,7 @@ export const TaskEntrySub = styled.div`
     
 
     h2{
-        font-size: 1.75em;
+        font-size: 1.25em;
         text-shadow: none;
         font-weight: 700;
         padding-bottom: 0.5em;
@@ -430,6 +432,12 @@ export const TaskEntrySub = styled.div`
 
 `
 
+export const InfoHeader = styled.div` 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+`
+
 
 export const InfoContainer = styled.div` 
     ${containerStyle};
@@ -440,7 +448,7 @@ export const InfoContainer = styled.div`
     position: relative;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 1em 0.5em 1em 0.5em;
+    padding: 0.5em;
     text-shadow: 0px 0px 3px black;
     min-height: 295px;
     
@@ -500,7 +508,7 @@ export const WeatherHolder = styled.div`
     text-align: right;
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     
     h2{
      
@@ -517,18 +525,17 @@ export const WeatherHolder = styled.div`
         font-size: 1em;
     }
 
-    
+   
 
     @media (min-width: 1200px){
         display: flex;
         justify-content: flex-end;
-        align-items: flex-end;
+        align-items: center;
         padding-bottom: 2em;
         margin-top: 4.5em;
         
         h2{
             font-size: 1.5em;
-            margin-top: 0em;
             margin-bottom: 0.25em;
         }
 
@@ -540,16 +547,24 @@ export const WeatherHolder = styled.div`
 `
 
 export const WeatherCombo = styled.div` 
-    margin-top: 1em;
+    margin-top: 0;
     display: flex;
     flex-direction: column;
     font-size: 0.75rem;
+
+    @media (min-width:1200px){
+        margin-top: 1em;
+    }
 `
 
 export const TempTitle = styled.div` 
-    font-size: 1.5em;
+    font-size: 1.8em;
+    font-weight: 100;
+    margin-top: 0;
+    margin-left: 0.25em;
 
     @media (min-width: 1200px){
+        margin-left: 0;
         font-size: 2.5em;
     }
     
@@ -646,6 +661,24 @@ export const TrackedTitle = styled.p`
     }
 `
 
+const stanButtonStyle = css` 
+        padding: 0.5em 1em;
+        background-color: ${props => props.theme === 'light'? '#cf8600' : '#7f5d87'};
+        color: white;
+        border-radius: 3px;
+        margin-right: 0.5em;
+        cursor: pointer;
+        border: none;
+        text-transform: uppercase;
+
+        &:disabled{
+            cursor: initial;
+            background-color: ${props => props.theme === 'light'? '#915e00' : '#59425e'};
+            color: lightgrey;
+        }
+
+`
+
 export const StanButton = styled.button` 
 
         padding: 0.5em 1em;
@@ -664,6 +697,18 @@ export const StanButton = styled.button`
         }
 
 ` 
+
+export const CardButton = styled.button`
+    ${stanButtonStyle};
+    font-size: 0.6rem;
+    padding: 0 5px;
+
+    @media (min-width: 1200px){
+        font-size: initial;
+        padding: 0.5em 1em;
+        
+    }
+`
 
 export const ThemeButton = styled.button` 
     display: block;
@@ -815,13 +860,11 @@ export const AddButton = styled.div`
 
 export const TimeTitle = styled.h2` 
     font-size: 2em;
-   
+    margin-top: 0.25em;
     padding: 0;
-    margin-top: 0.1em;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     position: relative; 
-    margin-bottom: 0.5em;
    
     @media (min-width:1200px){
         margin-top: 0;

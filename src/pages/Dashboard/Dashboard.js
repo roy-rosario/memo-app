@@ -18,7 +18,9 @@ import {
         TempTitle,
         EditCover,
         AddButton,
-        TrackedTitle
+        TrackedTitle,
+        InfoHeader,
+        WeatherTitle
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -485,7 +487,7 @@ function LogIn(){
             
                 <InfoContainer theme={theme}>
 
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+                    <InfoHeader>
 
                         {time && <TimeTitle>{time}</TimeTitle>}
                         
@@ -495,10 +497,10 @@ function LogIn(){
                                 <WeatherIcon condition={weather}/>
                                 <h2>{weather}</h2>
                             </WeatherCombo>
-                            {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                            {temp && <TempTitle>{temp}°</TempTitle>}
                         </WeatherHolder>
 
-                    </div>
+                    </InfoHeader>
                 
                     {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>{trackedMessage}</TrackedTitle></>}
                  </InfoContainer>
