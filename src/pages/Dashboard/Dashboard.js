@@ -504,7 +504,7 @@ function LogIn(){
 
                     </InfoHeader>
                 
-                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>{trackedMessage}</TrackedTitle></>}
+                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0', marginBottom: '0'}}>tracked: </p> <TrackedTitle >{trackedMessage}</TrackedTitle></>}
                  </InfoContainer>
             
             :
