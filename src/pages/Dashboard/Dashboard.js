@@ -67,7 +67,8 @@ function LogIn(){
     const itemsPerPage = 4
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
-
+    let today = new Date();
+    let timeStamp = today.getHours() + ":" + today.getMinutes()
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
@@ -489,7 +490,8 @@ function LogIn(){
 
                     <InfoHeader>
 
-                        {time && <TimeTitle>{time}</TimeTitle>}
+                        {/* {time && <TimeTitle>{time}</TimeTitle>} */}
+                        <TimeTitle>{timeStamp}</TimeTitle>
                         
                         <WeatherHolder theme={theme}>
                             {/* <i  className="far fa-sun"></i> */}
