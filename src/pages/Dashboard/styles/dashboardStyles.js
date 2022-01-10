@@ -514,7 +514,7 @@ export const WeatherHolder = styled.div`
 
     i{
         
-        font-size: 1.25em;
+        font-size: 1em;
     }
 
     
@@ -543,14 +543,16 @@ export const WeatherCombo = styled.div`
     margin-top: 1em;
     display: flex;
     flex-direction: column;
+    font-size: 0.75rem;
 `
 
 export const TempTitle = styled.div` 
-    font-size: 2.5em;    
+    font-size: 1.5em;
 
     @media (min-width: 1200px){
-        h2{font-size: 1.5em;}
+        font-size: 2.5em;
     }
+    
 `
 
 const textStyles = css` 
@@ -775,18 +777,30 @@ export const RevertIcon = styled.div`
 
 export const AddButton = styled.div`
     ${iconStyle};
+    width: initial;
+    color: white;
+    position: ${props => (props.display_? 'fixed' : 'initial')};
+    z-index: ${props => (props.display_? '10' : 'initial')};
+    left: ${props => (props.display_? '0' : 'initial')};
+    right: ${props => (props.display_? '0' : 'initial')};
+    margin-left: ${props => (props.display_? 'auto' : 'initial')};
+    margin-right: ${props => (props.display_? 'auto' : 'initial')};
+    bottom: ${props => (props.display_? '1em' : 'initial')};
+
     @media (max-width: 1200px){
-        height: 50px;
-        width: 50px;
+        height: 75px;
+        width: 75px;
         border-radius: 50%;
         border: none;
+        font-size: 1.5em;
+   
     }
 
 
 `
 
 export const TimeTitle = styled.h2` 
-    font-size: 3.5em;
+    font-size: 2em;
    
     padding: 0;
     margin-top: 0.1em;
