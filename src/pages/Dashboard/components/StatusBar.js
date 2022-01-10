@@ -14,7 +14,7 @@ export default function StatusBar({data}){
                 
                     {data.editMode && 
                     
-                    <TextEditor theme={data.theme}>
+                    <TextEditor theme={data.theme} display_={data.matchResult}>
                         <TextEditorTitle theme={data.theme} value={data.initialAdd? data.task : data.taskTitle} maxLength="50" onChange={e => (data.initialAdd? data.setTask(e.target.value) : data.setTaskTitle(e.target.value))}/>
                         <TextEditorBody theme={data.theme} value={data.initialAdd? body : entryBody} maxLength="250" onChange={e => (data.initialAdd? setBody(e.target.value) : setEntryBody(e.target.value))}/>
                         <div>

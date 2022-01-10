@@ -577,10 +577,10 @@ export const TextEditor = styled.div`
     border-bottom-right-radius: 30px 30px;
     padding: 1em 1.5em;
     width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    position: absolute;
+    top: 20vh;
+    left: 1.25em;
+    width: 90%;
+    position: ${props => (props.display_? 'fixed' : 'absolute')};
     z-index: 11;
     display: flex;
     flex-direction: column;
@@ -591,6 +591,7 @@ export const TextEditor = styled.div`
         width: 100%;
         top: initial;
         bottom: 0;
+        left: 0;
     }
 `
 
@@ -613,9 +614,13 @@ export const TextEditorBody = styled.textarea`
 
 export const EditCover = styled.div` 
     background-color: rgba(0,0,0, 0.3);
-    position: absolute;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
     width: 100vw;
-    height: 135vh;
+    height: 100vh;
     z-index: 1;
     
     @media (min-width: 1200px){
@@ -775,6 +780,8 @@ export const RevertIcon = styled.div`
     }
 `
 
+
+
 export const AddButton = styled.div`
     ${iconStyle};
     width: initial;
@@ -786,13 +793,18 @@ export const AddButton = styled.div`
     margin-left: ${props => (props.display_? 'auto' : 'initial')};
     margin-right: ${props => (props.display_? 'auto' : 'initial')};
     bottom: ${props => (props.display_? '1em' : 'initial')};
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.5em;
 
-    @media (max-width: 1200px){
-        height: 75px;
-        width: 75px;
+    @media (min-width: 1200px){
+        height: 50px;
+        width: 50px;
         border-radius: 50%;
         border: none;
-        font-size: 1.5em;
+        font-size: 1em;
    
     }
 
