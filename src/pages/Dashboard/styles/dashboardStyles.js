@@ -436,7 +436,7 @@ export const TaskEntrySub = styled.div`
 export const InfoHeader = styled.div` 
     display: flex; 
     justify-content: space-between; 
-    align-items: center;
+    
 `
 
 
@@ -449,7 +449,7 @@ export const InfoContainer = styled.div`
     position: relative;
     border-top-left-radius: 0px;
     border-bottom-right-radius: 0px;
-    padding: 0.5em;
+    padding: 1em;
     text-shadow: 0px 0px 3px black;
     min-height: 295px;
     
@@ -510,14 +510,13 @@ export const WeatherHolder = styled.div`
     position: relative;
     display: flex;
     align-items: flex-start;
-    
     h2{
      
         margin-left: 0.25em;
         font-size: 1.25em;
         display: inline;
         font-family: 'Roboto', sans-serif;
-        font-weight: 100;
+        font-weight: 400;
         margin-top: 0;
     }
 
@@ -531,13 +530,14 @@ export const WeatherHolder = styled.div`
     @media (min-width: 1200px){
         display: flex;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
         padding-bottom: 2em;
         margin-top: 4.5em;
         
         h2{
             font-size: 1.5em;
-            margin-bottom: 0.25em;
+            margin-bottom: 0.5em;
+            font-weight: 300;
         }
 
         i{
@@ -552,21 +552,24 @@ export const WeatherCombo = styled.div`
     display: flex;
     flex-direction: column;
     font-size: 0.75rem;
+    font-weight: 400;
+    
 
     @media (min-width:1200px){
         margin-top: 1em;
+        font-weight: 300;
     }
 `
 
 export const TempTitle = styled.div` 
     font-size: 1.8em;
-    font-weight: 100;
+    font-weight: 400;
     margin-top: 0;
     margin-left: 0.25em;
-
     @media (min-width: 1200px){
         margin-left: 0;
         font-size: 2.5em;
+        font-weight: 300;
     }
     
 `
@@ -861,10 +864,10 @@ export const AddButton = styled.div`
 
 export const TimeTitle = styled.h2` 
     font-size: 2em;
-    margin-top: 0.25em;
+    margin-top: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    font-weight: 100;
+    font-weight: 400;
     position: relative; 
    
     @media (min-width:1200px){
