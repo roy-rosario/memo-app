@@ -436,7 +436,7 @@ export const TaskEntrySub = styled.div`
 export const InfoHeader = styled.div` 
     display: flex; 
     justify-content: space-between; 
-    align-items: center;
+    
 `
 
 
@@ -510,7 +510,6 @@ export const WeatherHolder = styled.div`
     position: relative;
     display: flex;
     align-items: flex-start;
-    
     h2{
      
         margin-left: 0.25em;
@@ -531,13 +530,13 @@ export const WeatherHolder = styled.div`
     @media (min-width: 1200px){
         display: flex;
         justify-content: flex-end;
-        align-items: center;
+        align-items: flex-end;
         padding-bottom: 2em;
         margin-top: 4.5em;
         
         h2{
             font-size: 1.5em;
-            margin-bottom: 0.25em;
+            margin-bottom: 0.5em;
         }
 
         i{
@@ -552,6 +551,7 @@ export const WeatherCombo = styled.div`
     display: flex;
     flex-direction: column;
     font-size: 0.75rem;
+    
 
     @media (min-width:1200px){
         margin-top: 1em;
@@ -560,10 +560,9 @@ export const WeatherCombo = styled.div`
 
 export const TempTitle = styled.div` 
     font-size: 1.8em;
-    font-weight: 100;
+    font-weight: 300;
     margin-top: 0;
     margin-left: 0.25em;
-
     @media (min-width: 1200px){
         margin-left: 0;
         font-size: 2.5em;
@@ -861,7 +860,7 @@ export const AddButton = styled.div`
 
 export const TimeTitle = styled.h2` 
     font-size: 2em;
-    margin-top: 0.25em;
+    margin-top: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;

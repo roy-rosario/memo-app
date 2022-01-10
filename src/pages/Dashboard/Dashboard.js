@@ -111,12 +111,12 @@ function LogIn(){
 
     // tasks was tracked here previously, removed to test
 
-    useEffect(()=>{
-        getTime()
-        // getWeather() disabled because the weather API only allows few request, so only fetch data on initial render
-        reTrigger()
+    // useEffect(()=>{
+    //     getTime()
+    //     getWeather() disabled because the weather API only allows few request, so only fetch data on initial render
+    //     reTrigger()
         
-    }, [timeSwitch])
+    // }, [timeSwitch])
 
  
     const initialTracking = () =>{
@@ -150,12 +150,12 @@ function LogIn(){
         .catch(err => console.log(err) )
     }
 
-    const reTrigger = ()=>{
-        setTimeout(()=> {
-            setTimeSwitch(prev => !prev)
+    // const reTrigger = ()=>{
+    //     setTimeout(()=> {
+    //         setTimeSwitch(prev => !prev)
             
-        }, 1000)
-    }
+    //     }, 1000)
+    // }
 
     const addTask = useCallback(async(body, setBody) =>{
         
@@ -511,7 +511,7 @@ function LogIn(){
 
                 <InfoContainer theme={theme}>
                    
-                    {time && <TimeTitle>{time}</TimeTitle>}
+                   <TimeTitle>{timeStamp}</TimeTitle>
                 
                     {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>{trackedMessage}</TrackedTitle></>}
 
