@@ -275,13 +275,7 @@ function TaskComponent({data}){
 
                         }
 
-                        {data.matchResult && 
-                            <ListTypeTray>
-                                <StanButton onClick={()=>{data.toggleTaskTypes('tasks')}} theme={data.theme}>current</StanButton>
-                                <StanButton onClick={()=>{data.toggleTaskTypes('completed')}} theme={data.theme}>completed</StanButton>
-                                <StanButton onClick={()=>{data.toggleTaskTypes('archived')}} theme={data.theme}>archived</StanButton>
-                            </ListTypeTray>                                
-                        }
+                        
 
                 </TaskContainer>
 
