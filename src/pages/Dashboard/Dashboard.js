@@ -31,6 +31,7 @@ import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
 import { EntryBodyContext} from '../../utils/entryBodyContext'
 import TaskComponent from './components/TaskComponent'
+import TextEditorComponent from './components/TextEditorComponent'
 
 
 function LogIn(){
@@ -449,6 +450,7 @@ function LogIn(){
     return(
         <>
        {editMode && <EditCover/>}
+       {editMode && <TextEditorComponent data={generalProps}/>}
         <NavBar theme={theme}>
             <h2>memo-app</h2>
 
@@ -525,10 +527,12 @@ function LogIn(){
             <SubContainer theme={theme}>
 
                 <MiddleContainer>
-
-                        <StatusBar 
-                            data={generalProps}
-                        />
+                        {
+                            !matchResult &&
+                            <StatusBar 
+                                data={generalProps}
+                            />
+                        }
 
                 {   !matchResult?
                     <QueryContainer theme={theme}>

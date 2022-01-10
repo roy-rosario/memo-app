@@ -577,8 +577,10 @@ export const TextEditor = styled.div`
     border-bottom-right-radius: 30px 30px;
     padding: 1em 1.5em;
     width: 100%;
-    top: 20vh;
-    left: 1.25em;
+    top: 15vh;
+    left: 1em;
+    right: 1em;
+    margin: 0 auto;
     width: 90%;
     position: ${props => (props.display_? 'fixed' : 'absolute')};
     z-index: 11;
@@ -588,10 +590,13 @@ export const TextEditor = styled.div`
     
     @media (min-width:1200px){
         min-height: 400px;
-        width: 100%;
+        width: 22.5%;
         top: initial;
-        bottom: 0;
-        left: 0;
+        bottom: 10%;
+        left: 29.5%;
+        right: 0;
+        margin:0;
+        
     }
 `
 
