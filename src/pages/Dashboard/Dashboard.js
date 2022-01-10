@@ -18,7 +18,9 @@ import {
         TempTitle,
         EditCover,
         AddButton,
-        TrackedTitle
+        TrackedTitle,
+        InfoHeader,
+        WeatherTitle
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -31,6 +33,7 @@ import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
 import { EntryBodyContext} from '../../utils/entryBodyContext'
 import TaskComponent from './components/TaskComponent'
+import TextEditorComponent from './components/TextEditorComponent'
 
 
 function LogIn(){
@@ -449,6 +452,7 @@ function LogIn(){
     return(
         <>
        {editMode && <EditCover/>}
+       {editMode && <TextEditorComponent data={generalProps}/>}
         <NavBar theme={theme}>
             <h2>memo-app</h2>
 
@@ -483,7 +487,7 @@ function LogIn(){
             
                 <InfoContainer theme={theme}>
 
-                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+                    <InfoHeader>
 
                         {time && <TimeTitle>{time}</TimeTitle>}
                         
@@ -493,10 +497,10 @@ function LogIn(){
                                 <WeatherIcon condition={weather}/>
                                 <h2>{weather}</h2>
                             </WeatherCombo>
-                            {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                            {temp && <TempTitle>{temp}°</TempTitle>}
                         </WeatherHolder>
 
-                    </div>
+                    </InfoHeader>
                 
                     {trackedId && <><p style={{marginLeft: '1em', marginTop: '0'}}>tracked: </p> <TrackedTitle p style={{marginLeft: '0.5em'}}>{trackedMessage}</TrackedTitle></>}
                  </InfoContainer>
@@ -525,12 +529,14 @@ function LogIn(){
             <SubContainer theme={theme}>
 
                 <MiddleContainer>
+                        {
+                            !matchResult &&
+                            <StatusBar 
+                                data={generalProps}
+                            />
+                        }
 
-                        <StatusBar 
-                            data={generalProps}
-                        />
-
-
+                {   !matchResult?
                     <QueryContainer theme={theme}>
 
                         <label><h4>Add a Task</h4></label>
@@ -561,7 +567,19 @@ function LogIn(){
                         </StanButton> */}
 
                     </QueryContainer>
-
+                    :
+                    <AddButton  
+                        display_={matchResult}
+                        onClick={()=>{
+                            setInitialAdd(true)
+                            toggleEditMode()
+                        }}
+                        theme={theme}
+                    >
+                        <i class="fas fa-plus"></i>
+                    </AddButton>
+                    }
+                
 
                 </MiddleContainer>
 
