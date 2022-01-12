@@ -20,7 +20,10 @@ import {
         AddButton,
         TrackedTitle,
         InfoHeader,
-        WeatherTitle
+        WeatherTitle,
+        InfoContainerSmall,
+        InfoContainerLarge,
+        QueryHolder
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -484,9 +487,9 @@ function LogIn(){
 
         <GreaterContainer>
     
-            {matchResult? 
+          
             
-                <InfoContainer theme={theme}>
+                <InfoContainerSmall theme={theme}>
 
                     <InfoHeader>
 
@@ -505,11 +508,11 @@ function LogIn(){
                     </InfoHeader>
                 
                     {trackedId && <><p style={{marginLeft: '1em', marginTop: '0', marginBottom: '0'}}>tracked: </p> <TrackedTitle >{trackedMessage}</TrackedTitle></>}
-                 </InfoContainer>
+                 </InfoContainerSmall>
             
-            :
+            
 
-                <InfoContainer theme={theme}>
+                <InfoContainerLarge theme={theme}>
                    
                    <TimeTitle>{timeStamp}</TimeTitle>
                 
@@ -524,25 +527,24 @@ function LogIn(){
                         {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
                     </WeatherHolder>
 
-                </InfoContainer>
+                </InfoContainerLarge>
 
-            }
+            
 
             <SubContainer theme={theme}>
 
                 <MiddleContainer>
-                        {
-                            !matchResult &&
-                            <StatusBar 
-                                data={generalProps}
-                            />
-                        }
-
-                {   !matchResult?
-                    <QueryContainer theme={theme}>
-
-                        <label><h4>Add a Task</h4></label>
-                        <AddButton 
+                       
+                    <StatusBar 
+                         data={generalProps}
+                    />
+                        
+                    <QueryHolder>
+                        <QueryContainer theme={theme}>
+                            <label><h4>Add a Task</h4></label>
+                        </QueryContainer>
+                        <AddButton  
+                            
                             onClick={()=>{
                                 setInitialAdd(true)
                                 toggleEditMode()
@@ -551,36 +553,10 @@ function LogIn(){
                         >
                             <i class="fas fa-plus"></i>
                         </AddButton>
-                        {/* <input
-                            value={task}
-                            type="text"
-                            maxLength="50"
-                            onChange = {(e => setTask(e.target.value))}
-                        />
-
-                        
-
-                        <StanButton 
-                            theme={theme}
-                            onClick={addTask} 
-                            disabled = {task === ""}
-                        >
-                            Submit a Task
-                        </StanButton> */}
-
-                    </QueryContainer>
-                    :
-                    <AddButton  
-                        display_={matchResult}
-                        onClick={()=>{
-                            setInitialAdd(true)
-                            toggleEditMode()
-                        }}
-                        theme={theme}
-                    >
-                        <i class="fas fa-plus"></i>
-                    </AddButton>
-                    }
+                    
+                    </QueryHolder>
+                    
+                    
                 
 
                 </MiddleContainer>

@@ -2,7 +2,8 @@ import { useContext } from 'react'
 import { collection } from 'firebase/firestore'
 import {
 
-        TaskEntry,
+        TaskEntrySmall,
+        TaskEntryLarge,
         TaskContainer,
         TaskWindow,
         IconHolder,
@@ -11,8 +12,10 @@ import {
         ArchiveIcon,
         RevertIcon,
         TaskEntrySub,
-        Last, 
-        Next,
+        LastSmall,
+        LastLarge, 
+        NextSmall,
+        NextLarge,
         Diamond,
         PageNav,
         PageNumbers,
@@ -54,8 +57,8 @@ function TaskComponent({data}){
                         </TaskHeader>
                    
                             <TaskWindow theme={data.theme}>
-                                {data.matchResult && data.tasks.length > 0 && 
-                                <Last 
+                                {data.tasks.length > 0 && 
+                                <LastSmall 
                                     theme={data.theme} 
                                     onClick={data.flipLast} 
                                     disabled={data.currentCard === 0}
@@ -64,12 +67,12 @@ function TaskComponent({data}){
                                     scaling={data.big}
                                 >
                                     <i class="fas fa-chevron-left"></i>
-                                </Last>}
-                                {(!data.matchResult && data.tasks.length > 0) &&
+                                </LastSmall>}
+                                { data.tasks.length > 0 &&
                                     data.tasks.slice(data.itemsVisited, data.itemsVisited + data.itemsPerPage)
                                     .map(entry => {
                                         return(
-                                            <TaskEntry theme={data.theme} key={entry.docId} depth={data.index} flip={data.cardFlip}>
+                                            <TaskEntryLarge theme={data.theme} key={entry.docId} depth={data.index} flip={data.cardFlip}>
                                                 {
                                                     data.collection === 'tasks' && 
                                                     <Diamond 
@@ -138,7 +141,7 @@ function TaskComponent({data}){
                                                         </IconHolder>
                                                 </TaskEntrySub>
                                 
-                                         </TaskEntry>
+                                         </TaskEntryLarge>
                                         )
                                     }) 
                                    
@@ -146,12 +149,11 @@ function TaskComponent({data}){
                                 {data.tasks.length > 0? data.tasks.map((entry) => {
 
                                         
-                                  if(data.matchResult){
-
+                                  
                                       if(entry === data.tasks[data.currentCard]){
                                           
                                          return(
-                                             <TaskEntry theme={data.theme} key={entry.docId} depth={data.index} flip={data.cardFlip}>
+                                             <TaskEntrySmall theme={data.theme} key={entry.docId} depth={data.index} flip={data.cardFlip}>
                                                      
                                              <TaskEntrySub theme={data.theme} >                                               
                                                       {data.contentVisible  && 
@@ -228,15 +230,16 @@ function TaskComponent({data}){
 
 
                                              </IconHolder>
-                                          </TaskEntry>
+                                          </TaskEntrySmall>
                                           )
                                         }
                                         
-                                    }
+                                    
                                                                     
                                         
                                 } ) : <p>There are no tasks to display</p>}
-                                {data.matchResult && data.tasks.length > 0 && <Next 
+                                {data.tasks.length > 0 && 
+                                <NextSmall 
                                     theme={data.theme} 
                                     onClick={data.flipNext} 
                                     disabled={data.currentCard === data.tasks.length-1}
@@ -245,12 +248,12 @@ function TaskComponent({data}){
                                     scaling={data.big}
                                 >
                                     <i class="fas fa-chevron-right"></i> 
-                                </Next>}
+                                </NextSmall>}
                             </TaskWindow>
                         
-                        {   !data.matchResult && data.tasks.length > 0 &&
+                        {   data.tasks.length > 0 &&
                             <PageNav>
-                                <Last 
+                                <LastLarge 
                                     theme={data.theme} 
                                     onClick={data.pagePrevious} 
                                     disabled={data.currentCard === 0}
@@ -259,10 +262,10 @@ function TaskComponent({data}){
                                     scaling={data.big}
                                 >
                                     <i class="fas fa-chevron-left"></i> 
-                                </Last>
+                                </LastLarge>
                                 
                                 <PageNumbers>{data.pageNumber+1} / {data.pageCount}</PageNumbers>
-                                <Next 
+                                <NextLarge 
                                     theme={data.theme} 
                                     onClick={data.pageNext} 
                                     disabled={data.currentCard === data.tasks.length-1}
@@ -271,7 +274,7 @@ function TaskComponent({data}){
                                     scaling={data.big}
                                 >
                                     <i class="fas fa-chevron-right"></i> 
-                                </Next>                                
+                                </NextLarge>                                
                             </PageNav>
 
                         }
