@@ -157,7 +157,7 @@ function TaskComponent({data}){
                                                      
                                              <TaskEntrySub theme={data.theme} >                                               
                                                       {data.contentVisible  && 
-                                                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>task</p> 
+                                                        <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}><p>{data.collection}</p> 
                                                       
                                                         {
                                                             data.collection === 'tasks' &&
