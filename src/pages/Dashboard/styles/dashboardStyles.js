@@ -188,12 +188,13 @@ export const MiddleContainer = styled.div`
     }
 `
 
-
+export const QueryHolder = styled.div`
+    position: relative;
+`
 
 
 export const QueryContainer = styled.div`
     ${containerStyle};
-    display: flex;
     justify-content: space-between;
     padding: 1em 1.75em;
 
@@ -206,23 +207,16 @@ export const QueryContainer = styled.div`
         font-weight: 400;
     }
 
-    input{
-        display: block;
-        width: 100%;
-        padding: 0.5em 1em;
-        border-radius: 3px;
-        border: 1px solid gray;
-        margin-bottom: 1em;
-    }
-
-    
 
     a{
         text-decoration: none;
         color: white;
     }
+    display: none;
+
 
     @media (min-width: 1200px){
+        display: flex;
         margin-bottom: 0em;
         padding: 2em 1.75em 2.5em 1.75em;
         width: 100%;
@@ -253,12 +247,13 @@ export const StatusContainer = styled.div`
         
         text-shadow: none;
     }
+    display: none;
 
     @media (min-width: 1200px){
         width: 100%;
         font-size: 1.25rem;
         min-height: 520px;
-        
+        display: block;
     }
 `
 
@@ -287,8 +282,9 @@ export const TaskContainer = styled.div`
     ${containerStyle};
     width: 100%;
     padding: 1em;
-    margin-bottom: 1em;
-    min-height: 415px;
+    
+    margin-bottom: 0.5em;
+    min-height: 425px;
     h2{
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
@@ -328,8 +324,9 @@ export const TaskWindow = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    padding: 1em;
-    margin-bottom: 1em;
+    padding: 0;
+    padding-top: 1em;
+    margin-bottom: 0em;
     @media (min-width: 1200px){
         height: 500px;
         box-shadow: none;
@@ -347,7 +344,7 @@ const taskEntryStandard = css`
         
         
 `
-export const TaskEntry = styled.div` 
+const taskEntryStyle = css` 
     background: ${props => (props.theme === 'light'? 'lightblue' : 'blueviolet')};
     margin: 0 0.5em 0 0.5em;
     display: flex;
@@ -371,7 +368,24 @@ export const TaskEntry = styled.div`
     }
 
   
-` 
+`
+
+export const TaskEntrySmall = styled.div`
+    ${taskEntryStyle};
+    
+    @media (min-width:1200px){
+        display: none;
+    }
+`
+
+export const TaskEntryLarge = styled.div`
+    ${taskEntryStyle};
+
+    @media (max-width:1199px){
+        display: none;
+    }
+`
+
 export const TaskEntrySub = styled.div` 
     ${taskEntryStandard};
     background: ${props => (props.theme === 'light'? 'white': 'grey')};
@@ -382,6 +396,7 @@ export const TaskEntrySub = styled.div`
     border-bottom-left-radius: 0px;
     padding-right: 1.5em;
     border-top-left-radius: 30px 30px;
+    
     
 
     h2{
@@ -401,6 +416,7 @@ export const TaskEntrySub = styled.div`
         color: ${props =>(props.theme === 'light'? 'grey':'lightgrey')};
         margin-bottom: 1em;
     }
+    
 
     @media (min-width: 1200px){
        height:100%;
@@ -412,12 +428,13 @@ export const TaskEntrySub = styled.div`
        align-items: center;
 
        h3{
-            margin-bottom: 0.25em;
+           margin-bottom: 0.25em;
            padding: 0;
+           font-size: 0.9em;
         }
 
        h2{
-           font-size: 1.25em;
+           font-size: 1em;
            margin-bottom: 0;
            padding: 0;
        }
@@ -754,9 +771,18 @@ export const PageNav = styled.div`
         display: flex;
         font-size: 1.5em;
         margin-left: 14.5em;
+
+        @media (max-width: 1199px){
+            display: none;
+        }
 `
     
 export const PageNumbers = styled.span` 
+        @media (max-width: 1199px){
+            display: none;
+        }
+
+        display: initial;
         margin 0 1em;
 `
 export const IconHolder = styled.div` 
@@ -848,7 +874,7 @@ export const EditIcon = styled.div`
 export const RevertIcon = styled.div` 
     ${iconStyle};
     border: none;
-    border-right: ${props => (props.theme === 'light'? '4px solid #a86d00': '4px solid #604666')};
+    border-right: ${props => (props.theme === 'light'? '4px solsid #a86d00': '4px solid #604666')};
 
     @media (min-width: 1200px){
         border-right: none;
@@ -861,13 +887,13 @@ export const AddButton = styled.div`
     ${iconStyle};
     width: initial;
     color: white;
-    position: ${props => (props.display_? 'fixed' : 'initial')};
-    z-index: ${props => (props.display_? '10' : 'initial')};
-    left: ${props => (props.display_? '0' : 'initial')};
-    right: ${props => (props.display_? '0' : 'initial')};
-    margin-left: ${props => (props.display_? 'auto' : 'initial')};
-    margin-right: ${props => (props.display_? 'auto' : 'initial')};
-    bottom: ${props => (props.display_? '0.75em' : 'initial')};
+    position: fixed;
+    z-index: 10;
+    /* left: calc(50% - 25px); */
+    left: 0;
+    right:0;
+    margin: 0 auto;
+    bottom: 0.8em;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -877,7 +903,10 @@ export const AddButton = styled.div`
         border-radius: 50%;
         border: none;
         font-size: 1em;
-   
+        position: absolute;
+        left: initial;
+        bottom: 33%;
+        right: 1.5em;
     }
 
 
@@ -924,7 +953,7 @@ const arrowStyles = css`
     }
 `
 
-export const Next = styled.div` 
+const nextStyle = css` 
     ${arrowStyles};
     
     &:hover{
@@ -940,7 +969,23 @@ export const Next = styled.div`
     }
 `
 
-export const Last = styled.div` 
+export const NextSmall = styled.div`
+    ${nextStyle};
+    border: 1px solid red;
+    @media (min-width: 1200px){
+        display: none;
+    }
+`
+
+export const NextLarge = styled.div`
+    ${nextStyle};
+    border: 1px solid yellow;
+    @media (max-width: 1199px){
+        display: none;
+    }
+`
+
+const LastStyle = css`
     ${arrowStyles};
     
     
@@ -959,6 +1004,19 @@ export const Last = styled.div`
     };
 `
 
+export const LastSmall = styled.div` 
+   ${LastStyle};
+   @media (min-width: 1200px){
+       display: none;
+   }
+`
+
+export const LastLarge = styled.div` 
+   ${LastStyle};
+   @media (max-width: 1199px){
+       display: none;
+   }
+`
 export const Diamond = styled.div`
     border: ${props => (props.theme === 'light'? '2px solid black' : '2px solid lightgrey')};
     min-width: 18px;

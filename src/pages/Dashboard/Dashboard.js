@@ -22,8 +22,8 @@ import {
         InfoHeader,
         WeatherTitle,
         InfoContainerSmall,
-        InfoContainerLarge
-
+        InfoContainerLarge,
+        QueryHolder
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -534,18 +534,17 @@ function LogIn(){
             <SubContainer theme={theme}>
 
                 <MiddleContainer>
-                        {
-                            !matchResult &&
-                            <StatusBar 
-                                data={generalProps}
-                            />
-                        }
-
-                {   !matchResult?
-                    <QueryContainer theme={theme}>
-
-                        <label><h4>Add a Task</h4></label>
-                        <AddButton 
+                       
+                    <StatusBar 
+                         data={generalProps}
+                    />
+                        
+                    <QueryHolder>
+                        <QueryContainer theme={theme}>
+                            <label><h4>Add a Task</h4></label>
+                        </QueryContainer>
+                        <AddButton  
+                            
                             onClick={()=>{
                                 setInitialAdd(true)
                                 toggleEditMode()
@@ -554,36 +553,10 @@ function LogIn(){
                         >
                             <i class="fas fa-plus"></i>
                         </AddButton>
-                        {/* <input
-                            value={task}
-                            type="text"
-                            maxLength="50"
-                            onChange = {(e => setTask(e.target.value))}
-                        />
-
-                        
-
-                        <StanButton 
-                            theme={theme}
-                            onClick={addTask} 
-                            disabled = {task === ""}
-                        >
-                            Submit a Task
-                        </StanButton> */}
-
-                    </QueryContainer>
-                    :
-                    <AddButton  
-                        display_={matchResult}
-                        onClick={()=>{
-                            setInitialAdd(true)
-                            toggleEditMode()
-                        }}
-                        theme={theme}
-                    >
-                        <i class="fas fa-plus"></i>
-                    </AddButton>
-                    }
+                    
+                    </QueryHolder>
+                    
+                    
                 
 
                 </MiddleContainer>
