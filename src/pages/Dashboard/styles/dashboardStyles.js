@@ -143,7 +143,8 @@ export const GreaterContainer = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-       
+        margin-bottom: 0em;
+        margin-top: 3em;
 }
 `
 
@@ -481,7 +482,7 @@ export const infoContainerStyle = css`
         background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')};
         background-size: cover;
         background-position: center;
-        opacity: 0.8;
+        opacity: 0.7;
         border-top-left-radius: 0px;
         border-bottom-right-radius: 0px;
         z-index: -1;
