@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { collection } from 'firebase/firestore'
 import {
 
         TaskEntrySmall,
@@ -22,7 +21,6 @@ import {
         EditIcon,
         TaskTitle,
         TaskHeader,
-        StanButton,
         ListTypeTray,
         CardButton,
     } 

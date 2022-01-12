@@ -12,7 +12,6 @@ import {
         MiddleContainer,
         TimeTitle,
         WeatherHolder,
-        InfoContainer,
         GreaterContainer,
         WeatherCombo,
         TempTitle,
@@ -20,7 +19,6 @@ import {
         AddButton,
         TrackedTitle,
         InfoHeader,
-        WeatherTitle,
         InfoContainerSmall,
         InfoContainerLarge,
         QueryHolder
@@ -64,9 +62,7 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     const {editMode, toggleEditMode} = useContext(EditContext)
-    const {entryBody, setEntryBody} = useContext(EntryBodyContext)
     let index = 0
-    const matchResult = window.matchMedia("(max-width: 1199px)").matches;
     const itemsPerPage = 4
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
@@ -76,7 +72,7 @@ function LogIn(){
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
         fetchTasks(collectionName)
-        if(matchResult){
+        if(window.matchMedia("(max-width: 1199px)").matches){
             setCurrentCard(0)
         }
     }
@@ -112,15 +108,6 @@ function LogIn(){
     }, [tasks])
 
 
-    // tasks was tracked here previously, removed to test
-
-    // useEffect(()=>{
-    //     getTime()
-    //     getWeather() disabled because the weather API only allows few request, so only fetch data on initial render
-    //     reTrigger()
-        
-    // }, [timeSwitch])
-
  
     const initialTracking = () =>{
         for(let i = 0; i < tasks.length ; i++){
@@ -131,15 +118,6 @@ function LogIn(){
         }
     }
 
-    async function getTime(){
-        await axios.get('http://worldtimeapi.org/api/timezone/America/New_York')
-        .then(res => {
-                if(res.data){
-                setTime(res.data.datetime.slice(11, 16))}
-            }
-        )
-        .catch(err => console.log(err))
-    }
 
 
     async function getWeather(){
@@ -152,13 +130,6 @@ function LogIn(){
         })
         .catch(err => console.log(err) )
     }
-
-    // const reTrigger = ()=>{
-    //     setTimeout(()=> {
-    //         setTimeSwitch(prev => !prev)
-            
-    //     }, 1000)
-    // }
 
     const addTask = useCallback(async(body, setBody) =>{
         
@@ -192,9 +163,6 @@ function LogIn(){
                 setTasks(whatever)
             }
             
-            // if(pageNumber > pageCount){
-            //     setPageNumber(0)
-            // }
         }
     }, [user])
     
@@ -252,15 +220,6 @@ function LogIn(){
         setThemeLock(prev => !prev)
     }
 
-    const diamondSelect = (id) =>{
-        
-        if(diamondActive !== id){
-            setdiamondActive(id)
-        }
-        else{
-            setdiamondActive(null)
-        }
-    }
 
 
     const flipNext = () =>{
@@ -331,13 +290,7 @@ function LogIn(){
             }
         }
 
-        // const edit = (entry) =>{
-        //     setCurrentId(entry.docId)
-        //     console.log(currentId)
-        //     toggleEditMode()
-        //     setTaskTitle(entry.task)
-        //     setEntryBody(entry.taskBody)
-        // }
+
 
         const cancel = () =>{
             setInitialAdd(false)
@@ -360,10 +313,7 @@ function LogIn(){
             else if(!entry.tracked){
                 for(let i = 0; i < tasks.length ; i++){
                     if(tasks[i].tracked){
-                        // console.log(tasks[i])
-                        // setTrackedMessage(tasks[i].task)
-                        // setTrackedId(tasks[i].docId)
-                        // console.log(trackedMessage, trackedId)
+        
                         let check = await editDoc(tasks[i].docId, {tracked: false})
                         if(check){
                             setTrackedId('')
@@ -432,7 +382,6 @@ function LogIn(){
             completeTask: completeTask,
             archiveTask: archiveTask,
             deleteTask: deleteTask,
-            // edit: edit,
             flipLast: flipLast,
             flipNext: flipNext,
             cancel: cancel,
@@ -442,7 +391,6 @@ function LogIn(){
             toggleEditMode: toggleEditMode,
             toggleThemeSelector: toggleThemeSelector,
             auth: auth,
-            matchResult: matchResult,
             user: user,
             history: history,
             editMode: editMode,

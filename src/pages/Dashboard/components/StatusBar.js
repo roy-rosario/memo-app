@@ -1,12 +1,8 @@
-import React, { useState, useContext} from 'react'
-import {StatusContainer, TextEditor, StanButton, EditCover, TextEditorTitle, TextEditorBody, TaskEntry} from '../styles/dashboardStyles'
-import { archiveDoc } from '../../../services/dataServices'
-import {EntryBodyContext} from '../../../utils/entryBodyContext' 
 
+import {StatusContainer} from '../styles/dashboardStyles'
 
 export default function StatusBar({data}){
    
-    
     
     return(
             <StatusContainer theme={data.theme}>

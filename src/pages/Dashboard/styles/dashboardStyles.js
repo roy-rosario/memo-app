@@ -980,7 +980,6 @@ export const NextSmall = styled.div`
 
 export const NextLarge = styled.div`
     ${nextStyle};
-    border: 1px solid yellow;
     @media (max-width: 1199px){
         display: none;
     }

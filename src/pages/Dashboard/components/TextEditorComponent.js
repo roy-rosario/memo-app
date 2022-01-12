@@ -1,6 +1,5 @@
 import React, { useState, useContext} from 'react'
-import {StatusContainer, TextEditor, StanButton, EditCover, TextEditorTitle, TextEditorBody, TaskEntry} from '../styles/dashboardStyles'
-import { archiveDoc } from '../../../services/dataServices'
+import {TextEditor, StanButton, TextEditorTitle, TextEditorBody} from '../styles/dashboardStyles'
 import {EntryBodyContext} from '../../../utils/entryBodyContext' 
 
 export default  function TextEditorComponent({data}){
