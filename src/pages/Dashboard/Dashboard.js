@@ -20,7 +20,10 @@ import {
         AddButton,
         TrackedTitle,
         InfoHeader,
-        WeatherTitle
+        WeatherTitle,
+        InfoContainerSmall,
+        InfoContainerLarge
+
     } 
 from './styles/dashboardStyles' 
 import StatusBar from './components/StatusBar'
@@ -484,9 +487,9 @@ function LogIn(){
 
         <GreaterContainer>
     
-            {matchResult? 
+          
             
-                <InfoContainer theme={theme}>
+                <InfoContainerSmall theme={theme}>
 
                     <InfoHeader>
 
@@ -505,11 +508,11 @@ function LogIn(){
                     </InfoHeader>
                 
                     {trackedId && <><p style={{marginLeft: '1em', marginTop: '0', marginBottom: '0'}}>tracked: </p> <TrackedTitle >{trackedMessage}</TrackedTitle></>}
-                 </InfoContainer>
+                 </InfoContainerSmall>
             
-            :
+            
 
-                <InfoContainer theme={theme}>
+                <InfoContainerLarge theme={theme}>
                    
                    <TimeTitle>{timeStamp}</TimeTitle>
                 
@@ -524,9 +527,9 @@ function LogIn(){
                         {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
                     </WeatherHolder>
 
-                </InfoContainer>
+                </InfoContainerLarge>
 
-            }
+            
 
             <SubContainer theme={theme}>
 
