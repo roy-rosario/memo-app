@@ -440,7 +440,7 @@ export const InfoHeader = styled.div`
 `
 
 
-export const InfoContainer = styled.div` 
+export const infoContainerStyle = css` 
     ${containerStyle};
     
     z-index: -1;
@@ -503,6 +503,24 @@ export const InfoContainer = styled.div`
         }
     }
 `
+
+
+export const InfoContainerSmall = styled.div`
+   ${infoContainerStyle};
+
+    @media (min-width: 1200px){
+        display: none;
+    }
+`
+
+export const InfoContainerLarge = styled.div`
+    ${infoContainerStyle};
+
+    @media (max-width: 1199px){
+        display: none;
+    }
+`
+
 
 export const WeatherHolder = styled.div` 
     
