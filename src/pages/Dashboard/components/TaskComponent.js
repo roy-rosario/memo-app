@@ -86,7 +86,7 @@ function TaskComponent({data}){
                                                 <TaskEntrySub theme={data.theme} >                                               
                                                         
                                                         <div style={{width: '100%'}}>
-                                                            <p>{data.contentVisible  && 'task'}</p>
+                                                            <p>{data.contentVisible  && data.collection}</p>
                                                             <h2 style={{marginBottom: "0"}}>{data.contentVisible  && (entry.task.length > 19? entry.task.slice(0,20).trim()+"..." : entry.task)} </h2>
                                                             <h3 style={{fontSize: "0.8 "}}> {data.contentVisible  && 'Created: '+ entry.dateCreated}</h3>
                                                         </div>
