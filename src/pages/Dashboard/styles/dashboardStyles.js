@@ -1,4 +1,5 @@
 import styled, {css} from 'styled-components'
+import lightData from '../../../utils/ligh'
 
 const containerStyle = css` 
     padding: 1em;
@@ -479,6 +480,7 @@ export const infoContainerStyle = css`
         bottom: 0px;
         left: 0px;
         right: 0px;
+        /* background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')}; */
         background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')};
         background-size: cover;
         background-position: center;
