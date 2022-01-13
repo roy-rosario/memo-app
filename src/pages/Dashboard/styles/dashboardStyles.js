@@ -1,5 +1,14 @@
 import styled, {css} from 'styled-components'
-import lightData from '../../../utils/ligh'
+import lightData from '../../../utils/lightImages.json'
+import darkData from '../../../utils/darkImages.json'
+
+
+const selectPicture = (array) =>{
+    let result = array[Math.floor(Math.random() * array.length)].path
+    return(`url("${result}")`)
+}
+
+selectPicture(lightData)
 
 const containerStyle = css` 
     padding: 1em;
@@ -480,8 +489,7 @@ export const infoContainerStyle = css`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        /* background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')}; */
-        background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image2.jpg")' : 'url("./images/night-image2.jpg")')};
+        background-image: ${props => (props.theme === 'light'? selectPicture(lightData) : selectPicture(darkData))};
         background-size: cover;
         background-position: center;
         opacity: 0.7;
@@ -514,7 +522,7 @@ export const infoContainerStyle = css`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background-image: ${props => (props.theme === 'light'? 'url("./images/noon-image.jpg")' : 'url("./images/night-image.jpg")')};
+        background-image: ${props => (props.theme === 'light'? selectPicture(lightData) : selectPicture(darkData))};
         background-size: cover;
         background-position: bottom;
         opacity: 0.5;
