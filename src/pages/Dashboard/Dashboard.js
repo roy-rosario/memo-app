@@ -32,9 +32,12 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, revertDoc, archiv
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
-import { PictureContextProvider} from '../../utils/pictureContext'
 import TaskComponent from './components/TaskComponent'
 import TextEditorComponent from './components/TextEditorComponent'
+import {PictureContext} from '../../utils/pictureContext'
+import lightData from '../../utils/lightImages.json'
+import darkData from '../../utils/darkImages.json'
+
 
 
 function LogIn(){
@@ -62,13 +65,30 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     const {editMode, toggleEditMode} = useContext(EditContext)
-    
+    const {picture, setPicture} = useContext(PictureContext)
     let index = 0
     const itemsPerPage = 4
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
     let today = new Date();
     let timeStamp = (today.getHours()<10?'0':'') + today.getHours() + ":" + (today.getMinutes()<10?'0':'') + today.getMinutes()
+    
+    
+    useEffect(()=>{
+        selectPicture()
+    },[theme])
+
+    const selectPicture = () =>{
+        theme==='light'?
+
+        setPicture(`url("${lightData[Math.floor(Math.random()*lightData.length)].path}")`)
+        :
+        setPicture(`url("${darkData[Math.floor(Math.random()*darkData.length)].path}")`)
+     
+    }
+
+
+    console.log(picture)
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
@@ -434,12 +454,11 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <PictureContextProvider>
                     <GreaterContainer>
                             
                                 
                                     
-                            <InfoContainerSmall theme={theme}>
+                            <InfoContainerSmall theme={theme} picture={picture}>
 
                                 <InfoHeader>
 
@@ -462,7 +481,7 @@ function LogIn(){
 
 
 
-                            <InfoContainerLarge theme={theme}>
+                            <InfoContainerLarge theme={theme} picture={picture}>
                             
                             <TimeTitle>{timeStamp}</TimeTitle>
                             
@@ -519,7 +538,7 @@ function LogIn(){
 
                         </SubContainer>
                     </GreaterContainer>
-        </PictureContextProvider>
+
         
     </>
     )

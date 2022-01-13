@@ -1,5 +1,4 @@
 import { useState, createContext } from "react"
-import darkData from '../../../utils/darkImages.json'
 
 
 

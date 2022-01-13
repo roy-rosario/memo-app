@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import React, {useState, useEffect} from 'react'
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 import {EntryBodyContextProvider} from './utils/entryBodyContext'
+import { PictureContextProvider} from './utils/pictureContext'
 
 
 initializeFirebase()
@@ -29,7 +30,10 @@ function App() {
         <Route exact path="/" component={LogIn}/>
         <Route path="/signup" component={SignUp}/>
         <EntryBodyContextProvider>
+        <PictureContextProvider>
           <Route path="/dashboard" component={Dashboard}/>
+
+        </PictureContextProvider>
         </EntryBodyContextProvider>
       </Switch>
     </BrowserRouter>
