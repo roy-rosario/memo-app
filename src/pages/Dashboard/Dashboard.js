@@ -32,9 +32,12 @@ import {addDoc, retrieveDocs, removeDoc, editDoc, completeDoc, revertDoc, archiv
 import {ThemeContext} from '../../utils/themeContext'
 import axios from 'axios'
 import { EditContext } from '../../utils/editContext'
-import { EntryBodyContext} from '../../utils/entryBodyContext'
 import TaskComponent from './components/TaskComponent'
 import TextEditorComponent from './components/TextEditorComponent'
+import {PictureContext} from '../../utils/pictureContext'
+import lightData from '../../utils/lightImages.json'
+import darkData from '../../utils/darkImages.json'
+
 
 
 function LogIn(){
@@ -62,12 +65,30 @@ function LogIn(){
     const history = useHistory()
     const {theme, toggleLightTheme, toggleDarkTheme} = useContext(ThemeContext)
     const {editMode, toggleEditMode} = useContext(EditContext)
+    const {picture, setPicture} = useContext(PictureContext)
     let index = 0
     const itemsPerPage = 4
     let itemsVisited = pageNumber * itemsPerPage
     const pageCount = Math.ceil(tasks.length / itemsPerPage)
     let today = new Date();
     let timeStamp = (today.getHours()<10?'0':'') + today.getHours() + ":" + (today.getMinutes()<10?'0':'') + today.getMinutes()
+    
+    
+    useEffect(()=>{
+        selectPicture()
+    },[theme])
+
+    const selectPicture = () =>{
+        theme==='light'?
+
+        setPicture(`url("${lightData[Math.floor(Math.random()*lightData.length)].path}")`)
+        :
+        setPicture(`url("${darkData[Math.floor(Math.random()*darkData.length)].path}")`)
+     
+    }
+
+
+    console.log(picture)
 
     const toggleTaskTypes = (collectionName) =>{
         setCollection(collectionName)
@@ -433,90 +454,92 @@ function LogIn(){
             </div>
         </NavBar>
 
-        <GreaterContainer>
-    
-          
-            
-                <InfoContainerSmall theme={theme}>
-
-                    <InfoHeader>
-
-                        {/* {time && <TimeTitle>{time}</TimeTitle>} */}
-                        <TimeTitle>{timeStamp}</TimeTitle>
-                        
-                        <WeatherHolder theme={theme}>
-                            {/* <i  className="far fa-sun"></i> */}
-                            <WeatherCombo>
-                                <WeatherIcon condition={weather}/>
-                                <h2>{weather}</h2>
-                            </WeatherCombo>
-                            {temp && <TempTitle>{temp}°</TempTitle>}
-                        </WeatherHolder>
-
-                    </InfoHeader>
-                
-                    {trackedId && <><p style={{marginLeft: '1em', marginTop: '0', marginBottom: '0'}}>tracked: </p> <TrackedTitle >{trackedMessage}</TrackedTitle></>}
-                 </InfoContainerSmall>
-            
-            
-
-                <InfoContainerLarge theme={theme}>
-                   
-                   <TimeTitle>{timeStamp}</TimeTitle>
-                
-                    {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>{trackedMessage}</TrackedTitle></>}
-
-                    <WeatherHolder theme={theme}>
-                        {/* <i  className="far fa-sun"></i> */}
-                        <WeatherCombo>
-                            <WeatherIcon condition={weather}/>
-                            <h2>{weather}</h2>
-                        </WeatherCombo>
-                        {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
-                    </WeatherHolder>
-
-                </InfoContainerLarge>
-
-            
-
-            <SubContainer theme={theme}>
-
-                <MiddleContainer>
-                       
-                    <StatusBar 
-                         data={generalProps}
-                    />
-                        
-                    <QueryHolder>
-                        <QueryContainer theme={theme}>
-                            <label><h4>Add a Task</h4></label>
-                        </QueryContainer>
-                        <AddButton  
+                    <GreaterContainer>
                             
-                            onClick={()=>{
-                                setInitialAdd(true)
-                                toggleEditMode()
-                            }}
-                            theme={theme}
-                        >
-                            <i class="fas fa-plus"></i>
-                        </AddButton>
-                    
-                    </QueryHolder>
-                    
-                    
-                
+                                
+                                    
+                            <InfoContainerSmall theme={theme} picture={picture}>
 
-                </MiddleContainer>
+                                <InfoHeader>
 
-                {/* case switch for all types of task containers - have it follow a state variable */}
-                
+                                    {/* {time && <TimeTitle>{time}</TimeTitle>} */}
+                                    <TimeTitle>{timeStamp}</TimeTitle>
+                                    
+                                    <WeatherHolder theme={theme}>
+                                        {/* <i  className="far fa-sun"></i> */}
+                                        <WeatherCombo>
+                                            <WeatherIcon condition={weather}/>
+                                            <h2>{weather}</h2>
+                                        </WeatherCombo>
+                                        {temp && <TempTitle>{temp}°</TempTitle>}
+                                    </WeatherHolder>
 
-                    <TaskComponent data={generalProps}/>
+                                </InfoHeader>
+                            
+                                {trackedId && <><p style={{marginLeft: '1em', marginTop: '0', marginBottom: '0'}}>tracked: </p> <TrackedTitle >{trackedMessage}</TrackedTitle></>}
+                            </InfoContainerSmall>
 
 
-            </SubContainer>
-        </GreaterContainer>
+
+                            <InfoContainerLarge theme={theme} picture={picture}>
+                            
+                            <TimeTitle>{timeStamp}</TimeTitle>
+                            
+                                {trackedId && <><p style={{marginLeft: '0.75em', marginTop: '0', marginBottom: '0', fontSize: '1.5em'}}>tracked: </p> <TrackedTitle>{trackedMessage}</TrackedTitle></>}
+
+                                <WeatherHolder theme={theme}>
+                                    {/* <i  className="far fa-sun"></i> */}
+                                    <WeatherCombo>
+                                        <WeatherIcon condition={weather}/>
+                                        <h2>{weather}</h2>
+                                    </WeatherCombo>
+                                    {temp && <TempTitle><h2>{temp}°</h2></TempTitle>}
+                                </WeatherHolder>
+
+                            </InfoContainerLarge>
+
+
+
+                        <SubContainer theme={theme}>
+
+                            <MiddleContainer>
+                                
+                                <StatusBar 
+                                    data={generalProps}
+                                />
+                                    
+                                <QueryHolder>
+                                    <QueryContainer theme={theme}>
+                                        <label><h4>Add a Task</h4></label>
+                                    </QueryContainer>
+                                    <AddButton  
+                                        
+                                        onClick={()=>{
+                                            setInitialAdd(true)
+                                            toggleEditMode()
+                                        }}
+                                        theme={theme}
+                                    >
+                                        <i class="fas fa-plus"></i>
+                                    </AddButton>
+                                
+                                </QueryHolder>
+                                
+                                
+                            
+
+                            </MiddleContainer>
+
+                            {/* case switch for all types of task containers - have it follow a state variable */}
+                            
+
+                                <TaskComponent data={generalProps}/>
+
+
+                        </SubContainer>
+                    </GreaterContainer>
+
+        
     </>
     )
 }

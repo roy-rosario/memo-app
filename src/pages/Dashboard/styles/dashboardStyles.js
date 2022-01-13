@@ -1,14 +1,6 @@
 import styled, {css} from 'styled-components'
-import lightData from '../../../utils/lightImages.json'
-import darkData from '../../../utils/darkImages.json'
 
 
-const selectPicture = (array) =>{
-    let result = array[Math.floor(Math.random() * array.length)].path
-    return(`url("${result}")`)
-}
-
-selectPicture(lightData)
 
 const containerStyle = css` 
     padding: 1em;
@@ -31,6 +23,7 @@ const containerStyle = css`
 `
 
 export const NavBar = styled.nav`
+    
     background-color: ${props => props.theme === 'light'? '#DCBE26' : '#474747'};
     color: ${props => props.theme === 'light'? 'white' : 'white'};
     padding: 1em;
@@ -489,7 +482,8 @@ export const infoContainerStyle = css`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background-image: ${props => (props.theme === 'light'? selectPicture(lightData) : selectPicture(darkData))};
+        /* background-image: ${props => (props.theme === 'light'? `url("./images/light-beach.jpg")` : 'url("./images/dark-beach.jpg")')}; */
+        background-image: ${props => (props.picture)};
         background-size: cover;
         background-position: center;
         opacity: 0.7;
@@ -522,7 +516,8 @@ export const infoContainerStyle = css`
         bottom: 0px;
         left: 0px;
         right: 0px;
-        background-image: ${props => (props.theme === 'light'? selectPicture(lightData) : selectPicture(darkData))};
+        /* background-image: ${props => (props.theme === 'light'? `url("./images/light-beach.jpg")` : 'url("./images/dark-beach.jpg")')}; */
+        background-image: ${props => (props.picture)};
         background-size: cover;
         background-position: bottom;
         opacity: 0.5;

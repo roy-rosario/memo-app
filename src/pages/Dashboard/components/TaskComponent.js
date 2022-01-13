@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import {
 
         TaskEntrySmall,
@@ -31,6 +31,9 @@ import {EntryBodyContext} from '../../../utils/entryBodyContext'
 
 function TaskComponent({data}){
     const {entryBody, setEntryBody} = useContext(EntryBodyContext)
+    
+
+    
 
     const edit = (entry) =>{
         data.setCurrentId(entry.docId)
