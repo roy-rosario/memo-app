@@ -136,3 +136,24 @@ export const ThemeButton = styled.button`
     margin: ${props => props.theme === 'light'? 'initial' : '0 0 0 auto'};
     transition: margin 7s ease;
 `
+
+export const Disclaimer = styled.div`
+    // border: 3px solid lemonchiffon;
+    max-width: 70%;
+    // border-radius: 5px;
+    margin: 0 auto;
+    font-size: 0.7em;
+    color: lemonchiffon;
+    margin-top: 2em;
+
+    p{
+        // border-radius: 5px;
+        text-align: center;
+    }
+
+    @media (min-width: 1200px){
+        font-size: 1.2em;
+    }
+    
+    
+`

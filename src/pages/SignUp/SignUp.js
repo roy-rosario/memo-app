@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {MainContainer, StanButton, Logo, PageTitle, TotalContainer} from '../../styles/defaultStyles' 
+import {MainContainer, StanButton, Logo, PageTitle, TotalContainer, Disclaimer} from '../../styles/defaultStyles' 
 import {useHistory, Link} from 'react-router-dom'
 import {signUpService} from '../../services/authServices'
 import { ThemeContext } from '../../utils/themeContext'
@@ -38,15 +38,15 @@ function SignUp(){
     }
 
     return(
-        <TotalContainer>
+        <TotalContainer style={{paddingBottom: '0em'}}>
             <Logo 
                 theme={theme} 
                 loaded={loaded}
-                margin= "0.75em"
+                margin= {"1em"}
             >
                 memo-app
             </Logo>
-            <MainContainer theme={theme}  onSubmit={onSignUp}>
+            <MainContainer theme={theme}  onSubmit={onSignUp} >
 
 
                 <PageTitle theme={theme}>Sign Up</PageTitle>
@@ -76,6 +76,12 @@ function SignUp(){
 
                 <Link to="/">Already have an account?</Link>
             </MainContainer>
+            <Disclaimer>
+                <p>
+                    Disclaimer: Email verification is not necessary. You can enter any email in the format of <b>name@site.com</b>, preferably non-existent ones, to sign up and log in.
+                </p>
+
+            </Disclaimer>
         </TotalContainer>
         
     )
